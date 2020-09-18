@@ -47,6 +47,28 @@ public class Clue {
 	}
 	
 	/**
+	 * The Clue constructor is used to initialise the question object using
+	 * String values from the line in a file in the database folder.
+	 * @param category
+	 * @param clue
+	 * @param clueType
+	 * @param answer
+	 * @param value
+	 */
+	public Clue(String category, String clue, String clueType, String answer, String value) {
+		_category = category;
+		_clue = clue;
+		_clueType = clueType;
+		_answer = answer;
+		_valueString = value;
+	}
+	
+	public void giveValue(String value) {
+		_value = Double.parseDouble(value);
+		_valueString = value;
+	}
+	
+	/**
 	 * answered marks the question as answered //Not used much, but left for possible future implementations.
 	 */
 	public void answered() {
