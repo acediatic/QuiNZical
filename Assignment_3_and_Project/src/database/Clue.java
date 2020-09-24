@@ -13,7 +13,7 @@ public class Clue {
 	private String _valueString;
 	private String _clue;
 	private String _clueType;
-	private String _category;
+	private Category _category;
 	private String _answer;
 	private Boolean _answered = false;
 	
@@ -34,12 +34,12 @@ public class Clue {
 	/**
 	 * The Clue constructor is used to initialise the question object using
 	 * String values from the line in a file in the database folder.
-	 * @param category
+	 * @param category, an object representing the category.
 	 * @param clue
 	 * @param clueType
 	 * @param answer
 	 */
-	public Clue(String category, String clue, String clueType, String answer) {
+	public Clue(Category category, String clue, String clueType, String answer) {
 		_category = category;
 		_clue  = clue;
 		_clueType = clueType;
@@ -97,7 +97,7 @@ public class Clue {
 	 * showCategory returns the category the clue comes under.
 	 * @return
 	 */
-	public String showCategory() {
+	public Category showCategory() {
 		return _category;
 	}
 	
@@ -108,5 +108,6 @@ public class Clue {
 	public String showClueType() {
 		return _clueType;
 	}
+	
 	
 }
