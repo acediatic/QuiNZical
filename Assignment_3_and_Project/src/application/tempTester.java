@@ -1,8 +1,12 @@
 package application;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -62,6 +66,10 @@ public class tempTester extends Application {
 			btnBackward.setPrefHeight(scene.getHeight());
 			btnForward.setPrefHeight(scene.getHeight());
 			
+			
+			//Finds the FXML file and loads the scene from it.
+			 scene = FXMLLoader.load(getClass().getResource("askQuestionScene.fxml")); 
+			 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
