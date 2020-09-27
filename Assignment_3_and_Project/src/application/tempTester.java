@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 
+import database.Clue;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -66,11 +67,19 @@ public class tempTester extends Application {
 			btnBackward.setPrefHeight(scene.getHeight());
 			btnForward.setPrefHeight(scene.getHeight());
 			
-			
 			//Finds the FXML file and loads the scene from it.
-			 scene = FXMLLoader.load(getClass().getResource("askQuestionScene.fxml")); 
-			 			
-			primaryStage.setScene(scene);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
+			primaryStage.setScene(loader.load());			
+			
+			Clue clue = new Clue("500", "Is this working?", "Yes!");
+			AskingController controller = loader.getController();
+			controller.initData(clue);
+			
+
+			primaryStage.setMinHeight(500);
+			primaryStage.setMinWidth(500);
+			
+			
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

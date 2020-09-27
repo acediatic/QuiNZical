@@ -7,9 +7,8 @@ public class AskClue {
 	private final Clue _clue;
 	private int _speed;
 	
-	public AskClue(Clue clue, int speed) {
+	public AskClue(Clue clue) {
 		_clue = clue;
-		_speed = speed;
 	}
 
 	public ask() {
@@ -18,12 +17,13 @@ public class AskClue {
 		
 		
 		
-		String readQuestion = "chmod +x ./ttsGen.sh &&  ./ttsGen.sh " + _clue.showClue() + " " + _speed;
+		String readQuestion = "chmod +x ./ttsGen.sh &&  ./ttsGen.sh " + _clue.showClue();
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", readQuestion);
 		
 		
 		
-		update(_clue, _clue.showCategory, )
+		
+		update(_clue, _clue.showCategory(), correct)
 		
 		
 		
