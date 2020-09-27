@@ -6,17 +6,84 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.List;
 
 public class Memory_maker {
+	
+	public static void historyStart(List<Category> categories) throws Exception {
+		//The absolute path is found regardless of location of the code.
+			String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
+			String [] relevantPath = fullPath.split(":");
+			String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
+			File history = new File(path + "/.History");
+			Boolean successfullyMade = false;
+			if (!history.exists()) {
+				successfullyMade = history.mkdir();
+			}
+			
+			// If it is, it copies all the files in categories into it.
+			if (successfullyMade) {
+				for (Category category:categories) {
+					File newCategory = new File(path+"/.History/"+category.categoryName());
+					if (!newCategory.exists()) {
+						try {
+							newCategory.createNewFile();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					//Add clue stuff here
+					File inputFile = new File(path+"/.History/"+category.categoryName());
+					//File tempFile = new File(path+"/.History/myTempFile.txt");
+
+					//BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+					BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
+					int clueValue = 100;
+					for (Clue clue: category.getRandomClues()) {
+						clue.giveValue(String.valueOf(clueValue));
+						clueValue += 100;
+						String lineToAdd = clue.showClue() +","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue();
+						writer.write(lineToAdd + System.getProperty("line.separator"));
+					}
+
+					/*String lineToRemove = clue.showValue()+","+clue.showClue()+","+clue.showAnswer();
+					String currentLine;
+
+					while((currentLine = reader.readLine()) != null) {
+					    if(!currentLine.equals(lineToRemove)) {
+					    	writer.write(currentLine + System.getProperty("line.separator"));
+					    }
+					}*/
+					writer.close(); 
+					/*reader.close();
+					tempFile.renameTo(inputFile);*/
+					
+				}
+			}
+			else if (!history.exists()) {
+				throw new Exception("History could not be made.");
+			}
+			
+			// The winnings file is created and stored with 0 initially.
+			File winnings = new File(path + "/.winnings");
+			winnings.createNewFile();
+			if (winnings.exists()) {
+				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));
+				initialWriter.write("0.0");
+				initialWriter.close();
+			}
+			else {
+				throw new Exception("Winnings not made.");
+			}
+			
+	}
 	
 	/**
 	 * The historyStart() method is very important.
 	 * It is what is used to initially make the progress files for the history and winnings of the user.
 	 * @throws Exception
 	 */
-	public static void historyStart() throws Exception {
+	/*public static void historyStart() throws Exception {
 		//The absolute path is found regardless of location of the code.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(":");
@@ -59,7 +126,7 @@ public class Memory_maker {
 			throw new Exception("Winnings not made.");
 		}
 		
-	}
+	}*/
 	
 	public static void update(Clue clue, Category category, Boolean correct) throws Exception {
 		//The absolute path is found regardless of location of the code.
@@ -84,7 +151,7 @@ public class Memory_maker {
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-		String lineToRemove = clue.showValue()+","+clue.showClue()+","+clue.showAnswer();
+		String lineToRemove = clue.showClue()+","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue();
 		String currentLine;
 
 		while((currentLine = reader.readLine()) != null) {

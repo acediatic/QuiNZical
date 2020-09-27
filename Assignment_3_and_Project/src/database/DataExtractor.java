@@ -43,7 +43,7 @@ public class DataExtractor {
 			else {
 				throw new FileNotFoundException("No data files found.");
 			}
-			Memory_maker.historyStart();
+			//Memory_maker.historyStart();
 		}
 		// Otherwise it extracts from the history directory and winnings file already made.
 		else {

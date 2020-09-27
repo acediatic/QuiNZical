@@ -111,4 +111,22 @@ public class Category {
 	public int indexOf(Clue clue) {
 		return _clues.indexOf(clue);
 	}
+	
+	/**
+	 * getRandomClues gets 5 questions from the list of clues in it, or all the clues in random order 
+	 * if they are less than 5.
+	 * @return List of CLues which are randomly ordered.
+	 */
+	public List<Clue> getRandomClues() {
+		List<Clue> randomClues = new ArrayList<Clue>();
+		List<Integer> done = new ArrayList<Integer>(); 
+		while ((randomClues.size() < _clues.size()) && (randomClues.size() < 5)) {
+				int randomIndex = (int)(Math.random() * _clues.size());
+				if (!done.contains(randomIndex)) {
+					randomClues.add(_clues.get(randomIndex));
+					done.add(randomIndex);
+				}
+		}
+		return randomClues;
+	}
 }
