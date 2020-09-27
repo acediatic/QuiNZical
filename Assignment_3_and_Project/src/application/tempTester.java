@@ -21,10 +21,13 @@ public class tempTester extends Application {
 	private Button btnForward = new Button(">>");
 	private Button btnBackward = new Button("<<");
 	private Button btnPause = new Button("Pause/Play");
+	private Stage _primaryStage;
 	
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("My Cool Video Player");
+		_primaryStage = primaryStage;
+		
+		_primaryStage.setTitle("My Cool Video Player");
 		try {
 			BorderPane root = new BorderPane();
 			
@@ -68,19 +71,24 @@ public class tempTester extends Application {
 			btnForward.setPrefHeight(scene.getHeight());
 			
 			//Finds the FXML file and loads the scene from it.
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
-			primaryStage.setScene(loader.load());			
+			//FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));
+			Scene incorrectAnswerScene = loader.load();			
+			IncorrectAnswerController controller = loader.getController();
+			controller.initData(_primaryStage);
+			
 			
 			Clue clue = new Clue("500", "Is this working?", "Yes!");
-			AskingController controller = loader.getController();
-			controller.initData(clue);
+			//AskingController controller = loader.getController();
+			
+			//controller.initData(clue);
 			
 
-			primaryStage.setMinHeight(500);
-			primaryStage.setMinWidth(500);
+			_primaryStage.setMinHeight(500);
+			_primaryStage.setMinWidth(500);
 			
 			
-			primaryStage.show();
+			_primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -94,5 +102,8 @@ public class tempTester extends Application {
 			launch(args);
 		}
 
+		public void setScene(Scene scene) {
+			_primaryStage.setScene(scene);
+		}
 
 }
