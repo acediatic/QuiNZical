@@ -6,7 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class IncorrectAnswerController implements Controller {
+public class QuestionBoardController implements Controller {
 	private Stage _stage;
 	
 	private void initalise() {}
@@ -17,21 +17,20 @@ public class IncorrectAnswerController implements Controller {
 	
 	@FXML
 	private void continueButtonAction() {
+
+		
+		
 		Platform.runLater(new Runnable() {
             @Override public void run() {
                 tempTester.setScene(homeScene);
                 
             }
         });
-		
-		
 	}
 
 	// Allows user to submit by using the enter key
 	@FXML
-	private void lookForEnter(KeyEvent keyEvent) {
-		if (keyEvent.getCode() == KeyCode.ENTER) {
-			continueButtonAction();
-		}
+	private void buttonHover() {
+		
 	}
 }

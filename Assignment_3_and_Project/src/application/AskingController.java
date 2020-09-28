@@ -42,7 +42,7 @@ public class AskingController {
 			boolean correct = false;
 			String usrAnsStripped = usrAns.getText().strip();
 			String actualAns = _clue.showAnswer().strip();
-			
+			 
 			if (usrAnsStripped.equalsIgnoreCase(actualAns)) {
 				correct = true;
 				loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));				

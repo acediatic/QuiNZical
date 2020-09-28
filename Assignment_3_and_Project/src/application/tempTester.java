@@ -72,11 +72,11 @@ public class tempTester extends Application {
 			
 			//Finds the FXML file and loads the scene from it.
 			//FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
 			Scene incorrectAnswerScene = loader.load();			
-			IncorrectAnswerController controller = loader.getController();
-			controller.initData(_primaryStage);
-			
+			//IncorrectAnswerController controller = loader.getController();
+			//controller.initData(_primaryStage);
+			_primaryStage.setScene(incorrectAnswerScene);
 			
 			Clue clue = new Clue("500", "Is this working?", "Yes!");
 			//AskingController controller = loader.getController();
@@ -104,6 +104,7 @@ public class tempTester extends Application {
 
 		public void setScene(Scene scene) {
 			_primaryStage.setScene(scene);
+			_primaryStage.show();
 		}
 
 }
