@@ -19,7 +19,7 @@ public class tempTester extends Application {
 
 	private Stage _primaryStage;
 	private double _currentFontSize = 1.8;
-	private QuestionBoardController qbc;
+	private Controller _currentController;
 	
 	
 	@Override
@@ -37,7 +37,7 @@ public class tempTester extends Application {
 			//FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
 			Scene incorrectAnswerScene = loader.load();			
-			qbc = loader.getController();
+			_currentController = loader.getController();
 			
 			
 			//IncorrectAnswerController controller = loader.getController();
@@ -56,11 +56,12 @@ public class tempTester extends Application {
 			
 			_primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
 				if(_primaryStage.getScene() != null) {
-					qbc.updateText(_primaryStage, oldVal, newVal);
+					_currentFontSize = _currentController.updateText(_primaryStage, _currentFontSize, oldVal, newVal);
 				}
 			});
 			
 			_primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -79,4 +80,7 @@ public class tempTester extends Application {
 			_primaryStage.show();
 		}
 
+		public void setController(Controller controller) {
+			_currentController = controller;
+		}
 }

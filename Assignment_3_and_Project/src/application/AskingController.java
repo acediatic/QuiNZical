@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import database.Memory_maker;
 
@@ -25,6 +26,22 @@ public class AskingController {
 		
 		_clue = clue;
 		questionField.setText(_clue.showClue());
+	}
+	
+	public Double updateText(Stage stage, Double currentFontSize, Number oldVal, Number newVal) {
+		Double newVald = newVal.doubleValue();
+		Double oldVald = oldVal.doubleValue();
+		
+		if(!oldVald.isNaN() && !newVald.isNaN()) {
+			double ratio = newVal.doubleValue() / oldVal.doubleValue();
+			currentFontSize = currentFontSize * ratio;
+			
+			GridPane gp = (GridPane) stage.getScene().getRoot();
+			
+			gp.setStyle("-fx-font-size: " + currentFontSize + "em");
+			
+			return currentFontSize;
+		}
 	}
 	
 	@FXML 

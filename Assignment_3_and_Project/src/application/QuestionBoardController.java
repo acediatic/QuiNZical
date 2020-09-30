@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class QuestionBoardController implements Controller {
 	private Stage _stage;
-	private double _currentFontSize = 1.8;
 	
 	private void initalise() {	}
 	
@@ -32,20 +31,22 @@ public class QuestionBoardController implements Controller {
         });
 	}
 
-	public void updateText(Stage stage, Number oldVal, Number newVal) {
+	public Double updateText(Stage stage, Double currentFontSize, Number oldVal, Number newVal) {
 		Double newVald = newVal.doubleValue();
 		Double oldVald = oldVal.doubleValue();
 		
 		if(!oldVald.isNaN() && !newVald.isNaN()) {
 			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			_currentFontSize = _currentFontSize * ratio;
+			currentFontSize = currentFontSize * ratio;
 			
 			GridPane gp = (GridPane) stage.getScene().getRoot();
 			
-			gp.setStyle("-fx-font-size: " + _currentFontSize + "em; -fx-padding: "+ _currentFontSize*10);
-			gp.setVgap(pow(2,_currentFontSize));
-			gp.setHgap(pow(2,_currentFontSize));
+			gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
+			gp.setVgap(pow(2,currentFontSize));
+			gp.setHgap(pow(2,currentFontSize));
+		
 		}
+		return currentFontSize;
 	}
 	
 }
