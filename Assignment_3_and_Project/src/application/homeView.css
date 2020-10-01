@@ -1,0 +1,38 @@
+
+.backgroundPane {
+    -fx-background-image: url("new-zealand.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+
+    -fx-border-width: 1em;
+    -fx-border-color: white;
+
+    -fx-background-color: white;
+}
+
+.root {
+    -fx-font-size: 2em;
+}
+
+.titleText {
+    -fx-font-size: 5em;
+    -fx-font-style: italic;
+    -fx-font-family: cursive;
+    -fx-text-fill: white;
+}
+
+.jfx-hamburger StackPane { 
+    -fx-background-color: white;
+}
+
+.button {
+    -fx-background-color: rgba(256,256,256,0.2);
+    -fx-background-radius: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-font-size: 1em;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
