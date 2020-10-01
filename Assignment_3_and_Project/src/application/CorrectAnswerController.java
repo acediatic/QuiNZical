@@ -41,7 +41,7 @@ public class CorrectAnswerController implements Controller {
 		
 		Platform.runLater(new Runnable() {
             @Override public void run() {
-                tempTester.setScene(homeScene);
+                Quizical.setScene(homeScene);
                 
             }
         });

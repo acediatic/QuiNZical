@@ -1,21 +1,17 @@
 package application;
 
-import java.net.URL;
-
 import database.Clue;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-import static java.lang.Math.pow;
 
-public class tempTester extends Application {
+
+
+
+public class Quizical extends Application {
 
 	private Stage _primaryStage;
 	private double _currentFontSize = 1.8;
@@ -35,14 +31,14 @@ public class tempTester extends Application {
 			
 			//Finds the FXML file and loads the scene from it.
 			//FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
-			Scene incorrectAnswerScene = loader.load();			
-			_currentController = loader.getController();
 			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeScreen.fxml"));
+			Scene askQuestionScene = loader.load();			
+			setController(loader.getController());
 			
-			//IncorrectAnswerController controller = loader.getController();
-			//controller.initData(_primaryStage);
-			_primaryStage.setScene(incorrectAnswerScene);
+			Controller controller = loader.getController();
+			controller.initData(_primaryStage);
+			_primaryStage.setScene(askQuestionScene);
 			
 			Clue clue = new Clue("500", "Is this working?", "Yes!");
 			//controller.initData(clue);
@@ -54,13 +50,16 @@ public class tempTester extends Application {
 			_primaryStage.minHeightProperty().bind(_primaryStage.widthProperty().multiply(1));
 			_primaryStage.maxHeightProperty().bind(_primaryStage.widthProperty().multiply(1));
 			
-			_primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+			/*_primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
 				if(_primaryStage.getScene() != null) {
 					_currentFontSize = _currentController.updateText(_primaryStage, _currentFontSize, oldVal, newVal);
 				}
 			});
-			
+			*/
 			_primaryStage.show();
+			
+			
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();

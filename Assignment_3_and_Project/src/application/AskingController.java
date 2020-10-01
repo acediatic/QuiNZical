@@ -19,7 +19,7 @@ public class AskingController {
 	private Clue _clue;
 	private Stage _stage;
 	
-	private void initalise() {}
+	private Double initalise() {}
 	
 	public void initData(Stage stage, Clue clue) {
 		_stage = stage;
