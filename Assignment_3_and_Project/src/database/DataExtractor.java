@@ -19,7 +19,7 @@ public class DataExtractor {
 	 * @return List<Category> categories
 	 * @throws Exception
 	 */
-	public static List<Category> setup() throws Exception {
+	/*public static List<Category> setup() throws Exception {
 		List<Category> categories = new ArrayList<Category>();
 		//This is used to get the absolute path, regardless of the location of the code.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
@@ -66,6 +66,86 @@ public class DataExtractor {
 			}
 		}
 		return categories;
+	}*/
+	
+	public static List<Category> setup() throws Exception {
+		List<Category> categoriesToReturn = new ArrayList<Category>();
+		//This is used to get the absolute path, regardless of the location of the code.
+		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
+		String [] relevantPath = fullPath.split(":");
+		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
+		File history = new File(path + "/.History");
+		File winnings = new File(path + "/.winnings");
+		Boolean historyExists = history.exists();
+		Boolean winningsExists = winnings.exists();
+		// Here it checks for pre-existing data and if there isn't, it throws an Exception. 
+		List<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
+		if (!historyExists || !winningsExists) {
+			File categoriesFolder = new File(path + "/categories");
+			if (categoriesFolder.exists()) {
+				List<Category> categories = InitialDatabaseExtractor.extractAndSort();
+				List<Category> randomCategories = new ArrayList<Category>();
+				List<Integer> done = new ArrayList<Integer>(); 
+				while (randomCategories.size() < 5) {
+					int randomIndex = (int)(Math.random() * categories.size());
+					if ((!done.contains(randomIndex))&&(!(categories.get(randomIndex).numberOfClues()<5))) {
+						randomCategories.add(categories.get(randomIndex));
+						done.add(randomIndex);
+					}
+				}
+				for (Category category:randomCategories) {
+					Category categoryToBeAdded = new Category(category.categoryName());
+					int clueValue = 100;
+					for (Clue clue: category.getRandomClues()) {
+						clue.giveValue(String.valueOf(clueValue));
+						clueValue += 100;
+						categoryToBeAdded.addClue(clue);
+					}
+					randomCategoriesWithRandomClues.add(categoryToBeAdded);
+				}
+				Memory_maker.historyStart(randomCategoriesWithRandomClues);
+				categoriesToReturn = historyLoader();
+			}
+			else {
+				throw new FileNotFoundException("No data files found.");
+			}
+		}
+		// Otherwise it extracts from the history directory and winnings file already made.
+		else {
+			categoriesToReturn = historyLoader();
+		}
+		return categoriesToReturn;
+	}
+	
+	/**
+	 * The method loads categories from the history files saved.
+	 * @return List<Category> fiveRandomCategoriesWithFiveRandomClues
+	 */
+	public static List<Category> historyLoader () {
+		List<Category> categoriesToReturn = new ArrayList<Category>();
+		//This is used to get the absolute path, regardless of the location of the code.
+		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
+		String [] relevantPath = fullPath.split(":");
+		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
+		File history = new File(path + "/.History");
+		File [] categoryFiles = history.listFiles();
+		for (File categoryFile: categoryFiles) {
+			Category category = new Category(categoryFile.getName());
+			try (BufferedReader br = new BufferedReader(new FileReader(categoryFile))) {
+			    String line;
+			    while ((line = br.readLine()) != null) {
+			    	String[] data=line.split(",");
+			    	Clue clue = new Clue (category.categoryName(), data[0],data[1], data[2], data[3], data[4]);
+			    	category.addClue(clue);			    	
+			    }
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			categoriesToReturn.add(category);
+		}
+		return categoriesToReturn;
 	}
 	
 	/**

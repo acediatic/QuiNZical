@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import application.Main;
+
 public class Memory_maker {
 	
 	public static void historyStart(List<Category> categories) throws Exception {
@@ -38,11 +40,8 @@ public class Memory_maker {
 
 					//BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 					BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
-					int clueValue = 100;
-					for (Clue clue: category.getRandomClues()) {
-						clue.giveValue(String.valueOf(clueValue));
-						clueValue += 100;
-						String lineToAdd = clue.showClue() +","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue();
+					for (Clue clue: category.getAllClues()) {
+						String lineToAdd = clue.showClue() +","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue()+",false";
 						writer.write(lineToAdd + System.getProperty("line.separator"));
 					}
 
@@ -69,7 +68,7 @@ public class Memory_maker {
 			winnings.createNewFile();
 			if (winnings.exists()) {
 				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));
-				initialWriter.write("0.0");
+				initialWriter.write("0");
 				initialWriter.close();
 			}
 			else {
@@ -129,6 +128,8 @@ public class Memory_maker {
 	}*/
 	
 	public static void update(Clue clue, Category category, Boolean correct) throws Exception {
+		//Updating in the Model as well.
+		Main.getData().markClueAsAnswered(category, clue);
 		//The absolute path is found regardless of location of the code.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(":");
@@ -158,6 +159,9 @@ public class Memory_maker {
 		    if(!currentLine.equals(lineToRemove)) {
 		    	writer.write(currentLine + System.getProperty("line.separator"));
 		    }
+		    else {
+		    	writer.write(currentLine.substring(0, currentLine.length()-4) + "true");
+		    }
 		}
 		writer.close(); 
 		reader.close();
@@ -175,8 +179,8 @@ public class Memory_maker {
 		String winningLine;
 
 		while((winningLine = winningReader.readLine()) != null) {
-			double alreadyWon = Double.parseDouble(winningLine);
-			double result = 0;
+			int alreadyWon = Integer.parseInt(winningLine);
+			int result = 0;
 			if (correct) {
 				result = alreadyWon + clue.returnValue();
 			}

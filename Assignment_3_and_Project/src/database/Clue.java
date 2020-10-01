@@ -9,7 +9,7 @@ package database;
  */
 public class Clue {
 
-	private double _value;
+	private int _value;
 	private String _valueString;
 	private String _clue;
 	private String _clueType;
@@ -26,7 +26,7 @@ public class Clue {
 	 */
 	public Clue(String value, String clue, String answer) {
 		_valueString = value;
-		_value = Double.parseDouble(_valueString);
+		_value = Integer.parseInt(_valueString);
 		_clue = clue;
 		_answer = answer;
 	}
@@ -63,8 +63,32 @@ public class Clue {
 		_valueString = value;
 	}
 	
+	/**
+	 * The Clue constructor is used to initialise the question object using
+	 * String values from the line in a file in the database folder.
+	 * @param category
+	 * @param clue
+	 * @param clueType
+	 * @param answer
+	 * @param value
+	 * @param answered
+	 */
+	public Clue(String category, String clue, String clueType, String answer, String value, String answered) {
+		_category = category;
+		_clue = clue;
+		_clueType = clueType;
+		_answer = answer;
+		_valueString = value;
+		if (answered.equals("true")) {
+			_answered = true;
+		}
+		else {
+			_answered = false;
+		}
+	}
+	
 	public void giveValue(String value) {
-		_value = Double.parseDouble(value);
+		_value = Integer.parseInt(value);
 		_valueString = value;
 	}
 	
@@ -95,7 +119,7 @@ public class Clue {
 	 * returnValue returns the value as a double for calculations.
 	 * @return
 	 */
-	public double returnValue() {
+	public int returnValue() {
 		return _value;
 	}
 	

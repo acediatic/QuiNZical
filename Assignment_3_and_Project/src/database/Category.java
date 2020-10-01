@@ -76,7 +76,7 @@ public class Category {
 	 * numberOfClues returns the number of Clues for the category.
 	 * @return
 	 */
-	public int numberOFClues() {
+	public int numberOfClues() {
 		return _clues.size();
 	}
 	
@@ -120,7 +120,8 @@ public class Category {
 	public List<Clue> getRandomClues() {
 		List<Clue> randomClues = new ArrayList<Clue>();
 		List<Integer> done = new ArrayList<Integer>(); 
-		while ((randomClues.size() < _clues.size()) && (randomClues.size() < 5)) {
+		//while ((randomClues.size() < _clues.size()) && (randomClues.size() < 5)) {
+		while (randomClues.size() < 5) {
 				int randomIndex = (int)(Math.random() * _clues.size());
 				if (!done.contains(randomIndex)) {
 					randomClues.add(_clues.get(randomIndex));
