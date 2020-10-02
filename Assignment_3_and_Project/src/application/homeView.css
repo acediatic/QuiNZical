@@ -17,8 +17,6 @@
 
 .titleText {
     -fx-font-size: 5em;
-    -fx-font-style: italic;
-    -fx-font-family: cursive;
     -fx-text-fill: white;
 }
 

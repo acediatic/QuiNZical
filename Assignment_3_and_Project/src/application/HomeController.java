@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.jfoenix.controls.JFXHamburger;
@@ -29,6 +30,9 @@ import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 public class HomeController implements Controller {
 	@FXML 
 	private JFXHamburger _hamMenu;
+	
+	@FXML
+	private Text mainTxt;
 	
 	@FXML
 	private JFXDrawer _drawer;
@@ -50,6 +54,8 @@ public class HomeController implements Controller {
         
         JFXRippler rippler = new JFXRippler(_beginBtn);
         _hbox.getChildren().add(rippler);
+        
+        mainTxt.setFont(GameMainController.titleFont);
 	}
 	
 	public void init() {

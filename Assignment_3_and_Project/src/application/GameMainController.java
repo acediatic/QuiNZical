@@ -1,9 +1,11 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 
-import database.ModuleModel;
+import database.Model;
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class GameMainController {
@@ -12,11 +14,12 @@ public class GameMainController {
 	
 	public static Controller currentController;
 	public static String path;
-	private static ModuleModel _data;
+	private static Model _model;
+	public static Font titleFont;
 	
 
-	public static ModuleModel getData() {
-		return _data;
+	public static Model getModel() {
+		return _model;
 	}
 	
 	private static GameMainController singleton = null;
@@ -25,7 +28,13 @@ public class GameMainController {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		ModuleModel.getInstance();
+		_model = Model.getInstance();
+		
+		String pathToFontFile = path + File.separator + "bin" + File.separator + "application" + File.separator + "resources" + File.separator + "font" + File.separator + "Ananda Black Personal Use.ttf";
+		
+		try {
+			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/titleFont.ttf"), 40);
+		} catch (Exception e) {	}
 	}
 	
 	public static GameMainController getInstance() {
@@ -36,3 +45,4 @@ public class GameMainController {
 	}
 	
 }
+

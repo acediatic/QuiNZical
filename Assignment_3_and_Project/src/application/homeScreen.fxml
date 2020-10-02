@@ -17,7 +17,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Text fill="WHITE" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="QuiNZical" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0" />
+                        <Text fx:id="mainTxt" fill="WHITE" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="QuiN Zical" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">

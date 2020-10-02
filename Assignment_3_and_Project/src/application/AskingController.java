@@ -6,6 +6,7 @@ import database.Clue;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,32 +16,28 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import database.Memory_maker;
 
-public class AskingController {
+public class AskingController implements Controller {
 	private Clue _clue;
 	private Stage _stage;
 	
-	private Double initalise() {}
+	private void initalize() {}
 	
-	public void initData(Stage stage, Clue clue) {
-		_stage = stage;
-		
+	public void initClue(Clue clue) {		
 		_clue = clue;
 		questionField.setText(_clue.showClue());
 	}
 	
-	public Double updateText(Stage stage, Double currentFontSize, Number oldVal, Number newVal) {
+	public void updateText(Number oldVal, Number newVal) {
 		Double newVald = newVal.doubleValue();
 		Double oldVald = oldVal.doubleValue();
 		
 		if(!oldVald.isNaN() && !newVald.isNaN()) {
 			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			currentFontSize = currentFontSize * ratio;
+			GameMainController._currentFontSize = GameMainController._currentFontSize * ratio;
 			
-			GridPane gp = (GridPane) stage.getScene().getRoot();
+			Node node = GameMainController.app.getStage().getScene().getRoot();
 			
-			gp.setStyle("-fx-font-size: " + currentFontSize + "em");
-			
-			return currentFontSize;
+			node.setStyle("-fx-font-size: " + GameMainController._currentFontSize + "em");
 		}
 	}
 	
@@ -95,5 +92,11 @@ public class AskingController {
                 _stage.setScene(scene);
             }
         });
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
 	}
 }

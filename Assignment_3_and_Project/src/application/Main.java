@@ -5,7 +5,7 @@ import java.util.List;
 import database.Category;
 import database.Clue;
 import database.Memory_maker;
-import database.ModuleModel;
+import database.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -17,7 +17,7 @@ public class Main extends Application {
 	
 	private static Stage _currentStage;
 	
-	private static ModuleModel _data = ModuleModel.getInstance();
+	private static Model _data = Model.getInstance();
 	
 	/**
 	 * getStage returns the stage to other classes, to allow them to set the stage.
@@ -28,7 +28,7 @@ public class Main extends Application {
         return _currentStage;
     }
 	
-	public static ModuleModel getData() {
+	public static Model getData() {
 		return _data;
 	}
 	

@@ -2,6 +2,7 @@ package application;
 
 import static java.lang.Math.pow;
 
+import java.io.IOException;
 import java.util.List;
 
 import database.Category;
@@ -9,35 +10,54 @@ import database.Clue;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class QuestionBoardController implements Controller {
-	private List<Category> _categories = GameMainController.getData().getGameCategories();
+	private List<Category> _categories = GameMainController.getModel().getGameCategories();
 	
-	private void initalise() {	}
+	private void initalise() {
+		categoryLbl.setFont(GameMainController.titleFont);
+	}
 	
 	public void init() {}
+
 	
 	@FXML
 	private void buttonPressed(ActionEvent e) {
+
 		Node node = (Node) e.getSource();
-		int nodeRow = GridPane.getRowIndex(node);
-		int nodeCol = GridPane.getColumnIndex(node);
+		Integer nodeCol = GridPane.getColumnIndex(node);
+		Integer nodeRow = GridPane.getRowIndex(node)-1;
 		
-		Category chosenCat = _categories.get(nodeRow);
-		Clue chosenClue = chosenCat.getClue(nodeCol);
+		// null means child has not been changed from default
+		// col, which is col 0.
+		if (nodeCol == null) {
+			nodeCol = 0;
+		}
 		
-		System.out.println("beginning question: " + chosenClue.showClue());
+		Category chosenCat = _categories.get(nodeCol);
+		Clue chosenClue = chosenCat.getClue(nodeRow);
 		
-		/*
-		Platform.runLater(new Runnable() {
-            @Override public void run() {
-                QuiNZical.setScene(homeScene);
-                
-            }
-        });
-        */
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
+			Scene scene = loader.load();
+			AskingController ac = (loader.getController());
+			ac.initClue(chosenClue);
+			
+			GameMainController.currentController = ac;
+			Platform.runLater(new Runnable() {
+	            @Override public void run() {
+	               GameMainController.app.setScene(scene); 
+	            }
+	        });
+		
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}			
 	}
 	
 	public void updateText(Number oldVal, Number newVal) {
