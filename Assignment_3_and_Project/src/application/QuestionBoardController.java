@@ -10,27 +10,20 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class QuestionBoardController implements Controller {
-	private Stage _stage;
-	private List<Category> _categories = QuiNZical.getData().getGameCategories();
+	private List<Category> _categories = GameMainController.getData().getGameCategories();
 	
 	private void initalise() {	}
 	
-	public void initData(Stage stage) {
-		_stage = stage;
-	}
+	public void init() {}
 	
 	@FXML
 	private void buttonPressed(ActionEvent e) {
 		Node node = (Node) e.getSource();
-		GridPane gp = (GridPane) node.getParent();
-		int nodeRow = gp.getRowIndex(node);
-		int nodeCol = gp.getColumnIndex(node);
+		int nodeRow = GridPane.getRowIndex(node);
+		int nodeCol = GridPane.getColumnIndex(node);
 		
 		Category chosenCat = _categories.get(nodeRow);
 		Clue chosenClue = chosenCat.getClue(nodeCol);
@@ -46,27 +39,22 @@ public class QuestionBoardController implements Controller {
         });
         */
 	}
-
 	
-	
-	
-	
-	public Double updateText(Stage stage, Double currentFontSize, Number oldVal, Number newVal) {
+	public void updateText(Number oldVal, Number newVal) {
+		Double currentFontSize = GameMainController._currentFontSize;
 		Double newVald = newVal.doubleValue();
 		Double oldVald = oldVal.doubleValue();
 		
 		if(!oldVald.isNaN() && !newVald.isNaN()) {
 			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			currentFontSize = currentFontSize * ratio;
+			GameMainController._currentFontSize = currentFontSize * ratio;
 			
-			GridPane gp = (GridPane) stage.getScene().getRoot();
+			GridPane gp = (GridPane) GameMainController.app.getStage().getScene().getRoot();
 			
 			gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
 			gp.setVgap(pow(2,currentFontSize));
 			gp.setHgap(pow(2,currentFontSize));
 		
 		}
-		return currentFontSize;
 	}
-	
 }

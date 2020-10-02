@@ -15,6 +15,19 @@ public class Memory_maker {
 	
 	public static void historyStart(List<Category> categories) throws Exception {
 			File history = new File(GameMainController.path + "/.History");
+			// The winnings file is created and stored with 0 initially.
+			File winnings = new File(path + "/.winnings");
+			winnings.createNewFile();
+			if (winnings.exists()) {
+				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));
+				initialWriter.write("0");
+				initialWriter.close();
+			}
+			else {
+				throw new Exception("Winnings not made.");
+			}
+			// The history file is created and stored for updating.
+			File history = new File(path + "/.History");
 			Boolean successfullyMade = false;
 			if (!history.exists()) {
 				successfullyMade = history.mkdir();
@@ -38,7 +51,7 @@ public class Memory_maker {
 					//BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 					BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
 					for (Clue clue: category.getAllClues()) {
-						String lineToAdd = clue.showClue() +","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue()+",false";
+						String lineToAdd = clue.showClue() +"@"+clue.showClueType()+"@"+clue.showAnswer()+"@"+clue.showValue()+"@false";
 						writer.write(lineToAdd + System.getProperty("line.separator"));
 					}
 
@@ -58,8 +71,7 @@ public class Memory_maker {
 			}
 			else if (!history.exists()) {
 				throw new Exception("History could not be made.");
-			}
-			
+
 			// The winnings file is created and stored with 0 initially.
 			File winnings = new File(GameMainController.path + "/.winnings");
 			winnings.createNewFile();
@@ -72,8 +84,7 @@ public class Memory_maker {
 				throw new Exception("Winnings not made.");
 			}
 			
-	}
-	
+		}
 	/**
 	 * The historyStart() method is very important.
 	 * It is what is used to initially make the progress files for the history and winnings of the user.
@@ -133,6 +144,47 @@ public class Memory_maker {
 			throw new Exception("Winnings file not made yet.");
 		}
 		File history = new File(GameMainController.path + "/.History");
+		
+		// The clue answered has its value used (added if correct/subtracted if incorrect) with the old value
+		// from the winnings file. Then the new value is added to a new file, which gets renamed to ".winnings"
+		// replacing the old one.
+		File oldWinnings = new File(path+"/.winnings");
+		File newWinnings = new File(path+"/.myTempFile.txt");
+
+		BufferedReader winningReader = new BufferedReader(new FileReader(oldWinnings));
+		BufferedWriter winningWriter = new BufferedWriter(new FileWriter(newWinnings));
+
+		String winningLine;
+
+		while((winningLine = winningReader.readLine()) != null) {
+			int alreadyWon = Integer.parseInt(winningLine);
+			int result = alreadyWon;
+			/*//Check 1
+			System.out.println(winningLine);
+			System.out.println(alreadyWon);
+			System.out.println(correct);
+			System.out.println(result);
+			//Check 1 done*/
+			if (correct) {
+				result = alreadyWon + clue.returnValue();
+				/*//Check 1
+				System.out.println(clue.showClue());
+				System.out.println(clue.returnValue());
+				System.out.println(correct);
+				System.out.println(result);
+				//Check 1 done*/
+			}
+			/*else {
+				result = alreadyWon - clue.returnValue();
+			}*/
+		    winningWriter.write(result + System.getProperty("line.separator"));
+		}
+		winningWriter.close(); 
+		winningReader.close();
+		newWinnings.renameTo(oldWinnings);
+		
+		// History should be present when updating them, so if it's not, an exception is thrown.
+		File history = new File(GameMainController.path + "/.History");
 		if (!history.exists()) {
 			throw new Exception("History file not made yet.");
 		}
@@ -145,7 +197,7 @@ public class Memory_maker {
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-		String lineToRemove = clue.showClue()+","+clue.showClueType()+","+clue.showAnswer()+","+clue.showValue();
+		String lineToRemove = clue.showClue()+"@"+clue.showClueType()+"@"+clue.showAnswer()+"@"+clue.showValue()+"@false";
 		String currentLine;
 
 		while((currentLine = reader.readLine()) != null) {
@@ -187,7 +239,6 @@ public class Memory_maker {
 		newWinnings.renameTo(oldWinnings);
 		
 	}
-	
 	/**
 	 * reset() utilises to deleteDir to delete the winnings and history files, to remove the users progress and reset the game.
 	 */

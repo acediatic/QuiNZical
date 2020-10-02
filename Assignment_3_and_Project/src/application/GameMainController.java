@@ -1,37 +1,38 @@
 package application;
 
+import java.io.File;
+
 import database.ModuleModel;
+import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class GameMainController {
-
 	public static Double _currentFontSize = 1.8;
-	private Controller _currentController;
-	private static ModuleModel _data = ModuleModel.getInstance();
-	private static Stage _currentStage;
+	public static QuiNZical app;
 	
-	/**
-	 * getStage returns the stage to other classes, to allow them to set the stage.
-	 * @return currentStage
-	 */
-	public static Stage getStage() {
-		_currentStage.setTitle("QuiNZical");
-        return _currentStage;
-    }
+	public static Controller currentController;
+	public static String path;
+	private static ModuleModel _data;
 	
+
 	public static ModuleModel getData() {
 		return _data;
 	}
 	
 	private static GameMainController singleton = null;
 	
-	private GameMainController() {}
+	private GameMainController() {
+		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
+		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
+		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
+		ModuleModel.getInstance();
+	}
 	
 	public static GameMainController getInstance() {
 		if (singleton == null) {
 			singleton = new GameMainController();
-			
-			return singleton;
 		}
+		return singleton;
 	}
+	
 }

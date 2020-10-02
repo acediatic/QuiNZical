@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -7,16 +9,16 @@ import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import application.Controller;
+import application.GameMainController;
 import application.QuiNZical;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -25,8 +27,6 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 public class HomeController implements Controller {
-	private Stage _currentStage = QuiNZical.getStage();
-	
 	@FXML 
 	private JFXHamburger _hamMenu;
 	
@@ -41,13 +41,6 @@ public class HomeController implements Controller {
 	
 	@FXML
 	private void initialize() {	
-		
-		_currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-			if(_currentStage.getScene() != null) {
-				updateText(oldVal, newVal);
-			}
-		});
-		
 		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -58,37 +51,33 @@ public class HomeController implements Controller {
         JFXRippler rippler = new JFXRippler(_beginBtn);
         _hbox.getChildren().add(rippler);
 	}
-
 	
-	public void initData(Stage stage) {
-		_stage = stage;
+	public void init() {
+		Stage currentStage = GameMainController.app.getStage();
+		currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+			if(currentStage.getScene() != null) {
+				updateText(oldVal, newVal);
+			}
+		});
 	}
 	
 	@FXML
-	private void buttonPressed(ActionEvent e) {
-		Node node = (Node) e.getSource();
-		GridPane gp = (GridPane) node.getParent();
-		int nodeRow = gp.getRowIndex(node);
-		int nodeCol = gp.getColumnIndex(node);
+	private void startGame(ActionEvent e) {	
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
+			Scene scene = loader.load();
+			GameMainController.currentController = (loader.getController());
+			
+			Platform.runLater(new Runnable() {
+	            @Override public void run() {
+	               GameMainController.app.setScene(scene); 
+	            }
+	        });
 		
-		
-		// Access objects
-		
-		
-
-		
-		
-		Platform.runLater(new Runnable() {
-            @Override public void run() {
-                Quizical.setScene(homeScene);
-                
-            }
-        });
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}			
 	}
-
-	
-	
-	
 	
 	public void updateText(Number oldVal, Number newVal) {
 		Double newVald = newVal.doubleValue();
@@ -96,11 +85,11 @@ public class HomeController implements Controller {
 		
 		if(!oldVald.isNaN() && !newVald.isNaN()) {
 			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			QuiNZical._currentFontSize = QuiNZical._currentFontSize * ratio;
+			GameMainController._currentFontSize = GameMainController._currentFontSize * ratio;
 			
-			Parent root = _currentStage.getScene().getRoot();
+			Parent root = GameMainController.app.getStage().getScene().getRoot();
 			
-			root.setStyle("-fx-font-size: " + QuiNZical._currentFontSize + "em");		
+			root.setStyle("-fx-font-size: " + GameMainController._currentFontSize + "em");		
 		}
 	}
 	
