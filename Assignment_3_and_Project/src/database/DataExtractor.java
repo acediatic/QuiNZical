@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.GameMainController;
+
 public class DataExtractor {
 
 	/**
@@ -70,18 +72,14 @@ public class DataExtractor {
 	
 	public static List<Category> setup() throws Exception {
 		List<Category> categoriesToReturn = new ArrayList<Category>();
-		//This is used to get the absolute path, regardless of the location of the code.
-		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
-		String [] relevantPath = fullPath.split(":");
-		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		File history = new File(path + "/.History");
-		File winnings = new File(path + "/.winnings");
+		File history = new File(GameMainController.path + "/.History");
+		File winnings = new File(GameMainController.path + "/.winnings");
 		Boolean historyExists = history.exists();
 		Boolean winningsExists = winnings.exists();
 		// Here it checks for pre-existing data and if there isn't, it throws an Exception. 
 		List<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
 		if (!historyExists || !winningsExists) {
-			File categoriesFolder = new File(path + "/categories");
+			File categoriesFolder = new File(GameMainController.path + "/categories");
 			if (categoriesFolder.exists()) {
 				List<Category> categories = InitialDatabaseExtractor.extractAndSort();
 				List<Category> randomCategories = new ArrayList<Category>();
@@ -123,11 +121,7 @@ public class DataExtractor {
 	 */
 	public static List<Category> historyLoader () {
 		List<Category> categoriesToReturn = new ArrayList<Category>();
-		//This is used to get the absolute path, regardless of the location of the code.
-		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
-		String [] relevantPath = fullPath.split(":");
-		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		File history = new File(path + "/.History");
+		File history = new File(GameMainController.path + "/.History");
 		File [] categoryFiles = history.listFiles();
 		for (File categoryFile: categoryFiles) {
 			Category category = new Category(categoryFile.getName());
@@ -154,11 +148,7 @@ public class DataExtractor {
 	 */
 	public static String winnings() { 
 		String win = "0.0";
-		//This is used to get the absolute path, regardless of the location of the code.
-		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
-		String [] relevantPath = fullPath.split(":");
-		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		File winnings = new File(path + "/.winnings");
+		File winnings = new File(GameMainController.path + "/.winnings");
 		BufferedReader winningReader;
 		try {
 			winningReader = new BufferedReader(new FileReader(winnings));

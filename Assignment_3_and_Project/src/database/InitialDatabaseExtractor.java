@@ -57,7 +57,8 @@ public class InitialDatabaseExtractor {
 	public static List<Category> extractAndSort() throws Exception {
 		// The absolute path regardless of position of the file is used for ease.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
-		String [] relevantPath = fullPath.split(":");
+		//String [] relevantPath = fullPath.split(":");
+		String [] relevantPath = fullPath.split(";");
 		String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 		List<Category> categories = new ArrayList<Category>();
 		File categoriesDirectory = new File(path+"/categories");
