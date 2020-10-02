@@ -14,7 +14,9 @@ import application.Main;
 public class Memory_maker {
 	
 	public static void historyStart(List<Category> categories) throws Exception {
-			File history = new File(GameMainController.path + "/.History");
+		//The absolute path is found regardless of location of the code.
+			String path = GameMainController.path;
+			
 			// The winnings file is created and stored with 0 initially.
 			File winnings = new File(path + "/.winnings");
 			winnings.createNewFile();
@@ -36,7 +38,7 @@ public class Memory_maker {
 			// If it is, it copies all the files in categories into it.
 			if (successfullyMade) {
 				for (Category category:categories) {
-					File newCategory = new File(GameMainController.path+"/.History/"+category.categoryName());
+					File newCategory = new File(path+"/.History/"+category.categoryName());
 					if (!newCategory.exists()) {
 						try {
 							newCategory.createNewFile();
@@ -45,7 +47,7 @@ public class Memory_maker {
 						}
 					}
 					//Add clue stuff here
-					File inputFile = new File(GameMainController.path+"/.History/"+category.categoryName());
+					File inputFile = new File(path+"/.History/"+category.categoryName());
 					//File tempFile = new File(path+"/.History/myTempFile.txt");
 
 					//BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -57,7 +59,6 @@ public class Memory_maker {
 
 					/*String lineToRemove = clue.showValue()+","+clue.showClue()+","+clue.showAnswer();
 					String currentLine;
-
 					while((currentLine = reader.readLine()) != null) {
 					    if(!currentLine.equals(lineToRemove)) {
 					    	writer.write(currentLine + System.getProperty("line.separator"));
@@ -71,20 +72,10 @@ public class Memory_maker {
 			}
 			else if (!history.exists()) {
 				throw new Exception("History could not be made.");
-
-			// The winnings file is created and stored with 0 initially.
-			File winnings = new File(GameMainController.path + "/.winnings");
-			winnings.createNewFile();
-			if (winnings.exists()) {
-				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));
-				initialWriter.write("0");
-				initialWriter.close();
-			}
-			else {
-				throw new Exception("Winnings not made.");
 			}
 			
-		}
+	}
+	
 	/**
 	 * The historyStart() method is very important.
 	 * It is what is used to initially make the progress files for the history and winnings of the user.
@@ -138,12 +129,13 @@ public class Memory_maker {
 	public static void update(Clue clue, Category category, Boolean correct) throws Exception {
 		//Updating in the Model as well.
 		Main.getData().markClueAsAnswered(category, clue);
-		File winnings = new File(GameMainController.path + "/.winnings");
-		// Winnings and history should be present when updating them, so if tey're not, an exception is thrown.
+		//The absolute path is found regardless of location of the code.
+		String path = GameMainController.path;
+		File winnings = new File(path + "/.winnings");
+		// Winnings should be present when updating them, so if it's not, an exception is thrown.
 		if (!winnings.exists()){
 			throw new Exception("Winnings file not made yet.");
 		}
-		File history = new File(GameMainController.path + "/.History");
 		
 		// The clue answered has its value used (added if correct/subtracted if incorrect) with the old value
 		// from the winnings file. Then the new value is added to a new file, which gets renamed to ".winnings"
@@ -184,15 +176,15 @@ public class Memory_maker {
 		newWinnings.renameTo(oldWinnings);
 		
 		// History should be present when updating them, so if it's not, an exception is thrown.
-		File history = new File(GameMainController.path + "/.History");
+		File history = new File(path + "/.History");
 		if (!history.exists()) {
 			throw new Exception("History file not made yet.");
 		}
 		
 		// The clue answered has its file located in history, and the file is copied line by line, excluding
 		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File inputFile = new File(GameMainController.path+"/.History/"+category.categoryName());
-		File tempFile = new File(GameMainController.path+"/.History/myTempFile.txt");
+		File inputFile = new File(path+"/.History/"+category.categoryName());
+		File tempFile = new File(path+"/.History/myTempFile.txt");
 
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -212,40 +204,16 @@ public class Memory_maker {
 		reader.close();
 		tempFile.renameTo(inputFile);
 		
-		// The clue answered has its value used (added if correct/subtracted if incorrect) with the old value
-		// from the winnings file. Then the new value is added to a new file, which gets renamed to ".winnings"
-		// replacing the old one.
-		File oldWinnings = new File(GameMainController.path+"/.winnings");
-		File newWinnings = new File(GameMainController.path+"/.myTempFile.txt");
-
-		BufferedReader winningReader = new BufferedReader(new FileReader(oldWinnings));
-		BufferedWriter winningWriter = new BufferedWriter(new FileWriter(newWinnings));
-
-		String winningLine;
-
-		while((winningLine = winningReader.readLine()) != null) {
-			int alreadyWon = Integer.parseInt(winningLine);
-			int result = 0;
-			if (correct) {
-				result = alreadyWon + clue.returnValue();
-			}
-			else {
-				result = alreadyWon - clue.returnValue();
-			}
-		    winningWriter.write(result + System.getProperty("line.separator"));
-		}
-		winningWriter.close(); 
-		winningReader.close();
-		newWinnings.renameTo(oldWinnings);
-		
 	}
+	
 	/**
 	 * reset() utilises to deleteDir to delete the winnings and history files, to remove the users progress and reset the game.
 	 */
 	public static void reset() {
 		//The absolute path is found regardless of location of the code.
-		File history = new File(GameMainController.path + "/.History");
-		File winnings = new File(GameMainController.path + "/.winnings");
+		String path = GameMainController.path;
+		File history = new File(path + "/.History");
+		File winnings = new File(path + "/.winnings");
 		//Checks the files and deletes them if they exist using deleteDir.
 		if (history.exists()) {
 			deleteDir(history);

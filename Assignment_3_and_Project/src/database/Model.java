@@ -3,16 +3,16 @@ package database;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleModel {
+public class Model {
 	
 	// static variable single_instance of type Singleton 
-    private static ModuleModel moduleModel = null; 
+    private static Model model = null; 
   
     // variable of type String 
     private List<Category> inGameCategories = new ArrayList<Category>(); 
   
     // private constructor restricted to this class itself 
-    private ModuleModel() 
+    private Model() 
     { 
         try {
 			inGameCategories = DataExtractor.setup();
@@ -22,12 +22,12 @@ public class ModuleModel {
     } 
   
     // static method to create instance of Singleton class 
-    public static ModuleModel getInstance() 
+    public static Model getInstance() 
     { 
-        if (moduleModel == null) 
-            moduleModel = new ModuleModel(); 
+        if (model == null) 
+            model = new Model(); 
   
-        return moduleModel; 
+        return model; 
     }
     
     public List<Category> getGameCategories() {
