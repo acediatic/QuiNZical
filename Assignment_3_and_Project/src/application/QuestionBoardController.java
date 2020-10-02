@@ -8,22 +8,52 @@ import java.util.List;
 import database.Category;
 import database.Clue;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class QuestionBoardController implements Controller {
 	private List<Category> _categories = GameMainController.getModel().getGameCategories();
 	
-	private void initalise() {
-		categoryLbl.setFont(GameMainController.titleFont);
-	}
-	
 	public void init() {}
+	
+	@FXML 
+	private GridPane gp;
+	
+	public void initialize() {
+		int catIndex = -1;
+		for (Category cat : _categories) {
+			catIndex++;
+			int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
+			for (Clue clue : cat.getAllClues()) {
+				clueIndex++;
+				if (!clue.isAnswered()) {
+				    ObservableList<Node> childrens = gp.getChildren();
+					for (Node node : childrens) {
+						Integer colIndex = gp.getColumnIndex(node);
+						Integer rowIndex = gp.getRowIndex(node);
+						if (colIndex == null) {
+							colIndex = 0;
+						} if (rowIndex == null) {
+							rowIndex = 0;
+						}
+						
+				        if(rowIndex == clueIndex && colIndex == catIndex) {
+				            node.setDisable(false);
+				            break;
+				        }
+				    }
+					break;
+				}
+			}
+		}
+	}
 
 	
 	@FXML
