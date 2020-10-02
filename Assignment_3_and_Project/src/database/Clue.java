@@ -61,6 +61,7 @@ public class Clue {
 		_clueType = clueType;
 		_answer = answer;
 		_valueString = value;
+		_value = Integer.parseInt(_valueString);
 	}
 	
 	/**
@@ -79,6 +80,7 @@ public class Clue {
 		_clueType = clueType;
 		_answer = answer;
 		_valueString = value;
+		_value = Integer.parseInt(_valueString);
 		if (answered.equals("true")) {
 			_answered = true;
 		}

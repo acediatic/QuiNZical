@@ -16,7 +16,7 @@ public class InitialDatabaseExtractor {
 	 * @return List<Category> categories
 	 * @throws Exception
 	 */
-	public static List<Category> extractAndSort(String filename) throws Exception {
+	/*public static List<Category> extractAndSort(String filename) throws Exception {
 		// The absolute path regardless of position of the file is used for ease.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(":");
@@ -46,7 +46,7 @@ public class InitialDatabaseExtractor {
 			categories.add(category);
 		}
 		return categories;
-	}
+	}*/
 	
 	/**
 	 * extractAndSort() takes all the data from the categories folder and uses it to form the 
@@ -71,7 +71,13 @@ public class InitialDatabaseExtractor {
 			try (BufferedReader br = new BufferedReader(new FileReader(categoryFile))) {
 			    String line;
 			    while ((line = br.readLine()) != null) {
-			    	String[] data=line.split(",");
+			    	String[] data=line.split("@");
+			    	/*//Checking
+				    System.out.println(line);
+				    System.out.println(data[0]);
+				    System.out.println(data[1]);
+				    System.out.println(data[2]);
+				    //Checking done*/
 			    	Clue clue = new Clue (category.categoryName(), data[0], data[1], data[2]);
 			    	category.addClue(clue);			    	
 			    }

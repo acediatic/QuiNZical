@@ -26,8 +26,8 @@ Your category file will need to have at least 5 questions for it to come into th
 Go to the categories folder and right click the categroy file you want to add clues to.
 Click "Open in Text Editor".
 Add a new line at the bottom and enter your clue in the following format:
-<Clue Question>,<Clue Type>,<Clue Answer>
-The CLue Question, Clue Type, and Clue Answer must contain no commas, and there should be no spaces after the commas between them.
+<Clue Question>@<Clue Type>@<Clue Answer>
+The Clue Question, Clue Type, and Clue Answer must contain no @ symbols, and there should be no spaces after the @ between them.
 
 
 ---Answering questions with multiple answers:---

@@ -134,7 +134,7 @@ public class DataExtractor {
 			try (BufferedReader br = new BufferedReader(new FileReader(categoryFile))) {
 			    String line;
 			    while ((line = br.readLine()) != null) {
-			    	String[] data=line.split(",");
+			    	String[] data=line.split("@");
 			    	Clue clue = new Clue (category.categoryName(), data[0],data[1], data[2], data[3], data[4]);
 			    	category.addClue(clue);			    	
 			    }
@@ -153,7 +153,7 @@ public class DataExtractor {
 	 * @return String winnings
 	 */
 	public static String winnings() { 
-		String win = "0.0";
+		String win = "0";
 		//This is used to get the absolute path, regardless of the location of the code.
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(":");
@@ -166,6 +166,10 @@ public class DataExtractor {
 
 			try {
 				while((winningLine = winningReader.readLine()) != null) {
+					//Checking
+					System.out.println(win);
+					System.out.println(winningLine);
+					//Checking done
 					win = winningLine;
 				}
 			} catch (IOException e) {
