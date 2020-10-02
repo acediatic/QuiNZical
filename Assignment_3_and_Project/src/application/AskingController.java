@@ -18,7 +18,6 @@ import database.Memory_maker;
 
 public class AskingController implements Controller {
 	private Clue _clue;
-	private Stage _stage;
 	
 	private void initalize() {}
 	
@@ -58,15 +57,14 @@ public class AskingController implements Controller {
 			boolean correct = false;
 			if (usrAnsStripped.equalsIgnoreCase(actualAns)) {
 				correct = true;
-				loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));				
+				loader = new FXMLLoader(getClass().getResource("correctAnswerScene.fxml"));				
 			} else {
-				loader = new FXMLLoader(getClass().getResource("correctAnswerScene.fxml"));
+				loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));
 			}
 			
 			try {
 				runLater(loader);
-				System.out.println("Updating");
-				Memory_maker.update(_clue, _clue.getCategory(), correct);
+				Memory_maker.update(_clue, _clue.showCategory(), correct);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -84,10 +82,11 @@ public class AskingController implements Controller {
 	
 	private void runLater(FXMLLoader loader) throws IOException {
 		Scene scene;
-		scene = loader.load();			
+		scene = loader.load();
+		
 		Platform.runLater(new Runnable() {
             @Override public void run() {
-                _stage.setScene(scene);
+                GameMainController.app.getStage().setScene(scene);
             }
         });
 	}

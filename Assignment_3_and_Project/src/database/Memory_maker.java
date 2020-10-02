@@ -126,9 +126,10 @@ public class Memory_maker {
 		
 	}*/
 	
-	public static void update(Clue clue, Category category, Boolean correct) throws Exception {
+	public static void update(Clue clue, String category, Boolean correct) throws Exception {
 		//Updating in the Model as well.
-		GameMainController.getModel().markClueAsAnswered(category, clue);
+		//GameMainController.getModel().markClueAsAnswered(category, clue);
+		clue.answered();
 		//The absolute path is found regardless of location of the code.
 		String path = GameMainController.path;
 		File winnings = new File(path + "/.winnings");
@@ -183,7 +184,7 @@ public class Memory_maker {
 		
 		// The clue answered has its file located in history, and the file is copied line by line, excluding
 		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File inputFile = new File(path+"/.History/"+category.categoryName());
+		File inputFile = new File(path+"/.History/"+category);
 		File tempFile = new File(path+"/.History/myTempFile.txt");
 
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
