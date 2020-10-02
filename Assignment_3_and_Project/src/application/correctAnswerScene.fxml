@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<Scene stylesheets="@correctAnswerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AskingController">
+<Scene stylesheets="@correctAnswerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AnswerController">
    <root>
       <BorderPane fx:id="pane" minHeight="500.0" minWidth="700.0">
          <bottom>
@@ -19,6 +21,21 @@
                </padding>
             </Label>
          </bottom>
+         <left>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" stylesheets="@homeView.css" text="Home" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="30.0" right="30.0" top="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goQuestionBoard" stylesheets="@homeView.css" text="New Question" HBox.hgrow="ALWAYS" />
+               </children>
+               <BorderPane.margin>
+                  <Insets left="60.0" />
+               </BorderPane.margin>
+            </HBox>
+         </left>
       </BorderPane>
    </root>
 </Scene>

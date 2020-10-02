@@ -1,4 +1,4 @@
-This well known fruit use to be called the Chinese Gooseberry@What is@the Kiwifruit@100@ftrueNew Zealand has 200 of this species@ and one species is our national symbol@What is@200@false
-This is the largest native tree in New Zealand@What is@the Kauri@300@false
-This green vegetable is a traditional staple food of the MÄ?ori@What is@PÅ«hÄ?@400@false
-This introduced alga is a threat to New Zealand rivers and is known as rock snot@What is@Didymo@500@false
+This is the largest active volcano in New Zealand@What is@Ruaphehu@100@false
+This is the name of the sea between the North and the South Island@What is@the Cook Strait@200@false
+This is the highest mountain in New Zealand@What is@Mt Aorangi/ Mt Aoraki/Mt Cook@300@false
+This is the name of the long chain of mountains that make up the backbone of the South Island@What is@the Southern Alps@400@ftrueThis is the name of the ocean New Zealand sits in@What is@the Pacific@500@false

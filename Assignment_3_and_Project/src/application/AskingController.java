@@ -12,8 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import database.Memory_maker;
 
 public class AskingController implements Controller {

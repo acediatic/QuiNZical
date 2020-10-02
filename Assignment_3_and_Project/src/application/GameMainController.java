@@ -30,7 +30,6 @@ public class GameMainController {
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 		_model = Model.getInstance();
 		
-		String pathToFontFile = path + File.separator + "bin" + File.separator + "application" + File.separator + "resources" + File.separator + "font" + File.separator + "Ananda Black Personal Use.ttf";
 		
 		try {
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/titleFont.ttf"), 40);
@@ -43,6 +42,5 @@ public class GameMainController {
 		}
 		return singleton;
 	}
-	
 }
 
