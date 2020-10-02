@@ -140,4 +140,9 @@ public class Category {
 		Clue randomClue = _clues.get(randomIndex);
 		return randomClue;
 	}
+	
+	@Override
+	public String toString() {
+		return _name;
+	}
 }

@@ -53,10 +53,9 @@ public class AskingController implements Controller {
 		     // Usr has not entered text, do nothing
 		} else {
 			FXMLLoader loader;
-			boolean correct = false;
 			String usrAnsStripped = usrAns.getText().strip();
 			String actualAns = _clue.showAnswer().strip();
-			 
+			boolean correct = false;
 			if (usrAnsStripped.equalsIgnoreCase(actualAns)) {
 				correct = true;
 				loader = new FXMLLoader(getClass().getResource("incorrectAnswerScene.fxml"));				
@@ -67,11 +66,12 @@ public class AskingController implements Controller {
 			try {
 				runLater(loader);
 				System.out.println("Updating");
-				//Memory_maker.update(_clue, _clue.showCategory(), correct);
+				Memory_maker.update(_clue, _clue.getCategory(), correct);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
+		
 	}
 
 	// Allows user to submit by using the enter key
@@ -85,8 +85,6 @@ public class AskingController implements Controller {
 	private void runLater(FXMLLoader loader) throws IOException {
 		Scene scene;
 		scene = loader.load();			
-		Controller controller = loader.getController();
-		controller.initData(_stage);
 		Platform.runLater(new Runnable() {
             @Override public void run() {
                 _stage.setScene(scene);

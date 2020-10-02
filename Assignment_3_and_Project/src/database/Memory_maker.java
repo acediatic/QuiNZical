@@ -128,7 +128,7 @@ public class Memory_maker {
 	
 	public static void update(Clue clue, Category category, Boolean correct) throws Exception {
 		//Updating in the Model as well.
-		Main.getData().markClueAsAnswered(category, clue);
+		GameMainController.getModel().markClueAsAnswered(category, clue);
 		//The absolute path is found regardless of location of the code.
 		String path = GameMainController.path;
 		File winnings = new File(path + "/.winnings");
