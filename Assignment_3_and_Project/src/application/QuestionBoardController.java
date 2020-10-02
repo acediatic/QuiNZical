@@ -2,6 +2,10 @@ package application;
 
 import static java.lang.Math.pow;
 
+import java.util.List;
+
+import database.Category;
+import database.Clue;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +17,7 @@ import javafx.stage.Stage;
 
 public class QuestionBoardController implements Controller {
 	private Stage _stage;
+	private List<Category> _categories = QuiNZical.getData().getGameCategories();
 	
 	private void initalise() {	}
 	
@@ -27,19 +32,19 @@ public class QuestionBoardController implements Controller {
 		int nodeRow = gp.getRowIndex(node);
 		int nodeCol = gp.getColumnIndex(node);
 		
+		Category chosenCat = _categories.get(nodeRow);
+		Clue chosenClue = chosenCat.getClue(nodeCol);
 		
-		// Access objects
+		System.out.println("beginning question: " + chosenClue.showClue());
 		
-		
-
-		
-		
+		/*
 		Platform.runLater(new Runnable() {
             @Override public void run() {
-                Quizical.setScene(homeScene);
+                QuiNZical.setScene(homeScene);
                 
             }
         });
+        */
 	}
 
 	

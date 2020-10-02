@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
+import application.Controller;
+import application.QuiNZical;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +25,7 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 public class HomeController implements Controller {
-	private Stage _stage;
+	private Stage _currentStage = QuiNZical.getStage();
 	
 	@FXML 
 	private JFXHamburger _hamMenu;
@@ -39,6 +41,13 @@ public class HomeController implements Controller {
 	
 	@FXML
 	private void initialize() {	
+		
+		_currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+			if(_currentStage.getScene() != null) {
+				updateText(oldVal, newVal);
+			}
+		});
+		
 		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -81,19 +90,18 @@ public class HomeController implements Controller {
 	
 	
 	
-	public Double updateText(Stage stage, Double currentFontSize, Number oldVal, Number newVal) {
+	public void updateText(Number oldVal, Number newVal) {
 		Double newVald = newVal.doubleValue();
 		Double oldVald = oldVal.doubleValue();
 		
 		if(!oldVald.isNaN() && !newVald.isNaN()) {
 			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			currentFontSize = currentFontSize * ratio;
+			QuiNZical._currentFontSize = QuiNZical._currentFontSize * ratio;
 			
-			Parent root = stage.getScene().getRoot();
+			Parent root = _currentStage.getScene().getRoot();
 			
-			root.setStyle("-fx-font-size: " + currentFontSize + "em");		
+			root.setStyle("-fx-font-size: " + QuiNZical._currentFontSize + "em");		
 		}
-		return currentFontSize;
 	}
 	
 }

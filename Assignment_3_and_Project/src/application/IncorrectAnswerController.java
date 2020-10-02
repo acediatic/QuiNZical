@@ -20,7 +20,7 @@ public class IncorrectAnswerController implements Controller {
 	private void continueButtonAction() {
 		Platform.runLater(new Runnable() {
             @Override public void run() {
-                Quizical.setScene(homeScene);
+                QuiNZical.setScene(homeScene);
                 
             }
         });
