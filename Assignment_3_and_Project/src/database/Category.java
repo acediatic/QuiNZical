@@ -130,4 +130,14 @@ public class Category {
 		}
 		return randomClues;
 	}
+	
+	/**
+	 * getOneRandomClue returns one random clue in the category
+	 * @return randomClue
+	 */
+	public Clue getOneRandomClue() {
+		int randomIndex = (int)(Math.random() * _clues.size());
+		Clue randomClue = _clues.get(randomIndex);
+		return randomClue;
+	}
 }
