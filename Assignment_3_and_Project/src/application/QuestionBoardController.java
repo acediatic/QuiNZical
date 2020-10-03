@@ -27,11 +27,34 @@ public class QuestionBoardController implements Controller {
 	@FXML 
 	private GridPane gp;
 	
+	@FXML
+	private Label cat1;
+	
+	@FXML
+	private Label cat2;
+	
+	@FXML
+	private Label cat3;
+	
+	@FXML
+	private Label cat4;
+	
+	@FXML
+	private Label cat5;
+	
+	
 	public void initialize() {
+		
+		cat1.setText(_categories.get(0).toString());
+		cat2.setText(_categories.get(1).toString());
+		cat3.setText(_categories.get(2).toString());
+		cat4.setText(_categories.get(3).toString());
+		cat5.setText(_categories.get(4).toString());
+		
 		int catIndex = -1;
 		for (Category cat : _categories) {
 			catIndex++;
-			int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
+			int clueIndex = -1; //starts at zero as in gridpane q's begin at row (index) 1
 			for (Clue clue : cat.getAllClues()) {
 				clueIndex++;
 				if (!clue.isAnswered()) {
@@ -41,11 +64,13 @@ public class QuestionBoardController implements Controller {
 						Integer rowIndex = gp.getRowIndex(node);
 						if (colIndex == null) {
 							colIndex = 0;
-						} if (rowIndex == null) {
-							rowIndex = 0;
-						}
+						} 
 						
-				        if(rowIndex == clueIndex && colIndex == catIndex) {
+						if (rowIndex == null) {
+							rowIndex = 0;
+						} 
+						
+						if (rowIndex == clueIndex && colIndex == catIndex) {
 				            node.setDisable(false);
 				            break;
 				        }
