@@ -1,3 +1,27 @@
 .root {
     -fx-background-image: url("winnings-image.jpg");
+    -fx-background-repeat: stretch; 
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+}
+
+.yourWinningsTxt {
+    -fx-text-fill: white;
+    -fx-font-size: 5em;
+}
+
+.usrWinnings {
+    -fx-text-fill: gold;
+    -fx-font-size: 8em;
+}
+
+.button {
+    -fx-background-color: rgba(0,0,0,0.4);
+    -fx-background-radius: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-font-size: 1em;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }

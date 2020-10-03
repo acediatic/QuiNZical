@@ -31,9 +31,8 @@ public class GameMainController {
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 		_model = Model.getInstance();
 		
-		
 		try {
-			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/titleFont.ttf"), 40);
+			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/homeFont.ttf"), 40);
 		} catch (Exception e) {	}
 	}
 	

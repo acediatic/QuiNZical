@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,53 +33,44 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-public class DrawerController implements Controller {
-	@FXML
-	private void initialize() {	}
+public class WinningsController implements Controller {
+	
+	@FXML 
+	private Text usrWinnings;
 	
 	@FXML
-	private void startGame(ActionEvent e) {	
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
-			Scene scene = loader.load();
-			GameMainController.currentController = (loader.getController());
-			
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
+	private Text yourWinningsTxt;
+	
+	@FXML
+	private void initialize() {	
+		usrWinnings.setFont(GameMainController.titleFont);
 		
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}			
+		String winnings = "$" + DataExtractor.winnings();
+		System.out.println(winnings);
+		
+		usrWinnings.setText("$" + DataExtractor.winnings());
+		usrWinnings.setFill(Color.GOLDENROD);
+		yourWinningsTxt.setFont(GameMainController.titleFont);
+		yourWinningsTxt.setFill(Color.WHITE);
 	}
 	
 	@FXML
-	private void viewScore() {
+	private void back() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("winningsScene.fxml"));
-			Scene scene = loader.load();
-			GameMainController.currentController = (loader.getController());
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeScreen.fxml"));
+			Scene scene = loader.load();			
+			
+			GameMainController.currentController = loader.getController();
+			GameMainController.currentController.init();
 			
 			Platform.runLater(new Runnable() {
 	            @Override public void run() {
 	               GameMainController.app.setScene(scene); 
 	            }
 	        });
-		
-		} catch (IOException e1) {
+		} catch(IOException e1) {
 			e1.printStackTrace();
 		}
-	}
-	
-	@FXML
-	private void reset() {
-		Memory_maker.reset();
-	}
-	
-	@FXML private void quit() {
-		Platform.exit();
 	}
 
 	@Override
@@ -92,5 +84,4 @@ public class DrawerController implements Controller {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
