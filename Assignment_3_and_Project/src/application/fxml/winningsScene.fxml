@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WinningsController">
+<Scene stylesheets="@../css/winningsScene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WinningsController">
    <root>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" stylesheets="@winningsScene.css">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <top>
             <Text fx:id="yourWinningsTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="yourWinningsTxt" text="Your Winnings:" BorderPane.alignment="BOTTOM_CENTER">
                <BorderPane.margin>

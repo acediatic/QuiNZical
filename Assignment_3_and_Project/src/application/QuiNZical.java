@@ -1,11 +1,9 @@
 package application;
 
-import java.io.File;
-
+import database.Memory_maker;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
@@ -30,8 +28,8 @@ public class QuiNZical extends Application {
 		_currentStage.setTitle("QuiNZical");
 		try {
 			GameMainController.app = this;
-	
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+			
 			_currentStage.setMinHeight(700);
 			_currentStage.setMinWidth(700);
 			
