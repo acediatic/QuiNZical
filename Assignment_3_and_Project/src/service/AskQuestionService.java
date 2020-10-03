@@ -20,6 +20,11 @@ public class AskQuestionService extends Service<Void> {
 	
 	
 	 public final void setCatAndClue(Integer col, Integer row) {
+		// null from gridpane get child means child has not been changed from default
+		// col, which is col 0.
+		 if (col == null) {
+				col = 0;
+			}
 		 nodeCol.set(col);
 		 nodeRow.set(row);
 	 }
@@ -38,14 +43,8 @@ public class AskQuestionService extends Service<Void> {
 		final Integer col = getCol();
 		
 		return new Task<Void>() {
-			protected Void call() throws IOException {
-				// null means child has not been changed from default
-				// col, which is col 0.
-				if (col == null) {
-					col = 0;
-				}
-				
-				Category chosenCat = _categories.get(col);
+			protected Void call() throws IOException {			
+				Category chosenCat = GameMainController.getModel().getCategory(col);
 				Clue chosenClue = chosenCat.getClue(row);
 				
 				FXMLService service = new FXMLService();
