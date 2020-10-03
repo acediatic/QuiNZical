@@ -3,6 +3,7 @@ package application;
 import static java.lang.Math.pow;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import controller.Controller;
@@ -42,14 +43,16 @@ public class QuestionBoardController implements Controller {
 	@FXML
 	private Label cat5;
 	
+	private List<Label> lblList;
 	
 	public void initialize() {
-		
-		cat1.setText(_categories.get(0).toString());
-		cat2.setText(_categories.get(1).toString());
-		cat3.setText(_categories.get(2).toString());
-		cat4.setText(_categories.get(3).toString());
-		cat5.setText(_categories.get(4).toString());
+		lblList = Arrays.asList(cat1,cat2,cat3,cat4,cat5);
+		int catCounter = 0;
+		for (Label cat : lblList) {
+			cat.setText(_categories.get(catCounter).toString());
+			cat.setWrapText(true);
+			catCounter ++;
+		}
 		
 		int catIndex = -1;
 		for (Category cat : _categories) {
