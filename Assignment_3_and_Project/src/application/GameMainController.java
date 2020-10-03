@@ -29,6 +29,7 @@ public class GameMainController {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
+		
 		_model = Model.getInstance();
 		
 		try {

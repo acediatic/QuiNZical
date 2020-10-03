@@ -1,10 +1,15 @@
 package application;
 
+import java.io.File;
+
 import javafx.application.Application;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
+import service.FXMLService;
 
 
 public class QuiNZical extends Application {
@@ -25,22 +30,14 @@ public class QuiNZical extends Application {
 		_currentStage.setTitle("QuiNZical");
 		try {
 			GameMainController.app = this;
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeScreen.fxml"));
-			Scene scene = loader.load();			
-			
-			GameMainController.currentController = loader.getController();
-			GameMainController.currentController.init();
-			
-			_currentStage.setScene(scene);
-			
+	
+			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 			_currentStage.setMinHeight(700);
 			_currentStage.setMinWidth(700);
 			
 			_currentStage.minHeightProperty().bind(_currentStage.widthProperty().multiply(1));
 			_currentStage.maxHeightProperty().bind(_currentStage.widthProperty().multiply(1));
 			
-			_currentStage.show();			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -60,5 +57,21 @@ public class QuiNZical extends Application {
 			_currentStage.setWidth(currentScene.getWidth());
 			_currentStage.setHeight(currentScene.getHeight());
 			_currentStage.show();
+		}
+		
+		public void addNewScene(FXMLService.FXMLNames fxml) {
+			 FXMLService service = new FXMLService();
+	         service.setFXML(fxml);
+			 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
+		            @Override 
+		            public void handle(WorkerStateEvent t) {
+		            	Scene scene = (Scene) t.getSource().getValue();
+		            	_currentStage.setScene(scene);
+		            	_currentStage.show();
+		            }
+		        });
+			 
+			 service.start();
 		}
 }

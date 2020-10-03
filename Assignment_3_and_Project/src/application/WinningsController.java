@@ -46,7 +46,6 @@ public class WinningsController implements Controller {
 		usrWinnings.setFont(GameMainController.titleFont);
 		
 		String winnings = "$" + DataExtractor.winnings();
-		System.out.println(winnings);
 		
 		usrWinnings.setText("$" + DataExtractor.winnings());
 		usrWinnings.setFill(Color.GOLDENROD);

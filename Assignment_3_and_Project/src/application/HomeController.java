@@ -54,7 +54,7 @@ public class HomeController implements Controller {
 			_drawer.setResizeContent(true);
 			_drawer.setResizableOnDrag(true);
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeDrawer.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/homeDrawer.fxml"));
 			VBox drawerContent = loader.load();
 
 			_drawer.setSidePane(drawerContent); 
