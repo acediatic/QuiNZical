@@ -14,7 +14,10 @@ import database.DataExtractor;
 import database.Memory_maker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,68 +30,50 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import service.FXMLService;
+import service.UpdateTextService;
 
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-public class DrawerController implements Controller {
+public class DrawerController extends Controller {
 	@FXML
 	private void initialize() {	}
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
-			Scene scene = loader.load();
-			GameMainController.currentController = (loader.getController());
-			
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
-		
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}			
+		GameMainController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
 	}
 	
 	@FXML
 	private void viewScore() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("winningsScene.fxml"));
-			Scene scene = loader.load();
-			GameMainController.currentController = (loader.getController());
-			
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
-		
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		GameMainController.app.addNewScene(FXMLService.FXMLNames.WINNINGS);	
 	}
 	
 	@FXML
 	private void reset() {
-		Memory_maker.reset();
+		Thread th = new Thread(new Task<Void>() {
+			protected Void call() throws IOException {
+				Memory_maker.reset();
+				return null;
+			}
+		});
+		th.start();
 	}
 	
-	@FXML private void quit() {
+	@FXML 
+	private void quit() {
 		Platform.exit();
 	}
 
-	@Override
-	public void updateText(Number oldVal, Number newVal) {
+	public void init() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void init() {
+	public void updateTextIndividual() {
 		// TODO Auto-generated method stub
 		
 	}

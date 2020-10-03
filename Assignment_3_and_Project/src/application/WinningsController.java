@@ -28,12 +28,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import service.FXMLService;
 
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-public class WinningsController implements Controller {
+public class WinningsController extends Controller {
 	
 	@FXML 
 	private Text usrWinnings;
@@ -44,9 +45,6 @@ public class WinningsController implements Controller {
 	@FXML
 	private void initialize() {	
 		usrWinnings.setFont(GameMainController.titleFont);
-		
-		String winnings = "$" + DataExtractor.winnings();
-		
 		usrWinnings.setText("$" + DataExtractor.winnings());
 		usrWinnings.setFill(Color.GOLDENROD);
 		yourWinningsTxt.setFont(GameMainController.titleFont);
@@ -55,31 +53,17 @@ public class WinningsController implements Controller {
 	
 	@FXML
 	private void back() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeScreen.fxml"));
-			Scene scene = loader.load();			
-			
-			GameMainController.currentController = loader.getController();
-			GameMainController.currentController.init();
-			
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
-		} catch(IOException e1) {
-			e1.printStackTrace();
-		}
+		GameMainController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
 	@Override
-	public void updateText(Number oldVal, Number newVal) {
+	public void init() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void init() {
+	public void updateTextIndividual() {
 		// TODO Auto-generated method stub
 		
 	}

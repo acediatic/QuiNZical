@@ -10,8 +10,16 @@ import controller.Controller;
 import database.Category;
 import database.Clue;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,8 +27,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import service.AskQuestionService;
+import service.FXMLService;
+import service.FXMLService.FXMLNames;
 
-public class QuestionBoardController implements Controller {
+public class QuestionBoardController extends Controller {
 	private List<Category> _categories = GameMainController.getModel().getGameCategories();
 	
 	public void init() {}
@@ -92,48 +104,15 @@ public class QuestionBoardController implements Controller {
 		Integer nodeCol = GridPane.getColumnIndex(node);
 		Integer nodeRow = GridPane.getRowIndex(node)-1;
 		
-		// null means child has not been changed from default
-		// col, which is col 0.
-		if (nodeCol == null) {
-			nodeCol = 0;
+		AskQuestionService askQuestion = new AskQuestionService();
+			askQuestion.setCatAndClue(nodeCol, nodeRow);
+			askQuestion.start();
 		}
-		
-		Category chosenCat = _categories.get(nodeCol);
-		Clue chosenClue = chosenCat.getClue(nodeRow);
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("askQuestionScene.fxml"));
-			Scene scene = loader.load();
-			AskingController ac = (loader.getController());
-			ac.initClue(chosenClue);
-			
-			GameMainController.currentController = ac;
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
-		
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}			
-	}
 	
-	public void updateText(Number oldVal, Number newVal) {
+	public void updateTextIndividual() {
 		Double currentFontSize = GameMainController._currentFontSize;
-		Double newVald = newVal.doubleValue();
-		Double oldVald = oldVal.doubleValue();
-		
-		if(!oldVald.isNaN() && !newVald.isNaN()) {
-			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			GameMainController._currentFontSize = currentFontSize * ratio;
-			
-			GridPane gp = (GridPane) GameMainController.app.getStage().getScene().getRoot();
-			
-			gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
-			gp.setVgap(pow(2,currentFontSize));
-			gp.setHgap(pow(2,currentFontSize));
-		
-		}
+		gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
+		gp.setVgap(pow(2,currentFontSize));
+		gp.setHgap(pow(2,currentFontSize));
 	}
 }

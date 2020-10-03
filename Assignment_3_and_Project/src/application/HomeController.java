@@ -13,7 +13,11 @@ import controller.Controller;
 import database.Memory_maker;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,12 +30,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import service.FXMLService;
+import service.UpdateTextService;
 
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-public class HomeController implements Controller {
+public class HomeController extends Controller {
 	@FXML 
 	private JFXHamburger _hamMenu;
 	
@@ -49,24 +55,38 @@ public class HomeController implements Controller {
 	
 	@FXML
 	private void initialize() {	
-		try {
-			_drawer.setDefaultDrawerSize(300);
-			_drawer.setResizeContent(true);
-			_drawer.setResizableOnDrag(true);
+		_drawer.setDefaultDrawerSize(300);
+		_drawer.setResizeContent(true);
+		_drawer.setResizableOnDrag(true);
+		
+		Service<VBox> drawerService = new Service<VBox>() {
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/homeDrawer.fxml"));
-			VBox drawerContent = loader.load();
-
-			_drawer.setSidePane(drawerContent); 
-			for (Node node : drawerContent.getChildren()) {
-				Button btn = (Button) node;
-				btn.setFont(GameMainController.titleFont);
+			@Override
+			protected Task<VBox> createTask() {
+				return new Task<VBox>() {
+					protected VBox call() throws IOException {
+						FXMLLoader loader = new FXMLLoader(FXMLService.FXMLNames.HOMEDRAWER.toURL());
+						VBox drawerContent = loader.load();
+						return drawerContent;
+					}
+				};
 			}
-			
-		} catch(IOException e1) {
-			e1.printStackTrace();
-		}
-			HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
+		};
+		
+		drawerService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override 
+            public void handle(WorkerStateEvent t) {
+            	VBox drawerContent = (VBox)t.getSource().getValue();
+            	_drawer.setSidePane(drawerContent);
+            	for (Node node : drawerContent.getChildren()) {
+    				Button btn = (Button) node;
+    				btn.setFont(GameMainController.titleFont);
+    			}
+            }
+        });
+	 
+		drawerService.start();
+		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             burgerTask.setRate(burgerTask.getRate() * -1);
@@ -82,7 +102,6 @@ public class HomeController implements Controller {
         _hbox.getChildren().add(rippler);
         
         mainTxt.setFont(GameMainController.titleFont);
-        
 	}
 	
 	public void init() {
@@ -108,34 +127,12 @@ public class HomeController implements Controller {
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("questionBoard.fxml"));
-			Scene scene = loader.load();
-			GameMainController.currentController = (loader.getController());
-			
-			Platform.runLater(new Runnable() {
-	            @Override public void run() {
-	               GameMainController.app.setScene(scene); 
-	            }
-	        });
-		
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}			
+		GameMainController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
 	}
-	
-	public void updateText(Number oldVal, Number newVal) {
-		Double newVald = newVal.doubleValue();
-		Double oldVald = oldVal.doubleValue();
+
+	@Override
+	public void updateTextIndividual() {
+		// TODO Auto-generated method stub
 		
-		if(!oldVald.isNaN() && !newVald.isNaN()) {
-			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-			GameMainController._currentFontSize = GameMainController._currentFontSize * ratio;
-			
-			Parent root = GameMainController.app.getStage().getScene().getRoot();
-			
-			root.setStyle("-fx-font-size: " + GameMainController._currentFontSize + "em");		
-		}
 	}
-	
 }

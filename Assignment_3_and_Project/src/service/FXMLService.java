@@ -53,5 +53,9 @@ public class FXMLService extends Service<Scene> {
     		public String toString() {
     			return _location;
     		}
+    		
+    		public URL toURL() {
+    			return getClass().getResource("/application/fxml/"+ this.toString());
+    		}
     	}
  }
