@@ -24,7 +24,7 @@
     -fx-background-color: white;
 }
 
-.button {
+#contButton {
     -fx-background-color: rgba(256,256,256,0.2);
     -fx-background-radius: 10px;
     -fx-border-color: white;
@@ -33,4 +33,13 @@
     -fx-font-style: italic;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+}
+
+
+.drawer {
+    -fx-background-color: transparent;
+}
+
+.drawerOpen {
+    -fx-background-color: transparent;
 }

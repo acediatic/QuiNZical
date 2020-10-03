@@ -8,18 +8,22 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-import application.Controller;
 import application.GameMainController;
-import application.QuiNZical;
+import controller.Controller;
+import database.Memory_maker;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -45,17 +49,40 @@ public class HomeController implements Controller {
 	
 	@FXML
 	private void initialize() {	
-		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
+		try {
+			_drawer.setDefaultDrawerSize(300);
+			_drawer.setResizeContent(true);
+			_drawer.setResizableOnDrag(true);
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("homeDrawer.fxml"));
+			VBox drawerContent = loader.load();
+
+			_drawer.setSidePane(drawerContent); 
+			for (Node node : drawerContent.getChildren()) {
+				Button btn = (Button) node;
+				btn.setFont(GameMainController.titleFont);
+			}
+			
+		} catch(IOException e1) {
+			e1.printStackTrace();
+		}
+			HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
-        });
+            if (_drawer.isOpened()){
+            	_drawer.close();
+            } else {
+            	_drawer.open();
+            }
+        }); 
         
         JFXRippler rippler = new JFXRippler(_beginBtn);
         _hbox.getChildren().add(rippler);
         
         mainTxt.setFont(GameMainController.titleFont);
+        
 	}
 	
 	public void init() {
@@ -65,6 +92,18 @@ public class HomeController implements Controller {
 				updateText(oldVal, newVal);
 			}
 		});
+	}
+	
+	@FXML
+	private void drawerOpen() {
+		_drawer.getStyleClass().clear();
+		_drawer.getStyleClass().add("drawerOpen");
+	}
+	
+	@FXML
+	private void drawerClose() {
+		_drawer.getStyleClass().clear();
+		_drawer.getStyleClass().add("drawer");
 	}
 	
 	@FXML

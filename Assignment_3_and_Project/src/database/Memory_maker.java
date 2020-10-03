@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.List;
 
 import application.GameMainController;
-import application.Main;
 
 public class Memory_maker {
 	

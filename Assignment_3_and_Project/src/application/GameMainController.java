@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.IOException;
 
+import controller.Controller;
 import database.Model;
 import javafx.application.Application;
 import javafx.scene.text.Font;

@@ -162,10 +162,6 @@ public class DataExtractor {
 
 			try {
 				while((winningLine = winningReader.readLine()) != null) {
-					//Checking
-					System.out.println(win);
-					System.out.println(winningLine);
-					//Checking done
 					win = winningLine;
 				}
 			} catch (IOException e) {

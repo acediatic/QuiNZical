@@ -5,6 +5,7 @@ import static java.lang.Math.pow;
 import java.io.IOException;
 import java.util.List;
 
+import controller.Controller;
 import database.Category;
 import database.Clue;
 import javafx.application.Platform;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <root>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;winnings-image.jpg&quot;);">
+         <children>
+            <Text layoutX="289.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <JFXButton layoutX="280.0" layoutY="347.0" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="375.0" />
+         </children>
+      </AnchorPane>
+   </root>
+</Scene>

@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import controller.Controller;
 import database.Clue;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
