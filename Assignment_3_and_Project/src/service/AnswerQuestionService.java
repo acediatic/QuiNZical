@@ -1,13 +1,10 @@
 package service;
 
 import application.GameMainController;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
 
 public class AnswerQuestionService extends Service<Boolean> {
 	private StringProperty _usrAns = new SimpleStringProperty();
@@ -41,10 +38,11 @@ public class AnswerQuestionService extends Service<Boolean> {
      			} else {
      				nextSceneFXML = FXMLService.FXMLNames.INCORRECT;
      			}
+     			
      			GameMainController.app.addNewScene(nextSceneFXML);
      			
      			return correct;
+             };
          };
-     };
      }
 }

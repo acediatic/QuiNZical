@@ -1,6 +1,5 @@
 package application;
 
-import database.Memory_maker;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -64,6 +63,7 @@ public class QuiNZical extends Application {
 
 		            @Override 
 		            public void handle(WorkerStateEvent t) {
+		            	System.out.println("successful");
 		            	Scene scene = (Scene) t.getSource().getValue();
 		            	_currentStage.setScene(scene);
 		            	_currentStage.show();

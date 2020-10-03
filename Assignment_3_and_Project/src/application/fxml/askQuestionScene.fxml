@@ -6,21 +6,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <Scene stylesheets="@../css/questionStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AskingController">
    <root>
       <BorderPane fx:id="pane" minHeight="500.0" minWidth="700.0">
-         <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSubmitButtonAction" snapToPixel="false" style="-fx-background-color: #009900;" text="Submit Answer" textFill="WHITE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets bottom="20.0" left="50.0" right="50.0" top="50.0" />
-               </BorderPane.margin>
-            </Button>
-         </bottom>
          <center>
             <TextField fx:id="usrAns" alignment="CENTER" minHeight="50.0" minWidth="600.0" onKeyPressed="#lookForEnter" BorderPane.alignment="CENTER">
                <font>
@@ -41,6 +32,22 @@
                </padding>
             </Label>
          </top>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="125.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" snapToPixel="false" style="-fx-background-color: #009900;" text="Submit Answer" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="125.0" mnemonicParsing="false" onAction="#handleDontKnow" snapToPixel="false" style="-fx-background-color: #009900;" text="Don't Know" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </root>
 </Scene>

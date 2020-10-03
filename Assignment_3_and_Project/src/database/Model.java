@@ -39,9 +39,8 @@ public class Model {
     	return inGameCategories.get(index);
     }
     
-    /**
+    
     public void markClueAsAnswered (Category selectedCategory, Clue answeredClue) {
     	inGameCategories.get(inGameCategories.indexOf(selectedCategory)).getClue(inGameCategories.get(inGameCategories.indexOf(selectedCategory)).indexOf(answeredClue)).answered();
     }
-    */
 } 

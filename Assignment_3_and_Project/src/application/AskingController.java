@@ -36,24 +36,32 @@ public class AskingController extends Controller {
 		if (usrAns.getText() == null || usrAns.getText().trim().isEmpty()) {
 		     // Usr has not entered text, do nothing
 		} else {
-			AnswerQuestionService service = new AnswerQuestionService();
-	         service.setAns(usrAns.getText(), _clue.showAnswer());
-			 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-
-		            @Override 
-		            public void handle(WorkerStateEvent t) {
-		            	try {
-							Memory_maker.update(_clue, _category, (boolean) t.getSource().getValue());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		            }
-		        });
-			 
-			 service.start();
+			checkQuestion(usrAns.getText());
 		}
-		
 	}
+	
+	@FXML 
+	private void handleDontKnow() {
+		checkQuestion("");
+	}
+			
+	private void checkQuestion(String usrAns) {
+		AnswerQuestionService service = new AnswerQuestionService();
+		service.setAns(usrAns, _clue.showAnswer());
+		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
+	            @Override 
+	            public void handle(WorkerStateEvent t) {
+	            	try {
+						Memory_maker.update(_clue, _category, (boolean) t.getSource().getValue());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	            }
+	        });
+		 
+		 service.start();
+		}
 
 	// Allows user to submit by using the enter key
 	@FXML

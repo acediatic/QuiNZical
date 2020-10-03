@@ -63,13 +63,13 @@ public class QuestionBoardController extends Controller {
 		for (Label cat : lblList) {
 			cat.setText(_categories.get(catCounter).toString());
 			cat.setWrapText(true);
-			catCounter ++;
+			catCounter++;
 		}
 		
 		int catIndex = -1;
 		for (Category cat : _categories) {
 			catIndex++;
-			int clueIndex = -1; //starts at zero as in gridpane q's begin at row (index) 1
+			int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
 			for (Clue clue : cat.getAllClues()) {
 				clueIndex++;
 				if (!clue.isAnswered()) {

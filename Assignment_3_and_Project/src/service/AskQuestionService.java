@@ -50,7 +50,6 @@ public class AskQuestionService extends Service<Void> {
 				FXMLService service = new FXMLService();
 		         service.setFXML(FXMLService.FXMLNames.ASKQUESTION);
 				 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-	
 			            @Override 
 			            public void handle(WorkerStateEvent t) {
 			            	AskingController ac = (AskingController) GameMainController.currentController;
