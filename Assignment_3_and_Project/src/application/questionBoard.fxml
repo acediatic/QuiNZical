@@ -188,27 +188,27 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </Button>
-            <Label text="Cat1" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="cat1" text="Cat1" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="Cat2" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+            <Label fx:id="cat2" text="Cat2" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="Cat3" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+            <Label fx:id="cat3" text="Cat3" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="Cat4" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+            <Label fx:id="cat4" text="Cat4" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" text="Cat5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4">
+            <Label fx:id="cat5" alignment="CENTER" text="Cat5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
