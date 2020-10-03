@@ -11,7 +11,7 @@
 }
 
 .label {
-    -fx-font-size: 0.5em;
+    -fx-font-size: 1.2em;
     -fx-font-style: italic;
     -fx-font-weight: bold;
 }
