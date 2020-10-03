@@ -12,24 +12,27 @@
 
 <Scene fx:id="sc" stylesheets="@homeView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <root>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="596.0" prefWidth="844.0" styleClass="backgroundPane">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" styleClass="backgroundPane">
          <top>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Text fx:id="mainTxt" fill="WHITE" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="QuiN Zical" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0" />
+                        <Text fx:id="mainTxt" fill="WHITE" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="QuiNZical" />
                      </children>
                   </AnchorPane>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <JFXHamburger fx:id="_hamMenu" alignment="CENTER_RIGHT" layoutX="23.0" layoutY="40.0" scaleX="1.5" scaleY="1.5" AnchorPane.rightAnchor="20.0" />
+                        <JFXHamburger fx:id="_hamMenu" alignment="CENTER_RIGHT" layoutX="23.0" layoutY="40.0" scaleX="1.5" scaleY="1.5" />
                      </children>
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </AnchorPane>
                </children>
+               <BorderPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </BorderPane.margin>
             </HBox>
          </top>
          <bottom>
