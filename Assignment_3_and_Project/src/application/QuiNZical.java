@@ -63,7 +63,6 @@ public class QuiNZical extends Application {
 
 		            @Override 
 		            public void handle(WorkerStateEvent t) {
-		            	System.out.println("successful");
 		            	Scene scene = (Scene) t.getSource().getValue();
 		            	_currentStage.setScene(scene);
 		            	_currentStage.show();

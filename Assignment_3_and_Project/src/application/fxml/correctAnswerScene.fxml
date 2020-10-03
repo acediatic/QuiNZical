@@ -24,12 +24,12 @@
          <left>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" stylesheets="@homeView.css" text="Home" HBox.hgrow="ALWAYS">
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" stylesheets="@../css/homeView.css" text="Home" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="30.0" right="30.0" top="30.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goQuestionBoard" stylesheets="@homeView.css" text="New Question" HBox.hgrow="ALWAYS" />
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goQuestionBoard" stylesheets="@../css/homeView.css" text="New Question" HBox.hgrow="ALWAYS" />
                </children>
                <BorderPane.margin>
                   <Insets left="60.0" />
