@@ -43,4 +43,8 @@ public class Model {
     public void markClueAsAnswered (Category selectedCategory, Clue answeredClue) {
     	inGameCategories.get(inGameCategories.indexOf(selectedCategory)).getClue(inGameCategories.get(inGameCategories.indexOf(selectedCategory)).indexOf(answeredClue)).answered();
     }
+    
+    public void getNewModel() {
+    	model = new Model();
+    }
 } 

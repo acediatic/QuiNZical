@@ -28,8 +28,7 @@ public class DrawerController extends Controller {
 	}
 	
 	@FXML
-	private void reset() {
-
+	public void reset() {
 		Alert resetAlert = new Alert(AlertType.CONFIRMATION);
 		resetAlert.setTitle("WARNING!");
 		resetAlert.setHeaderText("Reset?");

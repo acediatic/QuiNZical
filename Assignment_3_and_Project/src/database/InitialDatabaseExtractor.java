@@ -73,12 +73,6 @@ public class InitialDatabaseExtractor {
 			    String line;
 			    while ((line = br.readLine()) != null) {
 			    	String[] data=line.split("@");
-			    	/*//Checking
-				    System.out.println(line);
-				    System.out.println(data[0]);
-				    System.out.println(data[1]);
-				    System.out.println(data[2]);
-				    //Checking done*/
 			    	Clue clue = new Clue (category.categoryName(), data[0], data[1], data[2]);
 			    	category.addClue(clue);			    	
 			    }

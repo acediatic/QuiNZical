@@ -66,14 +66,21 @@ public class QuestionBoardController extends Controller {
 			catCounter++;
 		}
 		
-		int catIndex = -1;
-		for (Category cat : _categories) {
-			catIndex++;
-			int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
-			for (Clue clue : cat.getAllClues()) {
-				clueIndex++;
-				if (!clue.isAnswered()) {
-				    ObservableList<Node> childrens = gp.getChildren();
+		boolean allAnswered = false;
+		for (Category c : _categories) {
+			allAnswered |= c.allAnswered();
+		}
+		
+		if(!allAnswered) {
+			
+			int catIndex = -1;
+			for (Category cat : _categories) {
+				catIndex++;
+				int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
+				Boolean lowestClueFound = false;
+				for (Clue clue : cat.getAllClues()) {
+					clueIndex++;
+					ObservableList<Node> childrens = gp.getChildren();
 					for (Node node : childrens) {
 						Integer colIndex = gp.getColumnIndex(node);
 						Integer rowIndex = gp.getRowIndex(node);
@@ -86,13 +93,20 @@ public class QuestionBoardController extends Controller {
 						} 
 						
 						if (rowIndex == clueIndex && colIndex == catIndex) {
-				            node.setDisable(false);
-				            break;
+							if (clue.isAnswered()) {
+								node.setVisible(false);
+							}
+							else if (!lowestClueFound) {
+								node.setDisable(false);
+								lowestClueFound = true;
+							} 
+							break;
 				        }
 				    }
-					break;
 				}
-			}
+			} 
+		} else {
+			GameMainController.app.addNewScene(FXMLService.FXMLNames.GAMECOMPLETE);
 		}
 	}
 

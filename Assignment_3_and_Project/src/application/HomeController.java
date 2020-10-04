@@ -68,6 +68,7 @@ public class HomeController extends Controller {
 						FXMLLoader loader = new FXMLLoader(FXMLService.FXMLNames.HOMEDRAWER.toURL());
 						VBox drawerContent = loader.load();
 						return drawerContent;
+						
 					}
 				};
 			}
