@@ -17,7 +17,7 @@
    <root>
       <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <center>
-            <TextField fx:id="usrAnsField" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#lookForEnter" BorderPane.alignment="CENTER">
+            <TextField fx:id="usrAnsField" alignment="CENTER" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#lookForEnter" BorderPane.alignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -37,11 +37,11 @@
             </Label>
          </top>
          <bottom>
-            <VBox alignment="CENTER" fillWidth="false" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" fillWidth="false" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" minWidth="125.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" snapToPixel="false" style="-fx-background-color: #009900;" text="Submit Answer" textFill="WHITE">
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="125.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" snapToPixel="false" style="-fx-background-color: #009900;" text="Submit Answer" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                            <font>
                               <Font size="16.0" />
                            </font>

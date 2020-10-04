@@ -23,7 +23,7 @@
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                   </Label>
-                  <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" promptText="Practice Category" style="-fx-background-color: green; -fx-border-radius: 20;" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" promptText="Practice Category" styleClass="catSelector" HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

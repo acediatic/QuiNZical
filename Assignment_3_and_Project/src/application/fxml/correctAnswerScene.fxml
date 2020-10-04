@@ -22,7 +22,7 @@
             </Label>
          </bottom>
          <left>
-            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" ripplerFill="BLACK" stylesheets="@../css/homeView.css" text="Home" HBox.hgrow="ALWAYS">
                      <HBox.margin>
