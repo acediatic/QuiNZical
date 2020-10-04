@@ -1,7 +1,7 @@
-package application;
+package controller.sceneControllers;
 
 
-import controller.Controller;
+import controller.PrimaryController;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -16,16 +16,16 @@ public class WinningsController extends Controller {
 	
 	@FXML
 	private void initialize() {	
-		usrWinnings.setFont(GameMainController.titleFont);
-		usrWinnings.setText("$" + GameMainController.getInstance().getWinnings());
+		usrWinnings.setFont(PrimaryController.titleFont);
+		usrWinnings.setText("$" + PrimaryController.getInstance().getWinnings());
 		usrWinnings.setFill(Color.GOLDENROD);
-		yourWinningsTxt.setFont(GameMainController.titleFont);
+		yourWinningsTxt.setFont(PrimaryController.titleFont);
 		yourWinningsTxt.setFill(Color.WHITE);
 	}
 	
 	@FXML
 	private void back() {
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
 	@Override

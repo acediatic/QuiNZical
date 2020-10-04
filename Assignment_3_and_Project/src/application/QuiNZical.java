@@ -1,5 +1,6 @@
 package application;
 
+import controller.PrimaryController;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -12,7 +13,7 @@ import service.FXMLService;
 
 public class QuiNZical extends Application {
 	private Stage _currentStage;
-	private GameMainController gmc = GameMainController.getInstance(); //initialises gmc.
+	private PrimaryController gmc = PrimaryController.getInstance(); //initialises gmc.
 	
 	/**
 	 * getStage returns the stage to other classes, to allow them to set the stage.
@@ -27,15 +28,8 @@ public class QuiNZical extends Application {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
 		try {
-			GameMainController.app = this;
-			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
-			
-			_currentStage.setMinHeight(700);
-			_currentStage.setMinWidth(700);
-			
-			_currentStage.minHeightProperty().bind(_currentStage.widthProperty().multiply(1));
-			_currentStage.maxHeightProperty().bind(_currentStage.widthProperty().multiply(1));
-			
+			PrimaryController.app = this;
+			addNewScene(FXMLService.FXMLNames.HOMESCREEN);			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -66,6 +60,10 @@ public class QuiNZical extends Application {
 		            public void handle(WorkerStateEvent t) {
 		            	Scene scene = (Scene) t.getSource().getValue();
 		            	_currentStage.setScene(scene);
+		            	
+		            	_currentStage.setMinHeight(700);
+		    			_currentStage.setMinWidth(700);
+		    			
 		            	_currentStage.show();
 		            }
 		        });

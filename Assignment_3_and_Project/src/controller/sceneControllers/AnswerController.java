@@ -1,7 +1,7 @@
-package application;
+package controller.sceneControllers;
 
 
-import controller.Controller;
+import controller.PrimaryController;
 import javafx.fxml.FXML;
 import service.FXMLService;
 
@@ -9,12 +9,12 @@ public class AnswerController extends Controller {
 	
 	@FXML
 	private void goHome() {
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 	
 	@FXML 
 	private void goQuestionBoard() {
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
 	}	
 
 	@Override

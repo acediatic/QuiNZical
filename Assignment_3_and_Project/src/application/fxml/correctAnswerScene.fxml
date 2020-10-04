@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<Scene stylesheets="@../css/correctAnswerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AnswerController">
+<Scene stylesheets="@../css/correctAnswerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.AnswerController">
    <root>
       <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <bottom>
@@ -22,14 +22,14 @@
             </Label>
          </bottom>
          <left>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" stylesheets="@../css/homeView.css" text="Home" HBox.hgrow="ALWAYS">
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goHome" ripplerFill="BLACK" stylesheets="@../css/homeView.css" text="Home" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="30.0" right="30.0" top="30.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goQuestionBoard" stylesheets="@../css/homeView.css" text="New Question" HBox.hgrow="ALWAYS" />
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#goQuestionBoard" ripplerFill="BLACK" stylesheets="@../css/homeView.css" text="New Question" HBox.hgrow="ALWAYS" />
                </children>
                <BorderPane.margin>
                   <Insets left="60.0" />

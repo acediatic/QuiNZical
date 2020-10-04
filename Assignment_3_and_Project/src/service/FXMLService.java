@@ -3,7 +3,7 @@ package service;
 import java.io.IOException;
 import java.net.URL;
 
-import application.GameMainController;
+import controller.PrimaryController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
@@ -32,8 +32,8 @@ public class FXMLService extends Service<Scene> {
              protected Scene call() throws IOException {
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+_fxml));
      			 Scene scene = loader.load();		
-     			 GameMainController.currentController = loader.getController();
-     			 GameMainController.currentController.init();
+     			 PrimaryController.currentController = loader.getController();
+     			 PrimaryController.currentController.init();
      			 return scene;
              }
          };
@@ -41,7 +41,8 @@ public class FXMLService extends Service<Scene> {
      
      public enum FXMLNames {
     		HOMESCREEN("homeScreen.fxml"), HOMEDRAWER("homeDrawer.fxml"), ASKQUESTION("askQuestionScene.fxml"), CORRECT("correctAnswerScene.fxml"),
-    		INCORRECT("incorrectAnswerScene.fxml"), QUESTIONBOARD("questionBoard.fxml"), WINNINGS("winningsScene.fxml"), GAMECOMPLETE("rewardScene.fxml");
+    		INCORRECT("incorrectAnswerScene.fxml"), QUESTIONBOARD("questionBoard.fxml"), WINNINGS("winningsScene.fxml"), GAMECOMPLETE("rewardScene.fxml"),
+    		PRACTICESELECTOR("practiceCatSelector.fxml");
 
     		private final String _location;
     		

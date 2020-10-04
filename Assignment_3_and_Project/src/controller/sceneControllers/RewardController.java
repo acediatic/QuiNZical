@@ -1,9 +1,9 @@
-package application;
+package controller.sceneControllers;
 
 
 import java.io.IOException;
 
-import controller.Controller;
+import controller.PrimaryController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
@@ -19,10 +19,10 @@ public class RewardController extends Controller {
 	
 	@FXML
 	private void initialize() {	
-		usrWinnings.setFont(GameMainController.titleFont);
-		usrWinnings.setText("$" + GameMainController.getInstance().getWinnings());
+		usrWinnings.setFont(PrimaryController.titleFont);
+		usrWinnings.setText("$" + PrimaryController.getInstance().getWinnings());
 		usrWinnings.setFill(Color.WHITE);
-		allDoneTxt.setFont(GameMainController.titleFont);
+		allDoneTxt.setFont(PrimaryController.titleFont);
 		allDoneTxt.setFill(Color.WHITE);
 	}
 	
@@ -30,12 +30,12 @@ public class RewardController extends Controller {
 	private void back() {
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
-				GameMainController.getInstance().reset();
+				PrimaryController.getInstance().reset();
 					return null;
 	            }
         	});
 		th.start();
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
 	@Override

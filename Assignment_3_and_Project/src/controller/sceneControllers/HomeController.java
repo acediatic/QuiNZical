@@ -1,4 +1,4 @@
-package application;
+package controller.sceneControllers;
 
 import java.io.IOException;
 
@@ -8,8 +8,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
-import application.GameMainController;
-import controller.Controller;
+import controller.PrimaryController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -80,7 +79,7 @@ public class HomeController extends Controller {
             	_drawer.setSidePane(drawerContent);
             	for (Node node : drawerContent.getChildren()) {
     				Button btn = (Button) node;
-    				btn.setFont(GameMainController.titleFont);
+    				btn.setFont(PrimaryController.titleFont);
     			}
             }
         });
@@ -101,11 +100,11 @@ public class HomeController extends Controller {
         JFXRippler rippler = new JFXRippler(_beginBtn);
         _hbox.getChildren().add(rippler);
         
-        mainTxt.setFont(GameMainController.titleFont);
+        mainTxt.setFont(PrimaryController.titleFont);
 	}
 	
 	public void init() {
-		Stage currentStage = GameMainController.app.getStage();
+		Stage currentStage = PrimaryController.app.getStage();
 		currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
 			if(currentStage.getScene() != null) {
 				updateText(oldVal, newVal);
@@ -127,7 +126,7 @@ public class HomeController extends Controller {
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
 	}
 
 	@Override

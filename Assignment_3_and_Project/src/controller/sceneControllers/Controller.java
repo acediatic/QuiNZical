@@ -1,4 +1,4 @@
-package controller;
+package controller.sceneControllers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import application.GameMainController;
+import controller.PrimaryController;
 import database.Category;
 import database.Clue;
 import javafx.concurrent.WorkerStateEvent;
@@ -24,8 +24,8 @@ public abstract class Controller {
 	
 	            @Override 
 	            public void handle(WorkerStateEvent t) {
-	            	Parent root = GameMainController.app.getStage().getScene().getRoot();
-	    			root.setStyle("-fx-font-size: " + GameMainController._currentFontSize + "em");
+	            	Parent root = PrimaryController.app.getStage().getScene().getRoot();
+	    			root.setStyle("-fx-font-size: " + PrimaryController._currentFontSize + "em");
 	    			updateTextIndividual();
 	            }
 	        }); 

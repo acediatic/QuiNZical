@@ -3,6 +3,8 @@ package database;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.PrimaryController;
+
 public class PracticeModuleModel {
 	
 	// static variable single_instance of type Singleton 
@@ -17,11 +19,7 @@ public class PracticeModuleModel {
     // private constructor restricted to this class itself 
     private PracticeModuleModel() 
     { 
-        try {
-			allGameCategories = InitialDatabaseExtractor.extractAndSort();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        PrimaryController.getInstance().getMasterCategories();
     } 
   
     // static method to create instance of Singleton class 

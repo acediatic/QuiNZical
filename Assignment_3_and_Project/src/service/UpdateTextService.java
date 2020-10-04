@@ -1,6 +1,6 @@
 package service;
 
-import application.GameMainController;
+import controller.PrimaryController;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
@@ -30,7 +30,7 @@ public class UpdateTextService extends Service<Void> {
              protected Void call() {
             	 if(!oldVal.isNaN() && !newVal.isNaN()) {
          			double ratio = newVal.doubleValue() / oldVal.doubleValue();
-         			GameMainController._currentFontSize = GameMainController._currentFontSize * ratio;
+         			PrimaryController._currentFontSize = PrimaryController._currentFontSize * ratio;
              }
             	 return null;
          };

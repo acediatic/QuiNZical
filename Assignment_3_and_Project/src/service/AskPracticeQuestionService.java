@@ -1,60 +1,60 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import controller.PrimaryController;
 import controller.sceneControllers.AskingController;
 import database.Category;
 import database.Clue;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
-public class AskQuestionService extends Service<Void> {
-	private IntegerProperty nodeCol = new SimpleIntegerProperty();
-	private IntegerProperty nodeRow = new SimpleIntegerProperty();
+public class AskPracticeQuestionService extends Service<Void> {
+	private ObjectProperty<Category> chosenCat = new SimpleObjectProperty<Category>();
+	private IntegerProperty attempts = new SimpleIntegerProperty();
 	
-	 public final void setCatAndClue(Integer col, Integer row) {
-		// null from gridpane get child means child has not been changed from default
-		// col, which is col 0.
-		 if (col == null) {
-				col = 0;
-			}
-		 nodeCol.set(col);
-		 nodeRow.set(row);
-	 }
-	
-	 public final Integer getCol() {
-	     return nodeCol.get();
+	 public final void setCategory(Category cat) {
+		chosenCat.set(cat);
 	 }
 	 
-	 public final Integer getRow() {
-	     return nodeRow.get();
-	 }
+	 public final Category getCategory() {
+			return chosenCat.get();
+		 }
+	 
+	 public final void setAttempts(Integer noAttempts) {
+			attempts.set(noAttempts);
+		 }
+		 
+		 public final Integer getAttempts() {
+				return attempts.get();
+			 }
 	
 	@Override
 	protected Task<Void> createTask() {
-		final Integer row = getRow();
-		final Integer col = getCol();
 		
 		return new Task<Void>() {
 			protected Void call() throws IOException {			
-				Category chosenCat = PrimaryController.getInstance().getCategory(col);
-				Clue chosenClue = chosenCat.getClue(row);
-				
+				Category chosenCat = getCategory();
+				List<Clue> possibleClues = chosenCat.getAllUnasnweredClues();
+				Clue randomClue = possibleClues.get(new Random().nextInt(possibleClues.size()));
+							
 				FXMLService service = new FXMLService();
 		         service.setFXML(FXMLService.FXMLNames.ASKQUESTION);
 				 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			            @Override 
 			            public void handle(WorkerStateEvent t) {
 			            	AskingController ac = (AskingController) PrimaryController.currentController;
-			            	ac.initClue(chosenCat, chosenClue, false);
+			            	ac.initClue(chosenCat, randomClue, true);
 			            	
 			            	Scene scene = (Scene) t.getSource().getValue();
 			            	PrimaryController.app.setScene(scene);
@@ -65,6 +65,4 @@ public class AskQuestionService extends Service<Void> {
 			};
 		};
 	}
-
-
 }

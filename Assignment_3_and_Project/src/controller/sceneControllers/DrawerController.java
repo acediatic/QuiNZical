@@ -1,8 +1,9 @@
-package application;
+package controller.sceneControllers;
 
 import java.io.IOException;
 import java.util.Optional;
-import controller.Controller;
+
+import controller.PrimaryController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -18,12 +19,17 @@ public class DrawerController extends Controller {
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
 	}
 	
 	@FXML
 	private void viewScore() {
-		GameMainController.app.addNewScene(FXMLService.FXMLNames.WINNINGS);	
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.WINNINGS);	
+	}
+	
+	@FXML
+	private void practice() {
+		PrimaryController.app.addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);	
 	}
 	
 	@FXML
@@ -38,7 +44,7 @@ public class DrawerController extends Controller {
         	Thread th = new Thread(new Task<Void>() {
 	        	protected Void call() throws IOException {
 	        		try {
-						GameMainController.getInstance().reset();
+						PrimaryController.getInstance().reset();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

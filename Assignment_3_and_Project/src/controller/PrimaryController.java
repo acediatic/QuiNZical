@@ -1,10 +1,11 @@
-package application;
+package controller;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import controller.Controller;
+import application.QuiNZical;
+import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
@@ -13,7 +14,7 @@ import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class GameMainController {
+public class PrimaryController {
 	public static Double _currentFontSize = 1.8;
 	public static QuiNZical app;
 	
@@ -24,11 +25,11 @@ public class GameMainController {
 	public static String path;
 	public static Font titleFont;
 	
-	private static GameMainController singleton = null;
+	private static PrimaryController singleton = null;
 	
 	private ArrayList<Category> _categories;
 	
-	private GameMainController() {
+	private PrimaryController() {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
@@ -42,9 +43,9 @@ public class GameMainController {
 		}
 	}
 	
-	public static GameMainController getInstance() {
+	public static PrimaryController getInstance() {
 		if (singleton == null) {
-			singleton = new GameMainController();
+			singleton = new PrimaryController();
 		}
 		return singleton;
 	}

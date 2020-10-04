@@ -1,4 +1,4 @@
-package application;
+package controller.sceneControllers;
 
 import static java.lang.Math.pow;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import controller.Controller;
+import controller.PrimaryController;
 import database.Category;
 import database.Clue;
 import javafx.application.Platform;
@@ -59,20 +59,20 @@ public class QuestionBoardController extends Controller {
 		lblList = Arrays.asList(cat1,cat2,cat3,cat4,cat5);
 		int catCounter = 0;
 		for (Label cat : lblList) {
-			cat.setText(GameMainController.getInstance().getCategories().get(catCounter).toString());
+			cat.setText(PrimaryController.getInstance().getCategories().get(catCounter).toString());
 			cat.setWrapText(true);
 			catCounter++;
 		}
 		
 		boolean allAnswered = false;
-		for (Category c : GameMainController.getInstance().getCategories()) {
+		for (Category c : PrimaryController.getInstance().getCategories()) {
 			allAnswered |= c.allAnswered();
 		}
 		
 		if(!allAnswered) {
 			
 			int catIndex = -1;
-			for (Category cat : GameMainController.getInstance().getCategories()) {
+			for (Category cat : PrimaryController.getInstance().getCategories()) {
 				catIndex++;
 				int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
 				Boolean lowestClueFound = false;
@@ -104,7 +104,7 @@ public class QuestionBoardController extends Controller {
 				}
 			} 
 		} else {
-			GameMainController.app.addNewScene(FXMLService.FXMLNames.GAMECOMPLETE);
+			PrimaryController.app.addNewScene(FXMLService.FXMLNames.GAMECOMPLETE);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class QuestionBoardController extends Controller {
 		}
 	
 	public void updateTextIndividual() {
-		Double currentFontSize = GameMainController._currentFontSize;
+		Double currentFontSize = PrimaryController._currentFontSize;
 		gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
 		gp.setVgap(pow(2,currentFontSize));
 		gp.setHgap(pow(2,currentFontSize));

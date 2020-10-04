@@ -8,13 +8,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import application.GameMainController;
+import controller.PrimaryController;
 
 public class WinningsExtractor {
 
 	
 	public String getWinnings() {
-		File winnings = new File(GameMainController.path + "/.winnings");
+		File winnings = new File(PrimaryController.path + "/.winnings");
 		Boolean winningsExists = winnings.exists();
 		
 		if(!winningsExists) {
@@ -31,7 +31,7 @@ public class WinningsExtractor {
 	private void makeWinnings() {
 		try {
 			// The winnings file is created and stored with 0 initially.
-			File winnings = new File(GameMainController.path + "/.winnings");
+			File winnings = new File(PrimaryController.path + "/.winnings");
 			winnings.createNewFile();
 			if (winnings.exists()) {
 				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));
@@ -55,7 +55,7 @@ public class WinningsExtractor {
 	private String readWinnings() { 
 		String currentWinnings = "0";
 		//This is used to get the absolute path, regardless of the location of the code.
-		String path = GameMainController.path;
+		String path = PrimaryController.path;
 		File winnings = new File(path + "/.winnings");
 		BufferedReader winningReader;
 		try {
@@ -70,7 +70,7 @@ public class WinningsExtractor {
 
 	public void updateWinningFile(Clue clue)  {
 		try {
-			File winningsFile = new File(GameMainController.path + "/.winnings");
+			File winningsFile = new File(PrimaryController.path + "/.winnings");
 			// Winnings should be present when updating them, so if it's not, an exception is thrown.
 			if (!winningsFile.exists()){
 				throw new Exception("Winnings file not made yet.");
@@ -91,7 +91,7 @@ public class WinningsExtractor {
 	}
 
 	public void resetWinnings() {
-		File winnings = new File(GameMainController.path + "/.winnings");
+		File winnings = new File(PrimaryController.path + "/.winnings");
 		if (winnings.exists()) {
 			winnings.delete();
 		}

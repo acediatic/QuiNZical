@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<Scene stylesheets="@../css/questionStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AskingController">
+<Scene stylesheets="@../css/questionStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.AskingController">
    <root>
-      <BorderPane fx:id="pane" minHeight="500.0" minWidth="700.0">
+      <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <center>
-            <TextField fx:id="usrAns" alignment="CENTER" minHeight="50.0" minWidth="600.0" onKeyPressed="#lookForEnter" BorderPane.alignment="CENTER">
+            <TextField fx:id="usrAnsField" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#lookForEnter" BorderPane.alignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
