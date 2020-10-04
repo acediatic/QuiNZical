@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import controller.Controller;
 import database.Category;
+import database.CategoryExtractor;
 import database.Clue;
-import database2.CategoryExtractor;
-import database2.WinningsExtractor;
+import database.WinningsExtractor;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;

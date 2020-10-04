@@ -1,4 +1,4 @@
-package database2;
+package database;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import application.GameMainController;
-import database.Clue;
 
 public class WinningsExtractor {
 
