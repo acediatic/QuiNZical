@@ -97,11 +97,11 @@ public class AskingController extends Controller {
 		            	} else {
 		            		answerAlert.setTitle("INCORRECT!");
 		            		answerAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");
-		            		speakAnswerResult(false);
 		            		if (PracticeModuleController.getInstance().currentAttempts == 2) {
 		            			usrAnsField.setPromptText(_clue.showAnswer().substring(0, 1));
 		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) {
 		            			usrAnsField.setPromptText(_clue.showAnswer());
+		            			speakAnswerResult(false);
 		            		}
 		            		answerAlert.showAndWait();
 		            	}
