@@ -1,8 +1,5 @@
 package controller.sceneControllers;
 
-import java.io.IOException;
-import java.util.Optional;
-
 import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
@@ -21,10 +18,9 @@ import service.FXMLService;
 
 public class AskingController extends Controller {
 	private Clue _clue;
+	@SuppressWarnings("unused")
 	private Category _category;
 	private boolean _practiceMode;
-	
-	private void initalize() {}
 	
 	public void initClue(Category category, Clue clue, boolean practiceMode) {		
 		_clue = clue;

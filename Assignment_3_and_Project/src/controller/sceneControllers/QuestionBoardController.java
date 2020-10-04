@@ -2,35 +2,20 @@ package controller.sceneControllers;
 
 import static java.lang.Math.pow;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
-import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import service.AskQuestionService;
 import service.FXMLService;
-import service.FXMLService.FXMLNames;
 
 public class QuestionBoardController extends Controller {	
 	public void init() {}

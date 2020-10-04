@@ -1,18 +1,10 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import application.QuiNZical;
-import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
-import database.Clue;
-import database.WinningsExtractor;
-import javafx.application.Application;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class PracticeModuleController {
 	public static Double _currentFontSize = 1.8;

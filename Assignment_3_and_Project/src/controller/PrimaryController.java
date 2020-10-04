@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import application.QuiNZical;
@@ -10,9 +9,7 @@ import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
 import database.WinningsExtractor;
-import javafx.application.Application;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class PrimaryController {
 	public static Double _currentFontSize = 1.8;
@@ -84,7 +81,6 @@ public class PrimaryController {
 		try {
 			winnings = winExtractor.getWinnings();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return winnings;
