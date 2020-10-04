@@ -35,6 +35,9 @@ public class AskingController extends Controller {
 		_clue = clue;
 		_category = category;
 		_practiceMode = practiceMode;	
+		if (_practiceMode) {
+			textToggle.setVisible(false);
+			}
 		showQuestionTextCheck();
 	}
 	
@@ -152,7 +155,7 @@ public class AskingController extends Controller {
 	
 	@FXML 
 	private void showQuestionTextCheck() {
-		if (textToggle.isSelected()) {
+		if (textToggle.isSelected() || _practiceMode) {
 			questionField.setText(_clue.showClue());
 		} else {
 			questionField.setText("Please listen for your hint.");
