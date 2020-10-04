@@ -7,13 +7,10 @@ import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
-import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -33,7 +30,7 @@ public class AskingController extends Controller {
 		_clue = clue;
 		_category = category;
 		_practiceMode = practiceMode;
-		if (practiceMode) {
+		if (_practiceMode) {
 			questionField.setText(clue.showClue());
 		} else {
 			questionField.setText("Please listen for your hint");
@@ -77,6 +74,7 @@ public class AskingController extends Controller {
 	            		PracticeModuleController.getInstance().currentAttempts++;
 	            		Alert resetAlert = new Alert(AlertType.INFORMATION);
 	            		resetAlert.setContentText("You have had " + PracticeModuleController.getInstance().currentAttempts + " attempt(s)");
+	            		usrAnsField.clear();
 	            		
 	            		if ((boolean) t.getSource().getValue()) {
 	            			resetAlert.setTitle("CORRECT!");
