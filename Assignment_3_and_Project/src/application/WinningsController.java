@@ -2,7 +2,6 @@ package application;
 
 
 import controller.Controller;
-import database.DataExtractor;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -18,7 +17,7 @@ public class WinningsController extends Controller {
 	@FXML
 	private void initialize() {	
 		usrWinnings.setFont(GameMainController.titleFont);
-		usrWinnings.setText("$" + DataExtractor.winnings());
+		usrWinnings.setText("$" + GameMainController.getInstance().getWinnings());
 		usrWinnings.setFill(Color.GOLDENROD);
 		yourWinningsTxt.setFont(GameMainController.titleFont);
 		yourWinningsTxt.setFill(Color.WHITE);

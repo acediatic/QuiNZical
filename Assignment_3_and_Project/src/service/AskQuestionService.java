@@ -44,7 +44,7 @@ public class AskQuestionService extends Service<Void> {
 		
 		return new Task<Void>() {
 			protected Void call() throws IOException {			
-				Category chosenCat = GameMainController.getModel().getCategory(col);
+				Category chosenCat = GameMainController.getInstance().getCategory(col);
 				Clue chosenClue = chosenCat.getClue(row);
 				
 				FXMLService service = new FXMLService();

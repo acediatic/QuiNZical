@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import service.AnswerQuestionService;
-import database.Memory_maker;
 
 public class AskingController extends Controller {
 	private Clue _clue;
@@ -53,7 +52,7 @@ public class AskingController extends Controller {
 	            @Override 
 	            public void handle(WorkerStateEvent t) {
 	            	try {
-						Memory_maker.update(_clue, _category, (boolean) t.getSource().getValue());
+						GameMainController.getInstance().update(_clue, (boolean) t.getSource().getValue());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

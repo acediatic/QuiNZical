@@ -4,8 +4,6 @@ package application;
 import java.io.IOException;
 
 import controller.Controller;
-import database.DataExtractor;
-import database.Memory_maker;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
@@ -22,7 +20,7 @@ public class RewardController extends Controller {
 	@FXML
 	private void initialize() {	
 		usrWinnings.setFont(GameMainController.titleFont);
-		usrWinnings.setText("$" + DataExtractor.winnings());
+		usrWinnings.setText("$" + GameMainController.getInstance().getWinnings());
 		usrWinnings.setFill(Color.WHITE);
 		allDoneTxt.setFont(GameMainController.titleFont);
 		allDoneTxt.setFill(Color.WHITE);
@@ -32,7 +30,7 @@ public class RewardController extends Controller {
 	private void back() {
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
-					Memory_maker.reset();
+				GameMainController.getInstance().reset();
 					return null;
 	            }
         	});

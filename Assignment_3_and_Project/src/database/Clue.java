@@ -13,7 +13,7 @@ public class Clue {
 	private String _valueString;
 	private String _clue;
 	private String _clueType;
-	private String _category;
+	private Category _category;
 	private String _answer;
 	private Boolean _answered = false;
 	
@@ -39,7 +39,7 @@ public class Clue {
 	 * @param clueType
 	 * @param answer
 	 */
-	public Clue(String category, String clue, String clueType, String answer) {
+	public Clue(Category category, String clue, String clueType, String answer) {
 		_category = category;
 		_clue  = clue;
 		_clueType = clueType;
@@ -55,7 +55,7 @@ public class Clue {
 	 * @param answer
 	 * @param value
 	 */
-	public Clue(String category, String clue, String clueType, String answer, String value) {
+	public Clue(Category category, String clue, String clueType, String answer, String value) {
 		_category = category;
 		_clue = clue;
 		_clueType = clueType;
@@ -74,7 +74,7 @@ public class Clue {
 	 * @param value
 	 * @param answered
 	 */
-	public Clue(String category, String clue, String clueType, String answer, String value, String answered) {
+	public Clue(Category category, String clue, String clueType, String answer, String value, String answered) {
 		_category = category;
 		_clue = clue;
 		_clueType = clueType;
@@ -146,8 +146,13 @@ public class Clue {
 	 * @return
 	 */
 	public String showCategory() {
+		return _category.toString();
+	}
+	
+	public Category getCategory() {
 		return _category;
 	}
+	
 	
 	/**
 	 * showClueType returns the clue type of the clue.

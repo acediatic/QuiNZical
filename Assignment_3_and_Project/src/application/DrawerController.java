@@ -3,7 +3,6 @@ package application;
 import java.io.IOException;
 import java.util.Optional;
 import controller.Controller;
-import database.Memory_maker;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -38,7 +37,12 @@ public class DrawerController extends Controller {
         if (result.isPresent() && result.get() == ButtonType.OK) {
         	Thread th = new Thread(new Task<Void>() {
 	        	protected Void call() throws IOException {
-	        		Memory_maker.reset();
+	        		try {
+						GameMainController.getInstance().reset();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return null;
 	            }
         	});

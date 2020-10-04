@@ -10,7 +10,6 @@ import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import application.GameMainController;
 import controller.Controller;
-import database.Memory_maker;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;

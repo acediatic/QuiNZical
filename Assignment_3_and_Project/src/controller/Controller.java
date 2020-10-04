@@ -1,6 +1,14 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import application.GameMainController;
+import database.Category;
+import database.Clue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -25,4 +33,5 @@ public abstract class Controller {
 	}
 	
 	public abstract void init();
+	
 }

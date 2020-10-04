@@ -32,9 +32,7 @@ import service.AskQuestionService;
 import service.FXMLService;
 import service.FXMLService.FXMLNames;
 
-public class QuestionBoardController extends Controller {
-	private List<Category> _categories = GameMainController.getModel().getGameCategories();
-	
+public class QuestionBoardController extends Controller {	
 	public void init() {}
 	
 	@FXML 
@@ -61,20 +59,20 @@ public class QuestionBoardController extends Controller {
 		lblList = Arrays.asList(cat1,cat2,cat3,cat4,cat5);
 		int catCounter = 0;
 		for (Label cat : lblList) {
-			cat.setText(_categories.get(catCounter).toString());
+			cat.setText(GameMainController.getInstance().getCategories().get(catCounter).toString());
 			cat.setWrapText(true);
 			catCounter++;
 		}
 		
 		boolean allAnswered = false;
-		for (Category c : _categories) {
+		for (Category c : GameMainController.getInstance().getCategories()) {
 			allAnswered |= c.allAnswered();
 		}
 		
 		if(!allAnswered) {
 			
 			int catIndex = -1;
-			for (Category cat : _categories) {
+			for (Category cat : GameMainController.getInstance().getCategories()) {
 				catIndex++;
 				int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
 				Boolean lowestClueFound = false;
