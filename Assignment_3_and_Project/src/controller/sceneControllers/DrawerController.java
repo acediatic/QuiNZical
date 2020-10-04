@@ -37,7 +37,10 @@ public class DrawerController extends Controller {
 	public void reset() {
 		HomeController hmCtrl = (HomeController) PrimaryController.getInstance().currentController;
 		hmCtrl.closeMenu();
-		PrimaryController.app.showResetAlert();
+		try {
+			PrimaryController.app.showResetAlert();
+		} catch (Exception e) {	}
+		
 	}
 	
 	@FXML 

@@ -1,15 +1,23 @@
 package controller.sceneControllers;
 
+import java.io.IOException;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import audio.Speaker;
 import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
+import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +26,7 @@ import service.FXMLService;
 
 public class AskingController extends Controller {
 	private Clue _clue;
+	private boolean audioFinished = true;
 	@SuppressWarnings("unused")
 	private Category _category;
 	private boolean _practiceMode;
@@ -25,8 +34,8 @@ public class AskingController extends Controller {
 	public void initClue(Category category, Clue clue, boolean practiceMode) {		
 		_clue = clue;
 		_category = category;
-		_practiceMode = practiceMode;
-		questionField.setText(clue.showClue());
+		_practiceMode = practiceMode;	
+		showQuestionTextCheck();
 	}
 	
 	@FXML 
@@ -34,6 +43,12 @@ public class AskingController extends Controller {
 	
 	@FXML
 	private Label questionField;
+	
+	@FXML
+	private JFXToggleButton textToggle;
+	
+	@FXML
+	private Slider speedSlider;
 
 	@FXML
 	private void handleSubmitButtonAction() {
@@ -72,10 +87,12 @@ public class AskingController extends Controller {
 	            			answerAlert.setTitle("CORRECT!");
 	            			answerAlert.setHeaderText("Congratulations! That's right!");
 	            			answerAlert.showAndWait();
+	            			speakAnswerResult(true);
 	            			PrimaryController.app.addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);
 		            	} else {
 		            		answerAlert.setTitle("INCORRECT!");
 		            		answerAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");
+		            		speakAnswerResult(false);
 		            		if (PracticeModuleController.getInstance().currentAttempts == 2) {
 		            			usrAnsField.setPromptText(_clue.showAnswer().substring(0, 1));
 		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) {
@@ -97,6 +114,52 @@ public class AskingController extends Controller {
 		}
 	}
 
+	@FXML
+	private void playAudio() {
+		if(audioFinished) {
+			audioFinished = false;
+			Thread th = new Thread(new Task<Void>() {
+				protected Void call() throws IOException {
+					Speaker.questionWithNZVoice(_clue, speedSlider.getValue());
+						return null;
+		        }
+				protected void succeeded() {
+					audioFinished = true;
+				}
+			});
+			th.start();
+		}
+	}
+	
+	private void speakAnswerResult(boolean correct) {
+		Thread th = new Thread(new Task<Void>() {
+			protected Void call() throws IOException {
+				audioFinished = false;
+				if (correct) {
+					Speaker.correctWithNZVoice(_clue, speedSlider.getValue());
+				} else {
+					Speaker.incorrectWithNZVoice(_clue, speedSlider.getValue());
+				}
+				return null;
+	        }
+			protected void succeeded() {
+				audioFinished = true;
+			}
+		});
+		th.start();
+
+	}
+	
+	@FXML 
+	private void showQuestionTextCheck() {
+		if (textToggle.isSelected()) {
+			questionField.setText(_clue.showClue());
+		} else {
+			questionField.setText("Please listen for your hint.");
+		}
+	}
+
+	
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
