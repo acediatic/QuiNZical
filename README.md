@@ -54,6 +54,7 @@ The clue might be marked incorrect because of the order so just try again next t
 
 
 ---Dependencies:---
+
 To play the game you need Java versionn 11 and JavaFX relevant to it.
 Also, festival will be needed as well. After installing festival, install the New Zealand festival voices at /usr/share/festival/voices/english/
 The relevant zip files have been provided along with the festivalNZVoiceSetup.sh script file.
