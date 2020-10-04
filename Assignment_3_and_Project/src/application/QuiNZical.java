@@ -43,10 +43,10 @@ public class QuiNZical extends Application {
 		}
 
 		public void setScene(Scene scene) {
-			Scene currentScene = _currentStage.getScene();
+			//Scene currentScene = _currentStage.getScene();
 			_currentStage.setScene(scene);
-			_currentStage.setWidth(currentScene.getWidth());
-			_currentStage.setHeight(currentScene.getHeight());
+			_currentStage.setWidth(700);
+			_currentStage.setHeight(700);
 			_currentStage.show();
 		}
 		
@@ -62,6 +62,9 @@ public class QuiNZical extends Application {
 		            	
 		            	_currentStage.setMinHeight(700);
 		    			_currentStage.setMinWidth(700);
+		    			
+		    			_currentStage.setWidth(700);
+		    			_currentStage.setHeight(700);
 		    			
 		            	_currentStage.show();
 		            }
