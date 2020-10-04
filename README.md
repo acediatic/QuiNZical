@@ -16,7 +16,7 @@ DO NOT DELETE ANY OF THE FILES IN THE 'categories' FOLDER, IT MUST HAVE AT LEAST
 Open the terminal in that diectory and copy paste and run the following command in it to run QuiNZical:
 
 
-./quinzical.sh
+`./quinzical.sh`
 
 
 (In case it doesn't work you will need to give it executable rights by running the following command in the terminal: `chmod +x quinzical.sh`)
@@ -24,7 +24,7 @@ Open the terminal in that diectory and copy paste and run the following command 
 Open the terminal in that diectory and copy paste and run the following command in it to run QuiNZical:
 
 
-java --module-path  /home/se2062020/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml -jar quinzical.jar
+`java --module-path  /home/se2062020/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml -jar quinzical.jar`
 
 
 ---To add new categories:---
@@ -60,7 +60,7 @@ The relevant zip files have been provided along with the festivalNZVoiceSetup.sh
 Keep the script file along with the zip files ("akl_nz_jdt_diphone.zip" and "akl_nz_cw_cg_cg.zip") in the same directory and open the terminal there. Then run:
 
 
-./festivalNZVoiceSetup.sh
+`./festivalNZVoiceSetup.sh`
 
 
 (In case it doesn't work you will need to give it executable rights by running the following command in the terminal: `chmod +x festivalNZVoiceSetup.sh`)
