@@ -211,7 +211,7 @@ public class CategoryExtractor {
 	 * It's major use is to be used to delete the history directory when the game is reset.
 	 * @param fileOrDir
 	 */
-	private static void deleteDir(File fileOrDir) {
+	public static void deleteDir(File fileOrDir) {
 	    File[] files = fileOrDir.listFiles();
 	    if(files != null) {
 	        for (final File file : files) {

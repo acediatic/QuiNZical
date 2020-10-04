@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import database.Clue;
-import database.Memory_maker;
+import database.CategoryExtractor;
 
 public class Speaker {
 	
@@ -36,7 +36,7 @@ public class Speaker {
 	
 	public static void question (Clue clue, double speed) {
 		if (schemeExists()) {
-			Memory_maker.deleteDir(festivalScheme);
+			CategoryExtractor.deleteDir(festivalScheme);
 		}
 		speed = 1/speed;
 		BufferedWriter writer;
@@ -61,13 +61,13 @@ public class Speaker {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 	
 	public static void questionWithNZVoice (Clue clue, double speed) {
 		if (checkNZVoice()) {
 			if (schemeExists()) {
-				Memory_maker.deleteDir(festivalScheme);
+				CategoryExtractor.deleteDir(festivalScheme);
 			}
 			speed = 1/speed;
 			BufferedWriter writer;
@@ -97,12 +97,12 @@ public class Speaker {
 		else {
 			question(clue, speed);
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 	
 	public static void correct (Clue clue, double speed) {
 		if (schemeExists()) {
-			Memory_maker.deleteDir(festivalScheme);
+			CategoryExtractor.deleteDir(festivalScheme);
 		}
 		speed = 1/speed;
 		BufferedWriter writer;
@@ -127,13 +127,13 @@ public class Speaker {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 	
 	public static void correctWithNZVoice (Clue clue, double speed) {
 		if (checkNZVoice()) {
 			if (schemeExists()) {
-				Memory_maker.deleteDir(festivalScheme);
+				CategoryExtractor.deleteDir(festivalScheme);
 			}
 			speed = 1/speed;
 			BufferedWriter writer;
@@ -163,12 +163,12 @@ public class Speaker {
 		else {
 			correct(clue, speed);
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 	
 	public static void incorrect (Clue clue, double speed) {
 		if (schemeExists()) {
-			Memory_maker.deleteDir(festivalScheme);
+			CategoryExtractor.deleteDir(festivalScheme);
 		}
 		speed = 1/speed;
 		BufferedWriter writer;
@@ -193,13 +193,13 @@ public class Speaker {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 	
 	public static void incorrectWithNZVoice (Clue clue, double speed) {
 		if (checkNZVoice()) {
 			if (schemeExists()) {
-				Memory_maker.deleteDir(festivalScheme);
+				CategoryExtractor.deleteDir(festivalScheme);
 			}
 			speed = 1/speed;
 			BufferedWriter writer;
@@ -229,7 +229,7 @@ public class Speaker {
 		else {
 			incorrect(clue, speed);
 		}
-		Memory_maker.deleteDir(festivalScheme);
+		CategoryExtractor.deleteDir(festivalScheme);
 	}
 
 }
