@@ -64,24 +64,24 @@ public class AskingController extends Controller {
 						}
 	            	} else {
 	            		PracticeModuleController.getInstance().currentAttempts++;
-	            		Alert resetAlert = new Alert(AlertType.INFORMATION);
-	            		resetAlert.setContentText("You have had " + PracticeModuleController.getInstance().currentAttempts + " attempt(s)");
+	            		Alert answerAlert = new Alert(AlertType.INFORMATION);
+	            		answerAlert.setContentText("You have had " + PracticeModuleController.getInstance().currentAttempts + " attempt(s)");
 	            		usrAnsField.clear();
 	            		
 	            		if ((boolean) t.getSource().getValue()) {
-	            			resetAlert.setTitle("CORRECT!");
-	            			resetAlert.setHeaderText("Congratulations! That's right!");
-	            			resetAlert.showAndWait();
+	            			answerAlert.setTitle("CORRECT!");
+	            			answerAlert.setHeaderText("Congratulations! That's right!");
+	            			answerAlert.showAndWait();
 	            			PrimaryController.app.addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);
 		            	} else {
-		            		resetAlert.setTitle("INCORRECT!");
-		            		resetAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");
+		            		answerAlert.setTitle("INCORRECT!");
+		            		answerAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");
 		            		if (PracticeModuleController.getInstance().currentAttempts == 2) {
 		            			usrAnsField.setPromptText(_clue.showAnswer().substring(0, 1));
 		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) {
 		            			usrAnsField.setPromptText(_clue.showAnswer());
 		            		}
-		            		resetAlert.showAndWait();
+		            		answerAlert.showAndWait();
 		            	}
 	            	}
 	            }

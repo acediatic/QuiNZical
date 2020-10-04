@@ -3,6 +3,7 @@ package controller.sceneControllers;
 import java.io.IOException;
 import java.util.Optional;
 
+import controller.PracticeModuleController;
 import controller.PrimaryController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -34,26 +35,9 @@ public class DrawerController extends Controller {
 	
 	@FXML
 	public void reset() {
-		Alert resetAlert = new Alert(AlertType.CONFIRMATION);
-		resetAlert.setTitle("WARNING!");
-		resetAlert.setHeaderText("Reset?");
-		resetAlert.setContentText("You are about to reset the game. All attempted questions and winnings will be reset. Are you sure you want to continue?");
-
-		Optional<ButtonType> result = resetAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-        	Thread th = new Thread(new Task<Void>() {
-	        	protected Void call() throws IOException {
-	        		try {
-						PrimaryController.getInstance().reset();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					return null;
-	            }
-        	});
-            th.start();
-        }
+		HomeController hmCtrl = (HomeController) PrimaryController.getInstance().currentController;
+		hmCtrl.closeMenu();
+		PrimaryController.app.showResetAlert();
 	}
 	
 	@FXML 

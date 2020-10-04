@@ -13,6 +13,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,8 @@ public class HomeController extends Controller {
 	
 	@FXML
 	private HBox _hbox;
+	
+	private HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
 	
 	@FXML
 	private void initialize() {	
@@ -79,7 +82,6 @@ public class HomeController extends Controller {
         });
 	 
 		drawerService.start();
-		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             burgerTask.setRate(burgerTask.getRate() * -1);
@@ -127,5 +129,15 @@ public class HomeController extends Controller {
 	public void updateTextIndividual() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void closeMenu() {
+		burgerTask.setRate(burgerTask.getRate() * -1);
+        burgerTask.play();
+        if (_drawer.isOpened()){
+        	_drawer.close();
+        } else {
+        	_drawer.open();
+        }
 	}
 }

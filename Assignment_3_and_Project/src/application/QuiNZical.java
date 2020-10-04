@@ -1,10 +1,16 @@
 package application;
 
+import java.io.IOException;
+
 import controller.PrimaryController;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import service.FXMLService;
 
@@ -71,5 +77,28 @@ public class QuiNZical extends Application {
 		        });
 			 
 			 service.start();
+		}
+		
+		public void showResetAlert() {
+			Alert resetAlert = new Alert(AlertType.CONFIRMATION);
+			resetAlert.setTitle("WARNING!");
+			resetAlert.setHeaderText("Reset?");
+			
+			resetAlert.showAndWait().ifPresent(response -> {
+			    if (response == ButtonType.OK) {
+			    	Thread th = new Thread(new Task<Void>() {
+			        	protected Void call() throws IOException {
+			        		try {
+								PrimaryController.getInstance().reset();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							return null;
+			            }
+		        	});
+		            th.start();
+			    }
+			});
 		}
 }
