@@ -39,6 +39,7 @@ public class AskingController extends Controller {
 			textToggle.setDisable(true);
 			}
 		showQuestionTextCheck();
+		playAudio();
 	}
 	
 	@FXML 
@@ -77,6 +78,7 @@ public class AskingController extends Controller {
 	            	if(!_practiceMode) { 
 		            	try {
 		            		PrimaryController.getInstance().update(_clue, (boolean) t.getSource().getValue());
+		            		speakAnswerResult((boolean) t.getSource().getValue());
 		        		} catch (Exception e) {
 							e.printStackTrace();
 						}

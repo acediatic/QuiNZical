@@ -34,11 +34,6 @@ public class QuiNZical extends Application {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
 		try {
-			
-			 FXMLLoader loader = new FXMLLoader(FXMLService.FXMLNames.ASKQUESTION.toURL());
- 			 Scene scene = loader.load();	
-			
-			
 			PrimaryController.app = this;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);			
 		} catch(Exception e) {
