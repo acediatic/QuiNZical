@@ -52,7 +52,7 @@ public class AskPracticeQuestionService extends Service<Void> {
 				 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			            @Override 
 			            public void handle(WorkerStateEvent t) {
-			            	AskingController ac = (AskingController) PrimaryController.currentController;
+			            	AskingController ac = (AskingController) PrimaryController.getInstance().currentController;
 			            	ac.initClue(chosenCat, randomClue, true);
 			            	
 			            	Scene scene = (Scene) t.getSource().getValue();

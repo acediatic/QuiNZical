@@ -46,7 +46,7 @@ public class HomeController extends Controller {
 	@FXML
 	private HBox _hbox;
 	
-	private HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
+	private HamburgerSlideCloseTransition burgerTask;
 	
 	@FXML
 	private void initialize() {	
@@ -80,7 +80,7 @@ public class HomeController extends Controller {
     			}
             }
         });
-	 
+		burgerTask = new HamburgerSlideCloseTransition(_hamMenu);
 		drawerService.start();
         burgerTask.setRate(-1);
         _hamMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {

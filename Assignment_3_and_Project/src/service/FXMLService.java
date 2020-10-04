@@ -32,8 +32,8 @@ public class FXMLService extends Service<Scene> {
              protected Scene call() throws IOException {
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+_fxml));
      			 Scene scene = loader.load();		
-     			 PrimaryController.currentController = loader.getController();
-     			 PrimaryController.currentController.init();
+     			 PrimaryController.getInstance().currentController = loader.getController();
+     			 PrimaryController.getInstance().currentController.init();
      			 return scene;
              }
          };

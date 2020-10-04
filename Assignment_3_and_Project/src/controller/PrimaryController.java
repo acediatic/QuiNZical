@@ -18,7 +18,7 @@ public class PrimaryController {
 	private WinningsExtractor winExtractor = new WinningsExtractor();
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
 	
-	public static Controller currentController;
+	public Controller currentController;
 	public static String path;
 	public static Font titleFont;
 	
