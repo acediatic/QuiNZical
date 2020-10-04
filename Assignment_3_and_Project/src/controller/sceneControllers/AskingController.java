@@ -36,7 +36,7 @@ public class AskingController extends Controller {
 		_category = category;
 		_practiceMode = practiceMode;	
 		if (_practiceMode) {
-			textToggle.setVisible(false);
+			textToggle.setDisable(true);
 			}
 		showQuestionTextCheck();
 	}
