@@ -39,7 +39,7 @@ public class AskQuestionService extends Service<Void> {
 	@Override
 	protected Task<Void> createTask() {
 		final Integer row = getRow();
-		final Integer col = getCol();
+		final Integer col = getCol(); 
 		
 		return new Task<Void>() {
 			protected Void call() throws IOException {			
