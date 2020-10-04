@@ -26,11 +26,7 @@ public class AskingController extends Controller {
 		_clue = clue;
 		_category = category;
 		_practiceMode = practiceMode;
-		if (_practiceMode) {
-			questionField.setText(clue.showClue());
-		} else {
-			questionField.setText("Please listen for your hint");
-		}
+		questionField.setText(clue.showClue());
 	}
 	
 	@FXML 
