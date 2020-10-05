@@ -65,8 +65,8 @@ public class QuestionBoardController extends Controller {
 					clueIndex++;
 					ObservableList<Node> childrens = gp.getChildren();
 					for (Node node : childrens) {
-						Integer colIndex = gp.getColumnIndex(node);
-						Integer rowIndex = gp.getRowIndex(node);
+						Integer colIndex = GridPane.getColumnIndex(node);
+						Integer rowIndex = GridPane.getRowIndex(node);
 						if (colIndex == null) {
 							colIndex = 0;
 						} 

@@ -13,7 +13,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +29,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
+@SuppressWarnings("unused")
 public class HomeController extends Controller {
 	@FXML 
 	private JFXHamburger _hamMenu;
