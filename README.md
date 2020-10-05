@@ -12,20 +12,14 @@ So whether you're here to play to learn about New Zealand trivia, or to test you
 Make sure the categories folder and the quinzical.jar file are in the same directory, as well as quinzical.sh.
 DO NOT DELETE ANY OF THE FILES IN THE 'categories' FOLDER, IT MUST HAVE AT LEAST 5 FILES, NOR DELETE ANY LINES ALREADY EXISTING IN THE FILES.
 
---To run, either:--
+--To run:--
 Open the terminal in that diectory and copy paste and run the following command in it to run QuiNZical:
 
 
 `./quinzical.sh`
 
 
-(In case it doesn't work you will need to give it executable rights by running the following command in the terminal: `chmod +x quinzical.sh`)
---Or:--
-Open the terminal in that diectory and copy paste and run the following command in it to run QuiNZical:
-
-
-`java --module-path  /home/se2062020/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml -jar quinzical.jar`
-
+(In case it doesn't work you will need to give it executable rights by running the following command instead: `chmod +x quinzical.sh; ./quinzical.sh`)
 
 ---To add new categories:---
 
