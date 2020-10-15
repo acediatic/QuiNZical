@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<Scene stylesheets="@../css/questionStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.PracticeCatSelector">
+   <root>
+      <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="questionField" contentDisplay="RIGHT" text="Select a Category: " wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="26.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" promptText="Practice Category" styleClass="catSelector" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </top>
+         <bottom>
+            <JFXButton buttonType="RAISED" minWidth="125.0" onAction="#back" ripplerFill="#2cff44" style="-fx-background-color: #009900;" text="Back" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
+            </JFXButton>
+         </bottom>
+      </BorderPane>
+   </root>
+</Scene>

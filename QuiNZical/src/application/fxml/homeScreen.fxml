@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<Scene fx:id="sc" stylesheets="@../css/homeView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.HomeController">
+   <root>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" styleClass="backgroundPane">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="mainTxt" fill="WHITE" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleText" text="QuiNZical" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <JFXHamburger fx:id="_hamMenu" alignment="CENTER_RIGHT" layoutX="23.0" layoutY="40.0" scaleX="1.5" scaleY="1.5" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <bottom>
+            <HBox fx:id="_hbox" alignment="CENTER" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
+               <children>
+                  <JFXButton fx:id="contButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" defaultButton="true" onAction="#startGame" prefHeight="32.0" prefWidth="425.0" ripplerFill="BLACK" text="Begin" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </bottom>
+         <right>
+            <JFXDrawer fx:id="_drawer" blendMode="SRC_ATOP" defaultDrawerSize="300.0" direction="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="300.0" onDrawerClosed="#drawerClose" onDrawerOpened="#drawerOpen" prefWidth="300.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </root>
+</Scene>
