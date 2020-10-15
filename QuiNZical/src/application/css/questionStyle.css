@@ -1,0 +1,20 @@
+.root{
+    -fx-background-image: url("askQuestionBackground.jpg");
+    -fx-background-repeat: stretch; 
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-font-size: 1em;
+}
+
+.playButton {
+    -fx-background-image: url("play.png");
+    -fx-background-repeat: stretch; 
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+}
+
+.catSelector {
+    -fx-font-size: 1.5em;
+    -fx-background-color: green;
+    -fx-border-radius: 20;
+}

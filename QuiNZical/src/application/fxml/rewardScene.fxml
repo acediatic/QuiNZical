@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<Scene stylesheets="@../css/rewardScene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.RewardController">
+   <root>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
+         <top>
+            <Text fx:id="allDoneTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="yourWinningsTxt" text="That's a wrap! You ended with: " BorderPane.alignment="BOTTOM_CENTER">
+               <BorderPane.margin>
+                  <Insets top="30.0" />
+               </BorderPane.margin></Text>
+         </top>
+         <bottom>
+            <JFXButton buttonType="RAISED" onAction="#back" ripplerFill="BLACK" text="Back and Reset" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </JFXButton>
+         </bottom>
+         <center>
+            <Text fx:id="usrWinnings" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="usrWinnings" text="\$1000" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </root>
+</Scene>

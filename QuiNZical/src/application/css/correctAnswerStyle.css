@@ -1,0 +1,18 @@
+.root{
+    -fx-background-image: url("correctQuestionBackground.jpg");
+    -fx-background-repeat: stretch; 
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-font-size: 2em;
+}
+
+.button {
+    -fx-background-color: rgba(256,256,256,0.2);
+    -fx-background-radius: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-font-size: 2em;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
