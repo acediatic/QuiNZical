@@ -1,5 +1,9 @@
 package database;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The Clue class is used to store a clue, its value, and correct answer.
  * It can then be used to return those values.
@@ -16,6 +20,9 @@ public class Clue {
 	private Category _category;
 	private String _answer;
 	private Boolean _answered = false;
+	private List<String> _multiAnswers;
+	private List<String> _possibleAnswers;
+	private List<List<String>> _multiAnswersWithPossibilities;
 	
 	/**
 	 * The Clue constructor is used to initialise the question object using
@@ -29,6 +36,7 @@ public class Clue {
 		_value = Integer.parseInt(_valueString);
 		_clue = clue;
 		_answer = answer;
+		splitAnswer(_answer);
 	}
 	
 	/**
@@ -44,6 +52,7 @@ public class Clue {
 		_clue  = clue;
 		_clueType = clueType;
 		_answer = answer;
+		splitAnswer(_answer);
 	}
 	
 	/**
@@ -60,6 +69,7 @@ public class Clue {
 		_clue = clue;
 		_clueType = clueType;
 		_answer = answer;
+		splitAnswer(_answer);
 		_valueString = value;
 		_value = Integer.parseInt(_valueString);
 	}
@@ -79,6 +89,7 @@ public class Clue {
 		_clue = clue;
 		_clueType = clueType;
 		_answer = answer;
+		splitAnswer(_answer);
 		_valueString = value;
 		_value = Integer.parseInt(_valueString);
 		if (answered.equals("true")) {
@@ -86,6 +97,102 @@ public class Clue {
 		}
 		else {
 			_answered = false;
+		}
+	}
+	
+	public Boolean check(String answer) {
+		if (answer.replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", ""))) {
+			return true;
+		}
+		//list.stream().anyMatch("search_value"::equalsIgnoreCase) //https://stackoverflow.com/questions/15824733/option-to-ignore-case-with-contains-method
+		//else if (_possibleAnswers.contains(_answer)) {
+		else if (_possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
+			return true;
+		}
+		else {
+			for (String s: _possibleAnswers) {
+				if (answer.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+					return true;
+				}
+			}
+			String [] answerArray = answer.split(",");
+			int multiMatch = 0;
+			for (String s : _multiAnswers) {
+				for (String ans: answerArray) {
+					if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+						multiMatch++;
+						break;
+					}
+				}
+			}
+			if (multiMatch == _multiAnswers.size()) {
+				return true;
+			}
+			
+			multiMatch = 0;
+			List<String> checkedAnswers = new ArrayList<String>();
+			for (List<String> list: _multiAnswersWithPossibilities) {
+				for (String s : list) {
+					for (String ans: answerArray) {
+						if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")) & !checkedAnswers.contains(s)) {
+							multiMatch++;
+							checkedAnswers.add(s);
+							break;
+						}
+					}
+				}
+			}
+			if (multiMatch == _multiAnswers.size()) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+	
+	private void splitAnswer(String answer) {
+		if (answer.contains(",") & answer.contains("/")) {
+			String[] multiAnswerArray = answer.split(",");
+			int maxVariations = 0;
+			for (int i = 0; i < multiAnswerArray.length; i++) {
+				if (multiAnswerArray[i].contains("/")) {
+					if (multiAnswerArray[i].split("/").length > maxVariations) {
+						maxVariations = multiAnswerArray[i].split("/").length;
+					}
+				}
+			}
+			for (int i = 0; i < maxVariations; i++) {
+				_multiAnswersWithPossibilities.add(new ArrayList<String>());
+			}
+			for (int i = 0; i < multiAnswerArray.length; i++) {
+				if (multiAnswerArray[i].contains("/")) {
+					if (multiAnswerArray[i].split("/").length < maxVariations) {
+						for (int j = 0; j < multiAnswerArray[i].split("/").length; j++) {
+							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
+						}
+						for (int j = multiAnswerArray[i].split("/").length; j < maxVariations; j++) {
+							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[0]);
+						}
+					}
+					else {
+						for (int j = 0; j < multiAnswerArray[j].split("/").length; j++) {
+							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
+						}
+					}
+				}
+				else {
+					for (int j = 0; j < maxVariations; j++) {
+						_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[j]);
+					}
+				}
+			}
+			
+		}
+		else if(answer.contains(",")) {
+			_multiAnswers = Arrays.asList(answer.split(","));
+		}
+		else if(answer.contains("/")) {
+			_possibleAnswers = Arrays.asList(answer.split("/"));
 		}
 	}
 	
