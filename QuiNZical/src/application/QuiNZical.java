@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -29,9 +30,10 @@ public class QuiNZical extends Application {
     }
 	
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws IOException {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
+		
 		try {
 			PrimaryController.app = this;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);			

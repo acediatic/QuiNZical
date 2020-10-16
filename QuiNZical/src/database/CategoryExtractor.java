@@ -30,7 +30,7 @@ public class CategoryExtractor {
 		else {
 			gameCategories = loadCategories();
 		}
-		return gameCategories;
+		return gameCategories; 
 	}
 	
 	public ArrayList<Category> getMasterCategories() throws Exception {
