@@ -7,7 +7,6 @@ import java.util.List;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.controls.JFXToggleButton;
-import com.sun.tools.javac.code.Attribute.Array;
 
 import audio.Speaker;
 import controller.PracticeModuleController;
