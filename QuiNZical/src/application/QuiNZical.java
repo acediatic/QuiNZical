@@ -6,6 +6,7 @@ import controller.PrimaryController;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import service.FXMLService;
@@ -30,8 +31,11 @@ public class QuiNZical extends Application {
 		gmc.setApp(this);
 		gmc.setStageListener();
 		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.ASKQUESTION));
+		Scene scene = loader.load();		
+		
 		try {
-			addNewScene(FXMLService.FXMLNames.HOMESCREEN);			
+			addNewScene(FXMLService.FXMLNames.ASKQUESTION);			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

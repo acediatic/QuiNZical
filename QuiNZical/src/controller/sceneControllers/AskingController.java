@@ -13,6 +13,8 @@ import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -25,8 +27,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import service.AnswerQuestionService;
 import service.FXMLService;
+
+import resources.progressFiles.*;
 
 public class AskingController extends Controller {
 	private Clue _clue;
@@ -61,6 +67,9 @@ public class AskingController extends Controller {
 	@FXML
 	private JFXNodesList macrons;
 	
+	@FXML
+	private HBox topHBox;
+	
 	private JFXNodesList macronsLower = new JFXNodesList();
 	private JFXNodesList macronsUpper = new JFXNodesList();
 	
@@ -70,51 +79,28 @@ public class AskingController extends Controller {
 	
 	@FXML 
 	private void initialize() {
+		addMacronButtons();
 		
-		JFXButton macronTitleButton = new JFXButton("Ā/ā");
-		macronTitleButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronTitleButton.getStyleClass().addAll("animated-option-button");
-		macrons.addAnimatedNode(macronTitleButton);
+		RingProgressIndicator timerVisual = new RingProgressIndicator();
+		timerVisual.setRingWidth(200);
+		topHBox.getChildren().add(0, timerVisual);
 		
-		JFXButton macronLowerButton = new JFXButton("ā");
-		macronLowerButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronLowerButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-		macronsLower.addAnimatedNode(macronLowerButton);
-
-		JFXButton macronUpperButton = new JFXButton("Ā");
-		macronUpperButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronUpperButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-		macronsUpper.addAnimatedNode(macronUpperButton);
-		
-			List<String[]> vowelLists = Arrays.asList(lowerVowels, upperVowels);
-			List<JFXNodesList> nodeLists = Arrays.asList(macronsLower, macronsUpper);
-			for (int i = 0; i<2; i++) {
-				for (String c : vowelLists.get(i)) {
-					JFXButton macronButton = new JFXButton(c);
-					macronButton.setButtonType(JFXButton.ButtonType.RAISED);
-					macronButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button-2");
-					
-					macronButton.setOnAction(new EventHandler<ActionEvent>() {
-						@Override public void handle(ActionEvent e) {
-							usrAnsField.setText(usrAnsField.getText() + macronButton.getText());
+		Timeline timer = new Timeline( 
+				new KeyFrame(Duration.seconds(1), 
+						new EventHandler<ActionEvent>() {
+							private int counter = 11;
+						   @Override
+						   public void handle(ActionEvent event) {
+							   counter--;
+							   timerVisual.setProgress(counter);
+						   }
 						}
-					});
-					nodeLists.get(i).addAnimatedNode(macronButton);
-				}
-			}
-			
-			for(JFXNodesList nodeList : nodeLists) {
-				nodeList.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-				nodeList.setRotate(-90); // right
-				nodeList.setSpacing(10d);
-				macrons.addAnimatedNode(nodeList);
-			}
-		
-		macrons.setRotate(180); // up
-		macrons.setSpacing(10d);
+				));
+				
+		timer.setCycleCount(10);
+		timer.play();
 	}
-	
-	
+
 	
 	@FXML
 	private void handleSubmitButtonAction() {
@@ -226,6 +212,49 @@ public class AskingController extends Controller {
 		}
 	}
 
+	private void addMacronButtons() {
+		JFXButton macronTitleButton = new JFXButton("Ā/ā");
+		macronTitleButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronTitleButton.getStyleClass().addAll("animated-option-button");
+		macrons.addAnimatedNode(macronTitleButton);
+		
+		JFXButton macronLowerButton = new JFXButton("ā");
+		macronLowerButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronLowerButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+		macronsLower.addAnimatedNode(macronLowerButton);
+
+		JFXButton macronUpperButton = new JFXButton("Ā");
+		macronUpperButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronUpperButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+		macronsUpper.addAnimatedNode(macronUpperButton);
+		
+			List<String[]> vowelLists = Arrays.asList(lowerVowels, upperVowels);
+			List<JFXNodesList> nodeLists = Arrays.asList(macronsLower, macronsUpper);
+			for (int i = 0; i<2; i++) {
+				for (String c : vowelLists.get(i)) {
+					JFXButton macronButton = new JFXButton(c);
+					macronButton.setButtonType(JFXButton.ButtonType.RAISED);
+					macronButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button-2");
+					
+					macronButton.setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							usrAnsField.setText(usrAnsField.getText() + macronButton.getText());
+						}
+					});
+					nodeLists.get(i).addAnimatedNode(macronButton);
+				}
+			}
+			
+			for(JFXNodesList nodeList : nodeLists) {
+				nodeList.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+				nodeList.setRotate(-90); // right
+				nodeList.setSpacing(10d);
+				macrons.addAnimatedNode(nodeList);
+			}
+		
+		macrons.setRotate(180); // up
+		macrons.setSpacing(10d);
+	}
 	
 	@Override
 	public void init() {
