@@ -43,7 +43,7 @@ public class PracticeCatSelector extends Controller {
 		
 	@FXML
 	private void back() {
-		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);		
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);		
 	}
 	
 	@Override

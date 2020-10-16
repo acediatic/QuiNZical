@@ -99,14 +99,7 @@ public class HomeController extends Controller {
         mainTxt.setFont(PrimaryController.titleFont);
 	}
 	
-	public void init() {
-		Stage currentStage = PrimaryController.app.getStage();
-		currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-			if(currentStage.getScene() != null) {
-				updateText(oldVal, newVal);
-			}
-		});
-	}
+	public void init() {}
 	
 	@FXML
 	private void drawerOpen() {
@@ -122,7 +115,7 @@ public class HomeController extends Controller {
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		PrimaryController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class AskQuestionService extends Service<Void> {
 			            	ac.initClue(chosenCat, chosenClue, false);
 			            	
 			            	Scene scene = (Scene) t.getSource().getValue();
-			            	PrimaryController.app.setScene(scene);
+			            	PrimaryController.getInstance().setScene(scene);
 			            }
 			        });
 				 service.start();

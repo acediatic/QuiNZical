@@ -155,7 +155,7 @@ public class AskingController extends Controller {
 	            			answerAlert.setHeaderText("Congratulations! That's right!");
 	            			answerAlert.showAndWait();
 	            			speakAnswerResult(true);
-	            			PrimaryController.app.addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);
+	            			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);
 		            	} else {
 		            		answerAlert.setTitle("INCORRECT!");
 		            		answerAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");

@@ -48,7 +48,7 @@ public class AnswerQuestionService extends Service<Boolean> {
      				nextSceneFXML = FXMLService.FXMLNames.INCORRECT;
      			}
      			if (!_practiceMode) {
-     				PrimaryController.app.addNewScene(nextSceneFXML);
+     				PrimaryController.getInstance().addNewScene(nextSceneFXML);
      			}
      			
      			return correct;

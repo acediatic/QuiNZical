@@ -9,12 +9,12 @@ public class AnswerController extends Controller {
 	
 	@FXML
 	private void goHome() {
-		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 	
 	@FXML 
 	private void goQuestionBoard() {
-		PrimaryController.app.addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
 	}	
 
 	@Override

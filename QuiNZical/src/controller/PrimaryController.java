@@ -9,23 +9,27 @@ import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
 import database.WinningsExtractor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import service.FXMLService;
 
 public class PrimaryController {
 	public static Double _currentFontSize = 1.8;
-	public static QuiNZical app;
+	public static Font titleFont;
+
+	public static String path;
+	public static File categoriesFolder;
+
+	private static PrimaryController singleton = null;
 	
 	private WinningsExtractor winExtractor = new WinningsExtractor();
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
 	
-	public Controller currentController;
-	public static String path;
-	public static File categoriesFolder;
-	public static Font titleFont;
-	
-	private static PrimaryController singleton = null;
-	
+	private QuiNZical app;
 	private ArrayList<Category> _categories;
+	public Controller currentController;
 	
 	private PrimaryController() {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
@@ -43,6 +47,15 @@ public class PrimaryController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setStageListener() {
+		Stage currentStage = app.getStage();
+		currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+			if(currentStage.getScene() != null) {
+				currentController.updateText(oldVal, newVal);
+			}
+		});
+	} 
 	
 	public static PrimaryController getInstance() {
 		if (singleton == null) {
@@ -96,6 +109,23 @@ public class PrimaryController {
 
 	public Category getCategory(int index) {
 		return _categories.get(index);
+	}
+	
+	public void addNewScene(FXMLService.FXMLNames fxml) {
+		app.addNewScene(fxml);
+	}
+
+	public void setApp(QuiNZical app) {
+		this.app = app;
+	}
+
+	public void updateRoot() {
+    	Parent root = app.getStage().getScene().getRoot();
+		root.setStyle("-fx-font-size: " + PrimaryController._currentFontSize + "em");
+	}
+
+	public void setScene(Scene scene) {
+		app.setScene(scene);
 	}
 }
 

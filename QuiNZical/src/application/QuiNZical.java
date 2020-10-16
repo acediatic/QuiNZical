@@ -4,21 +4,15 @@ import java.io.IOException;
 
 import controller.PrimaryController;
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import service.FXMLService;
 
 
 public class QuiNZical extends Application {
 	private Stage _currentStage;
-	@SuppressWarnings("unused")
 	private PrimaryController gmc = PrimaryController.getInstance(); //initialises gmc.
 	
 	/**
@@ -33,9 +27,10 @@ public class QuiNZical extends Application {
 	public void start(Stage stage) throws IOException {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
+		gmc.setApp(this);
+		gmc.setStageListener();
 		
 		try {
-			PrimaryController.app = this;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -74,33 +69,12 @@ public class QuiNZical extends Application {
 		    			_currentStage.setWidth(700);
 		    			_currentStage.setHeight(700);
 		    			
+		    			_currentStage.setResizable(false);
+		    			
 		            	_currentStage.show();
 		            }
 		        });
 			 
 			 service.start();
-		}
-		
-		public void showResetAlert() {
-			Alert resetAlert = new Alert(AlertType.CONFIRMATION);
-			resetAlert.setTitle("WARNING!");
-			resetAlert.setHeaderText("Reset?");
-			
-			resetAlert.showAndWait().ifPresent(response -> {
-			    if (response == ButtonType.OK) {
-			    	Thread th = new Thread(new Task<Void>() {
-			        	protected Void call() throws IOException {
-			        		try {
-								PrimaryController.getInstance().reset();
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							return null;
-			            }
-		        	});
-		            th.start();
-			    }
-			});
 		}
 }

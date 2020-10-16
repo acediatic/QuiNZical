@@ -35,7 +35,7 @@ public class RewardController extends Controller {
 	            }
         	});
 		th.start();
-		PrimaryController.app.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
 	@Override

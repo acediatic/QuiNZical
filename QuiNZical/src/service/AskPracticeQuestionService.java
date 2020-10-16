@@ -56,7 +56,7 @@ public class AskPracticeQuestionService extends Service<Void> {
 			            	ac.initClue(chosenCat, randomClue, true);
 			            	
 			            	Scene scene = (Scene) t.getSource().getValue();
-			            	PrimaryController.app.setScene(scene);
+			            	PrimaryController.getInstance().setScene(scene);
 			            }
 			        });
 				 service.start();

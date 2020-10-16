@@ -89,7 +89,7 @@ public class QuestionBoardController extends Controller {
 				}
 			} 
 		} else {
-			PrimaryController.app.addNewScene(FXMLService.FXMLNames.GAMECOMPLETE);
+			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.GAMECOMPLETE);
 		}
 	}
 
