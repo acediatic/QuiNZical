@@ -38,10 +38,6 @@ public class QuiNZical extends Application {
 		_currentStage.setTitle("QuiNZical");
 		setLoadScreen();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.ASKQUESTION.toString()));
-		 Scene scene = loader.load();
-		
-		
 		LoadControllerAndModelService service = new LoadControllerAndModelService();
 		service.setApp(this);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -59,42 +55,7 @@ public class QuiNZical extends Application {
 		service.start();
 	}
 	
-	public void shakeStage() {
-        Timeline timelineX = new Timeline(new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                if (x == 0) {
-                    _currentStage.setX(_currentStage.getX() + 10);
-                    x = 1;
-                } else {
-                	_currentStage.setX(_currentStage.getX() - 10);
-                    x = 0;
-                }
-            }
-        }));
-
-        timelineX.setCycleCount(Timeline.INDEFINITE);
-        timelineX.setAutoReverse(false);
-        timelineX.play();
-
-
-        Timeline timelineY = new Timeline(new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                if (y == 0) {
-                	_currentStage.setY(_currentStage.getY() + 10);
-                    y = 1;
-                } else {
-                	_currentStage.setY(_currentStage.getY() - 10);
-                    y = 0;
-                }
-            }
-        }));
-
-        timelineY.setCycleCount(Timeline.INDEFINITE);
-        timelineY.setAutoReverse(false);
-        timelineY.play();
-    }
+	
 		
 	/**
 	 * The main method for running the app.

@@ -78,7 +78,7 @@ public class AskingController extends Controller {
 	private Text timeText = new Text(timer.toString());
 	private Circle timerCircle;
 	private Circle timerDot;
-	private Timeline timeline;
+	private Timeline timeline = new Timeline();
 	private PathTransition path;
 	
 	private JFXNodesList macronsLower = new JFXNodesList();
@@ -114,7 +114,6 @@ public class AskingController extends Controller {
 	}
 	
 	private void startTimer() {
-		        timeline = new Timeline();
 		        timeline.setCycleCount(Timeline.INDEFINITE);
 		        timeline.getKeyFrames().add(
 		                new KeyFrame(Duration.seconds(1),
