@@ -41,11 +41,11 @@ import javafx.css.converter.SizeConverter;
 abstract class ProgressCircleIndicator extends Control {
     private static final int INDETERMINATE_PROGRESS = -1;
 
-    private ReadOnlyIntegerWrapper progress = new ReadOnlyIntegerWrapper(0);
+    private ReadOnlyIntegerWrapper progress = new ReadOnlyIntegerWrapper(10);
     private ReadOnlyBooleanWrapper indeterminate = new ReadOnlyBooleanWrapper(false);
 
     public ProgressCircleIndicator() {
-        this.getStylesheets().add(ProgressCircleIndicator.class.getResource("/application/css/circleprogress.css").toExternalForm());
+        this.getStylesheets().add(getClass().getResource("/application/css/external css/circleprogress.css").toExternalForm());
     }
  
     public int getProgress() {
@@ -120,7 +120,7 @@ abstract class ProgressCircleIndicator extends Control {
 
     private static class StyleableProperties {
         private static final CssMetaData<ProgressCircleIndicator, Number> INNER_CIRCLE_RADIUS = new CssMetaData<ProgressCircleIndicator, Number>(
-                "-fx-inner-radius", SizeConverter.getInstance(), 60) {
+                "-fx-inner-radius", SizeConverter.getInstance(), 20) {
 
             @Override
             public boolean isSettable(ProgressCircleIndicator n) {

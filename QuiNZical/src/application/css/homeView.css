@@ -13,6 +13,7 @@
 
 .root {
     -fx-font-size: 2em;
+    -fx-font-family: "QuiNZicalFont";
 }
 
 .titleText {
@@ -33,6 +34,7 @@
     -fx-font-style: italic;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+    -fx-font-family: "QuiNZicalFont";
 }
 
 

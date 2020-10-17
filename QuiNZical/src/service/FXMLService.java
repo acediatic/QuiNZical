@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import controller.PrimaryController;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
@@ -31,7 +32,7 @@ public class FXMLService extends Service<Scene> {
          return new Task<Scene>() {
              protected Scene call() throws IOException {
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+_fxml));
-     			 Scene scene = loader.load();		
+     			 Scene scene = loader.load();
      			 PrimaryController.getInstance().currentController = loader.getController();
      			 PrimaryController.getInstance().currentController.init();
      			 return scene;

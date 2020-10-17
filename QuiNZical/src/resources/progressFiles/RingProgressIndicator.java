@@ -37,7 +37,7 @@ import javafx.css.converter.SizeConverter;
  */
 public class RingProgressIndicator extends ProgressCircleIndicator {
     public RingProgressIndicator() {
-        this.getStylesheets().add(RingProgressIndicator.class.getResource("ringprogress.css").toExternalForm());
+        this.getStylesheets().add(RingProgressIndicator.class.getResource("/application/css/external css/ringprogress.css").toExternalForm());
         this.getStyleClass().add("ringindicator");
     }
 
@@ -80,7 +80,7 @@ public class RingProgressIndicator extends ProgressCircleIndicator {
 
     private static class StyleableProperties {
         private static final CssMetaData<RingProgressIndicator, Number> RING_WIDTH = new CssMetaData<RingProgressIndicator, Number>(
-                "-fx-ring-width", SizeConverter.getInstance(), 22) {
+                "-fx-ring-width", SizeConverter.getInstance(), 12) {
 
             @Override
             public boolean isSettable(RingProgressIndicator n) {

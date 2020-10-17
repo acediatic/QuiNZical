@@ -4,6 +4,7 @@
     -fx-background-position: center center;
     -fx-background-size: 100% 100%;
     -fx-font-size: 1.8em;
+    -fx-font-family: "QuiNZicalFont";
 }
 
 .GridPane{
@@ -14,6 +15,7 @@
     -fx-font-size: 1.2em;
     -fx-font-style: italic;
     -fx-font-weight: bold;
+    -fx-font-family: "QuiNZicalFont";
 }
 .button {
     transition-duration: 0.8s;
@@ -23,6 +25,7 @@
     -fx-font-size: 1em;
     -fx-font-style: italic;
     -fx-font-weight: bold;
+    -fx-font-family: "QuiNZicalFont";
 }
 
 .button:hover {
@@ -32,5 +35,5 @@
     -fx-font-size: 1.2em;
     -fx-font-style: italic;
     -fx-font-weight: bold;
-    -fx-font-family:  'fantasy';
+    -fx-font-family: "QuiNZicalFont";
 }   

@@ -118,7 +118,7 @@ public class FillProgressIndicatorSkin implements Skin<FillProgressIndicator> {
 
     private void setProgressLabel(int value) {
         if (value >= 0) {
-            percentLabel.setText(String.format("%d%%", value));
+            percentLabel.setText("yeet");
         }
     }
 
