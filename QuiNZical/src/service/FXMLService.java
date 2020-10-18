@@ -43,7 +43,8 @@ public class FXMLService extends Service<Scene> {
      public enum FXMLNames {
     		HOMESCREEN("homeScreen.fxml"), HOMEDRAWER("homeDrawer.fxml"), ASKQUESTION("askQuestionScene.fxml"), CORRECT("correctAnswerScene.fxml"),
     		INCORRECT("incorrectAnswerScene.fxml"), QUESTIONBOARD("questionBoard.fxml"), WINNINGS("winningsScene.fxml"), GAMECOMPLETE("rewardScene.fxml"),
-    		PRACTICESELECTOR("practiceCatSelector.fxml");
+    		PRACTICESELECTOR("practiceCatSelector.fxml"), INTERNATIONALBOARD("internationalBoard.fxml"), INTERNATIONALQUESTION("internationalAskQuestion.fxml"), 
+    		INTERNATIONALFINISHED("internationalFinished.fxml");
 
     		private final String _location;
     		

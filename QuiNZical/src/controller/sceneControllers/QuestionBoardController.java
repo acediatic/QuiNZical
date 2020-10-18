@@ -49,13 +49,18 @@ public class QuestionBoardController extends Controller {
 			catCounter++;
 		}
 		
-		boolean allAnswered = true;
+		int noCompletedCats = 0;
 		for (Category c : PrimaryController.getInstance().getCategories()) {
-			allAnswered &= c.allAnswered();
+			if(c.allAnswered()) {
+				noCompletedCats++;
+			}
 		}
 		
-		if(!allAnswered) {
-			
+		if(noCompletedCats <= 2) {
+			PrimaryController.getInstance().enableInternational();
+		}
+		
+		if(noCompletedCats < PrimaryController.getInstance().getCategories().size()) {
 			int catIndex = -1;
 			for (Category cat : PrimaryController.getInstance().getCategories()) {
 				catIndex++;

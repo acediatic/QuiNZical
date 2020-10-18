@@ -1,6 +1,11 @@
 package controller.sceneControllers;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -17,7 +22,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -46,10 +54,21 @@ public class HomeController extends Controller {
 	@FXML
 	private HBox _hbox;
 	
+	@FXML
+	private Button internationalButton;
+	
 	private HamburgerSlideCloseTransition burgerTask;
 	
 	@FXML
 	private void initialize() {	
+		Image globe = new Image(getClass().getClassLoader().getResourceAsStream("application/css/earth.png"));
+		internationalButton.setGraphic(new ImageView(globe));
+		internationalButton.getStyleClass().add("internationalButton");
+		//internationalButton.setVisible(PrimaryController.getInstance().internationalEnabled());
+		internationalButton.setVisible(true);
+		internationalButton.setMinWidth(50);
+		internationalButton.setMinHeight(50);
+		
 		_drawer.setDefaultDrawerSize(300);
 		_drawer.setResizeContent(true);
 		_drawer.setResizableOnDrag(true);
@@ -97,6 +116,13 @@ public class HomeController extends Controller {
         _hbox.getChildren().add(rippler);
         
         mainTxt.setFont(PrimaryController.titleFont);
+	}
+	
+	@FXML
+	private void internationalStart() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.INTERNATIONALBOARD));
+		 Scene scene = loader.load();
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.INTERNATIONALBOARD);	
 	}
 	
 	public void init() {}

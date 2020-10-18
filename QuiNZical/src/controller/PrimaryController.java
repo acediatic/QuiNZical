@@ -1,14 +1,17 @@
 package controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import application.QuiNZical;
+import audio.Speaker;
 import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
 import database.WinningsExtractor;
+import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -30,26 +33,39 @@ public class PrimaryController {
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
 	
 	private QuiNZical app;
+	
 	private ArrayList<Category> _categories;
+	private Category internationalCat; 
+	
+	private boolean _internationalEnabled = false;
+	
+	public Category getInternationalCat() {
+		return internationalCat;
+	}
+
+	public void setInternationalCat(Category internationalCat) {
+		this.internationalCat = internationalCat;
+	}
+
 	public Controller currentController;
 	
 	private String winnings;
 	
 	private PrimaryController() {
+		
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 		String categoriesPath = (new File(relevantPath[0])).getParentFile().getParentFile().getAbsolutePath();
 		categoriesFolder = new File(categoriesPath + "/categories");
-		
-		
+
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public void setStageListener() {
@@ -144,6 +160,14 @@ public class PrimaryController {
 
 	public void setLoadScreen() {
 		app.setLoadScreen();
+	}
+
+	public void enableInternational() {
+		_internationalEnabled = true;
+	}
+	
+	public boolean internationalEnabled() {
+		return _internationalEnabled;
 	}
 }
 
