@@ -21,8 +21,6 @@ import service.LoadControllerAndModelService;
 public class QuiNZical extends Application {
 	private Stage _currentStage;
 	private PrimaryController gmc;
-	private int y = 0;
-	private int x = 0;
 	
 	/**
 	 * getStage returns the stage to other classes, to allow them to set the stage.
@@ -45,7 +43,7 @@ public class QuiNZical extends Application {
             public void handle(WorkerStateEvent t) {
             	try {
             		gmc = (PrimaryController) t.getSource().getValue();
-            		addNewScene(FXMLService.FXMLNames.HOMESCREEN);	
+            		gmc.addNewScene(FXMLService.FXMLNames.HOMESCREEN);	
         			
         		} catch(Exception e) {
         			e.printStackTrace();
@@ -55,8 +53,6 @@ public class QuiNZical extends Application {
 		service.start();
 	}
 	
-	
-		
 	/**
 	 * The main method for running the app.
 	 * @param args
@@ -68,8 +64,13 @@ public class QuiNZical extends Application {
 		public void setScene(Scene scene) {
 			//Scene currentScene = _currentStage.getScene();
 			_currentStage.setScene(scene);
+			
+        	_currentStage.setMinHeight(700);
+			_currentStage.setMinWidth(700);
+			
 			_currentStage.setWidth(700);
 			_currentStage.setHeight(700);
+			
 			_currentStage.show();
 		}
 		
@@ -80,30 +81,5 @@ public class QuiNZical extends Application {
 			
 			Scene loadScene = new Scene(timerVisual, 700, 700);
 			setScene(loadScene);
-		}
-	
-		public void addNewScene(FXMLService.FXMLNames fxml) {
-			 FXMLService service = new FXMLService();
-	         service.setFXML(fxml);
-			 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-
-		            @Override 
-		            public void handle(WorkerStateEvent t) {
-		            	Scene scene = (Scene) t.getSource().getValue();
-		            	_currentStage.setScene(scene);
-		            	
-		            	_currentStage.setMinHeight(700);
-		    			_currentStage.setMinWidth(700);
-		    			
-		    			_currentStage.setWidth(700);
-		    			_currentStage.setHeight(700);
-		    			
-		    			_currentStage.setResizable(false);
-		    			
-		            	_currentStage.show();
-		            }
-		        });
-			 
-			 service.start();
 		}
 }

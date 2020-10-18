@@ -3,9 +3,18 @@ package controller.sceneControllers;
 
 import controller.PrimaryController;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import service.FXMLService;
 
 public class AnswerController extends Controller {
+	
+	@FXML
+	private Text winningsMsg;
+	
+	@FXML
+	private void initialize() {
+		winningsMsg.setText("Your Current Winnings: $" + PrimaryController.getInstance().getWinnings());
+	}
 	
 	@FXML
 	private void goHome() {
