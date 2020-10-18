@@ -20,9 +20,9 @@ public class Clue {
 	private Category _category;
 	private String _answer;
 	private Boolean _answered = false;
-	private List<String> _multiAnswers;
-	private List<String> _possibleAnswers;
-	private List<List<String>> _multiAnswersWithPossibilities;
+	private List<String> _multiAnswers = new ArrayList<String>();
+	private List<String> _possibleAnswers = new ArrayList<String>();
+	private List<List<String>> _multiAnswersWithPossibilities = new ArrayList<List<String>>();
 	
 	/**
 	 * The Clue constructor is used to initialise the question object using
@@ -100,22 +100,45 @@ public class Clue {
 		}
 	}
 	
+	/**
+	 * check is used to check if the answer the user gave for the question is correct or not. 
+	 * It utilises the splitting in splitAnswer, and follows the same splitting criteria to check 
+	 * if the answer is correct or not. If multiple answers are needed, all answers need to be present. 
+	 * If there are various possible answers, only one possibility needs to match. If there is only 
+	 * one answer, it needs to match. It accounts for cases and blank spaces as well.
+	 * @param answer
+	 * @return if the answer given for the clue is correct or not
+	 */
 	public Boolean check(String answer) {
 		if (answer.replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", ""))) {
 			return true;
 		}
-		//list.stream().anyMatch("search_value"::equalsIgnoreCase) //https://stackoverflow.com/questions/15824733/option-to-ignore-case-with-contains-method
-		//else if (_possibleAnswers.contains(_answer)) {
-		else if (_possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
+		else if  (_possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
 			return true;
 		}
 		else {
+			String [] answerArray;
+			if (answer.contains(",")) {
+				answerArray = answer.split(",");
+			}
+			else if (answer.contains("/")) {
+				answerArray = answer.split("/");
+			}
+			else {
+				answerArray = answer.split(" ");
+			}
 			for (String s: _possibleAnswers) {
 				if (answer.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
 					return true;
 				}
+				else {
+					for (String ans : answerArray) {
+						if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+							return true;
+						}
+					}
+				}
 			}
-			String [] answerArray = answer.split(",");
 			int multiMatch = 0;
 			for (String s : _multiAnswers) {
 				for (String ans: answerArray) {
@@ -150,6 +173,14 @@ public class Clue {
 		return false;
 	}
 	
+	/**
+	 * The splitAnswer method allows the answer for the clue to be split in case there are different 
+	 * possible answers or multiple answers to the clue. It uses a criteria for it, answers with a "," 
+	 * are split into multiple answers, all of which need to be correct. Otherwise, answers with a "/" 
+	 * are split into possibleAnswers, only one of which marks the clue as correct if it matches. Then, 
+	 * for clues with both "," and "/" it is split into a combination of possible multiple answers.
+	 * @param answer
+	 */
 	private void splitAnswer(String answer) {
 		if (answer.contains(",") & answer.contains("/")) {
 			String[] multiAnswerArray = answer.split(",");
@@ -182,20 +213,36 @@ public class Clue {
 				}
 				else {
 					for (int j = 0; j < maxVariations; j++) {
-						_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[j]);
+						if (!_multiAnswersWithPossibilities.get(j).contains(multiAnswerArray[i])) {
+							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i]);
+						}
 					}
 				}
 			}
-			
+			_possibleAnswers.add(answer);
+			_multiAnswers = Arrays.asList(answer.split(","));	
 		}
 		else if(answer.contains(",")) {
 			_multiAnswers = Arrays.asList(answer.split(","));
+			_possibleAnswers.add(answer);
+			_multiAnswersWithPossibilities.add(_possibleAnswers);
 		}
 		else if(answer.contains("/")) {
 			_possibleAnswers = Arrays.asList(answer.split("/"));
+			_multiAnswers.add(answer);
+			_multiAnswersWithPossibilities.add(_possibleAnswers);
+		}
+		else {
+			_possibleAnswers.add(answer);
+			_multiAnswers.add(answer);
+			_multiAnswersWithPossibilities.add(_possibleAnswers);
 		}
 	}
 	
+	/**
+	 * giveValue is used to assign a value to the clue.
+	 * @param value
+	 */
 	public void giveValue(String value) {
 		_value = Integer.parseInt(value);
 		_valueString = value;
@@ -210,7 +257,7 @@ public class Clue {
 	
 	/**
 	 * Returns if the question has been answered or not.
-	 * @return
+	 * @return if the question is answered
 	 */
 	public Boolean isAnswered() {
 		return _answered;
@@ -218,15 +265,15 @@ public class Clue {
 	
 	/**
 	 * showValue returns the value as a String.
-	 * @return
+	 * @return value string
 	 */
 	public String showValue() {
 		return _valueString;
 	}
 	
 	/**
-	 * returnValue returns the value as a double for calculations.
-	 * @return
+	 * returnValue returns the value as a int for calculations.
+	 * @return value 
 	 */
 	public int returnValue() {
 		return _value;
@@ -234,7 +281,7 @@ public class Clue {
 	
 	/**
 	 * showClue returns the question.
-	 * @return
+	 * @return clue/question
 	 */
 	public String showClue() {
 		return _clue;
@@ -242,7 +289,7 @@ public class Clue {
 	
 	/**
 	 * showAnswer returns answer for checking.
-	 * @return
+	 * @return answer
 	 */
 	public String showAnswer() {
 		return _answer;
@@ -250,12 +297,16 @@ public class Clue {
 	
 	/**
 	 * showCategory returns the category the clue comes under.
-	 * @return
+	 * @return category name
 	 */
 	public String showCategory() {
 		return _category.toString();
 	}
 	
+	/**
+	 * getCategory returns the category the clue belongs to.
+	 * @return category
+	 */
 	public Category getCategory() {
 		return _category;
 	}
@@ -263,7 +314,7 @@ public class Clue {
 	
 	/**
 	 * showClueType returns the clue type of the clue.
-	 * @return
+	 * @return clue type
 	 */
 	public String showClueType() {
 		return _clueType;
