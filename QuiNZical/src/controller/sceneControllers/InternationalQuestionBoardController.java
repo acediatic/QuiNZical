@@ -8,12 +8,14 @@ import java.util.List;
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import service.AskQuestionInternationalService;
 import service.AskQuestionService;
 import service.FXMLService;
 
@@ -28,10 +30,11 @@ public class InternationalQuestionBoardController extends Controller {
 	
 	public void initialize() {
 		
-		internationalCatLbl.setFont(PrimaryController.titleFont);
-		/*Category internationalCategory = PrimaryController.getInstance().getInternationalCat();
-		
+		internationalCatLbl.setFont(PrimaryController.titleFont); 
+		Category internationalCategory = PrimaryController.getInstance().getInternationalCat();
+
 		if (internationalCategory.allAnswered()) {
+			PrimaryController.getInstance().setLoadScreen();
 			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.INTERNATIONALFINISHED);
 		} else { 
 			int clueIndex = 0; //starts at zero as in gridpane q's begin at row (index) 1
@@ -58,7 +61,7 @@ public class InternationalQuestionBoardController extends Controller {
 			        }
 			    }
 			}
-		}*/
+		}
 	}
 
 	
@@ -66,10 +69,10 @@ public class InternationalQuestionBoardController extends Controller {
 	private void buttonPressed(ActionEvent e) {
 
 		Node node = (Node) e.getSource();
-		Integer nodeCol = GridPane.getColumnIndex(node);
+		Integer nodeCol = 0;
 		Integer nodeRow = GridPane.getRowIndex(node)-1;
 		
-		AskQuestionService askQuestion = new AskQuestionService();
+		AskQuestionInternationalService askQuestion = new AskQuestionInternationalService();
 			askQuestion.setCatAndClue(nodeCol, nodeRow);
 			askQuestion.start();
 		}

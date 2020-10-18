@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<Scene stylesheets="@../css/rewardScene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.RewardController">
+<Scene stylesheets="@../css/rewardScene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.InternationalRewardController">
    <root>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <top>
-            <Text fx:id="allDoneTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="yourWinningsTxt" text="Well Done! You've finished the International Section" BorderPane.alignment="BOTTOM_CENTER">
+            <Text fx:id="allDoneTxt" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="3.0" styleClass="yourWinningsTxt" text="Well Done! You've finished the International Section" textAlignment="CENTER" BorderPane.alignment="BOTTOM_CENTER">
                <BorderPane.margin>
                   <Insets top="30.0" />
                </BorderPane.margin></Text>

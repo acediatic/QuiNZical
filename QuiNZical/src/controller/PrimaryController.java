@@ -11,6 +11,7 @@ import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
 import database.WinningsExtractor;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -40,6 +41,9 @@ public class PrimaryController {
 	private boolean _internationalEnabled = false;
 	
 	public Category getInternationalCat() {
+		if (internationalCat == null) {
+			internationalCat = catExtractor.getInternational();
+		}
 		return internationalCat;
 	}
 
@@ -61,6 +65,7 @@ public class PrimaryController {
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
+			checkForInternational();
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -106,6 +111,8 @@ public class PrimaryController {
 			winExtractor.resetWinnings();
 			catExtractor.resetCategories();
 			_categories = catExtractor.getCategories();
+			_internationalEnabled = false;
+			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,7 +165,13 @@ public class PrimaryController {
 	}
 
 	public void setLoadScreen() {
-		app.setLoadScreen();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				app.setLoadScreen();
+			}
+			
+		});
 	}
 
 	public void enableInternational() {
@@ -167,6 +180,22 @@ public class PrimaryController {
 	
 	public boolean internationalEnabled() {
 		return _internationalEnabled;
+	}
+	
+	private void checkForInternational() {
+		if(getNumberCompletedCategories() >= 2) {
+			enableInternational();
+		}
+	}
+	
+	public int getNumberCompletedCategories() {
+		int noCompletedCats = 0;
+		for (Category c : getCategories()) {
+			if(c.allAnswered()) {
+				noCompletedCats++;
+			}
+		}
+		return noCompletedCats;
 	}
 }
 

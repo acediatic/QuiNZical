@@ -64,8 +64,8 @@ public class HomeController extends Controller {
 		Image globe = new Image(getClass().getClassLoader().getResourceAsStream("application/css/earth.png"));
 		internationalButton.setGraphic(new ImageView(globe));
 		internationalButton.getStyleClass().add("internationalButton");
-		//internationalButton.setVisible(PrimaryController.getInstance().internationalEnabled());
-		internationalButton.setVisible(true);
+		internationalButton.setVisible(PrimaryController.getInstance().internationalEnabled());
+		
 		internationalButton.setMinWidth(50);
 		internationalButton.setMinHeight(50);
 		
@@ -120,8 +120,6 @@ public class HomeController extends Controller {
 	
 	@FXML
 	private void internationalStart() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.INTERNATIONALBOARD));
-		 Scene scene = loader.load();
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.INTERNATIONALBOARD);	
 	}
 	
