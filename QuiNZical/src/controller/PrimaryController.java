@@ -8,6 +8,9 @@ import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
+import database.IncorrectClueExtractor;
+import database.ScoreboardExtractor;
+import database.User;
 import database.WinningsExtractor;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -31,6 +34,8 @@ public class PrimaryController {
 	
 	private QuiNZical app;
 	private ArrayList<Category> _categories;
+	private ArrayList<Category> _incorrectCategories;
+	private ArrayList<User> _scorers;
 	public Controller currentController;
 	
 	private String winnings;
@@ -91,6 +96,7 @@ public class PrimaryController {
 			winExtractor.resetWinnings();
 			catExtractor.resetCategories();
 			_categories = catExtractor.getCategories();
+			IncorrectClueExtractor.resetIncorrect();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,6 +120,14 @@ public class PrimaryController {
 
 	public Category getCategory(int index) {
 		return _categories.get(index);
+	}
+	
+	public ArrayList<Category> getAllIncorrect() {
+		return _incorrectCategories;
+	}
+	
+	public ArrayList<User> getScoreboard() {
+		return _scorers;
 	}
 	
 	public void addNewScene(FXMLService.FXMLNames fxml) {
@@ -144,6 +158,14 @@ public class PrimaryController {
 
 	public void setLoadScreen() {
 		app.setLoadScreen();
+	}
+	
+	public void setIncorrect () {
+		_incorrectCategories = (ArrayList<Category>) IncorrectClueExtractor.getIncorrect();
+	}
+	
+	public void setScoreboard () {
+		_scorers = (ArrayList<User>) ScoreboardExtractor.extractScoreBoard();
 	}
 }
 
