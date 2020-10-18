@@ -1,11 +1,9 @@
 package controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import application.QuiNZical;
-import audio.Speaker;
 import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
@@ -15,7 +13,6 @@ import database.ScoreboardExtractor;
 import database.User;
 import database.WinningsExtractor;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -44,17 +41,6 @@ public class PrimaryController {
   
 	private Category internationalCat; 
 	private boolean _internationalEnabled = false;
-  
-	public Category getInternationalCat() {
-		if (internationalCat == null) {
-			internationalCat = catExtractor.getInternational();
-		}
-		return internationalCat;
-	}
-
-	public void setInternationalCat(Category internationalCat) {
-		this.internationalCat = internationalCat;
-	}
 
 	public Controller currentController;
 	
@@ -64,8 +50,7 @@ public class PrimaryController {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		String categoriesPath = (new File(relevantPath[0])).getParentFile().getParentFile().getAbsolutePath();
-		categoriesFolder = new File(categoriesPath + "/categories");
+		categoriesFolder = new File(path + "/categories");
 		
 		try {
 			_categories = catExtractor.getCategories();
@@ -75,6 +60,17 @@ public class PrimaryController {
 		} catch (Exception e) {	
 			e.printStackTrace();
 		} 
+	}
+	
+	public Category getInternationalCat() {
+		if (internationalCat == null) {
+			internationalCat = catExtractor.getInternational();
+		}
+		return internationalCat;
+	}
+
+	public void setInternationalCat(Category internationalCat) {
+		this.internationalCat = internationalCat;
 	}
 	
 	public void setStageListener() {

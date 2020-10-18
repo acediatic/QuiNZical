@@ -3,17 +3,11 @@ package application;
 import java.io.IOException;
 
 import controller.PrimaryController;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import resources.progressFiles.RingProgressIndicator;
 import service.FXMLService;
 import service.LoadControllerAndModelService;
@@ -36,9 +30,6 @@ public class QuiNZical extends Application {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
 		setLoadScreen();
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.QUESTIONBOARD));
-		 Scene scene = loader.load();
 		
 		LoadControllerAndModelService service = new LoadControllerAndModelService();
 		service.setApp(this);

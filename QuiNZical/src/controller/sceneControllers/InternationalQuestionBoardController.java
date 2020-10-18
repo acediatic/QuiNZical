@@ -2,13 +2,9 @@ package controller.sceneControllers;
 
 import static java.lang.Math.pow;
 
-import java.util.Arrays;
-import java.util.List;
-
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import service.AskQuestionInternationalService;
-import service.AskQuestionService;
 import service.FXMLService;
 
 public class InternationalQuestionBoardController extends Controller {	

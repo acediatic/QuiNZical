@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import controller.PrimaryController;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
