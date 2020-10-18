@@ -40,9 +40,10 @@ public class PrimaryController {
 		
 		
 		try {
+			reset();
 			_categories = catExtractor.getCategories();
 			getWinnings();
-			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/homeFont.ttf"), 40);
+			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
 			e.printStackTrace();
 		}
@@ -126,6 +127,10 @@ public class PrimaryController {
 
 	public void setScene(Scene scene) {
 		app.setScene(scene);
+	}
+
+	public void setLoadScreen() {
+		app.setLoadScreen();
 	}
 }
 

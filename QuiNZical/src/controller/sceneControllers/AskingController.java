@@ -1,6 +1,8 @@
  package controller.sceneControllers;
 
 import java.io.IOException;
+import javafx.util.Duration;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +15,9 @@ import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
 import database.Clue;
+import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -25,6 +30,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
 import service.AnswerQuestionService;
 import service.FXMLService;
 
@@ -34,6 +44,7 @@ public class AskingController extends Controller {
 	@SuppressWarnings("unused")
 	private Category _category;
 	private boolean _practiceMode;
+	private Integer timer = 10;
 	
 	public void initClue(Category category, Clue clue, boolean practiceMode) {		
 		_clue = clue;
@@ -61,6 +72,15 @@ public class AskingController extends Controller {
 	@FXML
 	private JFXNodesList macrons;
 	
+	@FXML
+	private StackPane stack;
+	
+	private Text timeText = new Text(timer.toString());
+	private Circle timerCircle;
+	private Circle timerDot;
+	private Timeline timeline = new Timeline();
+	private PathTransition path;
+	
 	private JFXNodesList macronsLower = new JFXNodesList();
 	private JFXNodesList macronsUpper = new JFXNodesList();
 	
@@ -70,56 +90,73 @@ public class AskingController extends Controller {
 	
 	@FXML 
 	private void initialize() {
-		
-		JFXButton macronTitleButton = new JFXButton("Ā/ā");
-		macronTitleButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronTitleButton.getStyleClass().addAll("animated-option-button");
-		macrons.addAnimatedNode(macronTitleButton);
-		
-		JFXButton macronLowerButton = new JFXButton("ā");
-		macronLowerButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronLowerButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-		macronsLower.addAnimatedNode(macronLowerButton);
+		addMacronButtons();
 
-		JFXButton macronUpperButton = new JFXButton("Ā");
-		macronUpperButton.setButtonType(JFXButton.ButtonType.RAISED);
-		macronUpperButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-		macronsUpper.addAnimatedNode(macronUpperButton);
+		timerDot = new Circle(5, Color.LIGHTGREEN);
 		
-			List<String[]> vowelLists = Arrays.asList(lowerVowels, upperVowels);
-			List<JFXNodesList> nodeLists = Arrays.asList(macronsLower, macronsUpper);
-			for (int i = 0; i<2; i++) {
-				for (String c : vowelLists.get(i)) {
-					JFXButton macronButton = new JFXButton(c);
-					macronButton.setButtonType(JFXButton.ButtonType.RAISED);
-					macronButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button-2");
-					
-					macronButton.setOnAction(new EventHandler<ActionEvent>() {
-						@Override public void handle(ActionEvent e) {
-							usrAnsField.setText(usrAnsField.getText() + macronButton.getText());
-						}
-					});
-					nodeLists.get(i).addAnimatedNode(macronButton);
-				}
-			}
-			
-			for(JFXNodesList nodeList : nodeLists) {
-				nodeList.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
-				nodeList.setRotate(-90); // right
-				nodeList.setSpacing(10d);
-				macrons.addAnimatedNode(nodeList);
-			}
+		timerCircle = new Circle(30, Color.GREEN);
+		timerCircle.setStroke(Color.WHITE);
+		timerCircle.setStrokeWidth(3);
 		
-		macrons.setRotate(180); // up
-		macrons.setSpacing(10d);
+		StackPane sp = new StackPane(timerCircle, timerDot);
+		sp.setRotate(-90);
+		
+		timeText.setBoundsType(TextBoundsType.VISUAL);
+		timeText.setFont(PrimaryController.titleFont);
+		timeText.setFill(Color.WHITE);
+		
+		path = new PathTransition(Duration.millis(1000), timerCircle, timerDot);
+		path.setCycleCount(10);
+		path.play();
+		path.pause(); // Added due to bug in JavaFX
+		 
+		stack.getChildren().addAll(sp, timeText);
 	}
 	
+	private void startTimer() {
+		        timeline.setCycleCount(Timeline.INDEFINITE);
+		        timeline.getKeyFrames().add(
+		                new KeyFrame(Duration.seconds(1),
+		                  new EventHandler<ActionEvent>() {
+		                    // KeyFrame event handler
+		                    @Override
+		                	public void handle(ActionEvent event) {
+		                    	boolean timerFinished = !decrementTimerAndSetText();
+		                        if (timerFinished) {
+		                            timeline.stop();
+		                            checkQuestion(usrAnsSafety());
+		                        } else {
+		                        	
+		                        }
+		                      }
+		                }));
+		        
+				path.play();
+				timeline.playFromStart();
+	}
 	
+	private void stopTimer() {
+		timeline.stop();
+	}
+	// returns true if there is still time in the timer.
+	private boolean decrementTimerAndSetText() {
+		timer--;
+		timeText.setText(timer.toString());
+		return timer > 0;
+	}
+
+	private String usrAnsSafety() {
+		String usrAns = usrAnsField.getText();
+		if (usrAnsField.getText() == null || usrAnsField.getText().trim().isEmpty()) {
+		    usrAns = "";
+		}
+		return usrAns;
+	}
 	
 	@FXML
 	private void handleSubmitButtonAction() {
-		if (usrAnsField.getText() == null || usrAnsField.getText().trim().isEmpty()) {
-		     // Usr has not entered text, do nothing
+		if (usrAnsSafety().isEmpty()) {
+			// do nothing
 		} else {
 			checkQuestion(usrAnsField.getText());
 		}
@@ -131,6 +168,7 @@ public class AskingController extends Controller {
 	}
 			
 	private void checkQuestion(String usrAns) {
+		stopTimer();
 		AnswerQuestionService service = new AnswerQuestionService();
 		service.setAns(usrAns, _clue.showAnswer(), _practiceMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -192,6 +230,7 @@ public class AskingController extends Controller {
 		        }
 				protected void succeeded() {
 					audioFinished = true;
+					startTimer();
 				}
 			});
 			th.start();
@@ -226,6 +265,49 @@ public class AskingController extends Controller {
 		}
 	}
 
+	private void addMacronButtons() {
+		JFXButton macronTitleButton = new JFXButton("Ā/ā");
+		macronTitleButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronTitleButton.getStyleClass().addAll("animated-option-button");
+		macrons.addAnimatedNode(macronTitleButton);
+		
+		JFXButton macronLowerButton = new JFXButton("ā");
+		macronLowerButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronLowerButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+		macronsLower.addAnimatedNode(macronLowerButton);
+
+		JFXButton macronUpperButton = new JFXButton("Ā");
+		macronUpperButton.setButtonType(JFXButton.ButtonType.RAISED);
+		macronUpperButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+		macronsUpper.addAnimatedNode(macronUpperButton);
+		
+			List<String[]> vowelLists = Arrays.asList(lowerVowels, upperVowels);
+			List<JFXNodesList> nodeLists = Arrays.asList(macronsLower, macronsUpper);
+			for (int i = 0; i<2; i++) {
+				for (String c : vowelLists.get(i)) {
+					JFXButton macronButton = new JFXButton(c);
+					macronButton.setButtonType(JFXButton.ButtonType.RAISED);
+					macronButton.getStyleClass().addAll("animated-option-button", "animated-option-sub-button-2");
+					
+					macronButton.setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							usrAnsField.setText(usrAnsField.getText() + macronButton.getText());
+						}
+					});
+					nodeLists.get(i).addAnimatedNode(macronButton);
+				}
+			}
+			
+			for(JFXNodesList nodeList : nodeLists) {
+				nodeList.getStyleClass().addAll("animated-option-button", "animated-option-sub-button");
+				nodeList.setRotate(-90); // right
+				nodeList.setSpacing(10d);
+				macrons.addAnimatedNode(nodeList);
+			}
+		
+		macrons.setRotate(180); // up
+		macrons.setSpacing(10d);
+	}
 	
 	@Override
 	public void init() {
