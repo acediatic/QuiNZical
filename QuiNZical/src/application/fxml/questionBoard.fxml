@@ -188,11 +188,11 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="cat1" style="-fx-font-family: QuiNZicalFont;" text="Cat1" textAlignment="CENTER" textFill="WHITE" />
-            <Label fx:id="cat2" style="-fx-font-family: QuiNZicalFont;" text="Cat2" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" />
-            <Label fx:id="cat3" style="-fx-font-family: QuiNZicalFont;" text="Cat3" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" />
-            <Label fx:id="cat4" style="-fx-font-family: QuiNZicalFont;" text="Cat4" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" />
-            <Label fx:id="cat5" alignment="CENTER" style="-fx-font-family: QuiNZicalFont;" text="Cat5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4" />
+            <Label fx:id="cat1" text="Cat1" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="cat2" text="Cat2" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" />
+            <Label fx:id="cat3" text="Cat3" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" />
+            <Label fx:id="cat4" text="Cat4" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" />
+            <Label fx:id="cat5" alignment="CENTER" text="Cat5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4" />
             <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonPressed" text="100" textAlignment="CENTER" textFill="WHITE" underline="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold Italic" size="14.0" />

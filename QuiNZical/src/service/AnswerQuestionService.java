@@ -12,11 +12,13 @@ public class AnswerQuestionService extends Service<Boolean> {
 	private StringProperty _usrAns = new SimpleStringProperty();
 	private StringProperty _realAns = new SimpleStringProperty();
 	private BooleanProperty _practiceMode = new SimpleBooleanProperty();
+	private BooleanProperty _internationalMode = new SimpleBooleanProperty();
 	
-	 public final void setAns(String usrAns, String realAns, boolean practiceMode) {
+	 public final void setAns(String usrAns, String realAns, boolean practiceMode, boolean internationalMode) {
 		 _usrAns.set(usrAns);
 		 _realAns.set(realAns);
 		 _practiceMode.set(practiceMode);
+		 _internationalMode.set(internationalMode);
      }
 
      public final String getUsrAns() {
@@ -31,10 +33,15 @@ public class AnswerQuestionService extends Service<Boolean> {
          return _practiceMode.get();
      }
 
+     public final Boolean getInternationalMode() {
+    	 return _internationalMode.get();
+     }
+     
      protected Task<Boolean> createTask() {
          final String usrAns = getUsrAns();
          final String realAns = getRealAns();
          final Boolean _practiceMode = getPracticeMode();
+         final Boolean _internationalMode = getInternationalMode();
          return new Task<Boolean>() {
              protected Boolean call() {
             	String usrAnsStripped = usrAns.strip();
@@ -43,9 +50,17 @@ public class AnswerQuestionService extends Service<Boolean> {
      			FXMLService.FXMLNames nextSceneFXML;
      			if (usrAnsStripped.equalsIgnoreCase(actualAns)) {
      				correct = true;
-     				nextSceneFXML = FXMLService.FXMLNames.CORRECT;				
+     				if(!_internationalMode) {
+     					nextSceneFXML = FXMLService.FXMLNames.CORRECT;	
+     				} else {
+     					nextSceneFXML = FXMLService.FXMLNames.INTERNATIONALCORRECT;
+     				}
      			} else {
-     				nextSceneFXML = FXMLService.FXMLNames.INCORRECT;
+     				if(!_internationalMode) {
+     					nextSceneFXML = FXMLService.FXMLNames.INCORRECT;
+ 					} else {
+ 						nextSceneFXML = FXMLService.FXMLNames.INTERNATIONALINCORRECT;
+ 					}
      			}
      			if (!_practiceMode) {
      				PrimaryController.getInstance().addNewScene(nextSceneFXML);

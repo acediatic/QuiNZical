@@ -52,7 +52,7 @@ public class AskQuestionService extends Service<Void> {
 			            @Override 
 			            public void handle(WorkerStateEvent t) {
 			            	AskingController ac = (AskingController) PrimaryController.getInstance().currentController;
-			            	ac.initClue(chosenCat, chosenClue, false);
+			            	ac.initClue(chosenCat, chosenClue, false, false);
 			            	
 			            	Scene scene = (Scene) t.getSource().getValue();
 			            	PrimaryController.getInstance().setScene(scene);

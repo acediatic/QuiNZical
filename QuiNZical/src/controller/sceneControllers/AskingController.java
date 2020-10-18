@@ -45,11 +45,13 @@ public class AskingController extends Controller {
 	private Category _category;
 	private boolean _practiceMode;
 	private Integer timer = 10;
+	private boolean _internationalMode;
 	
-	public void initClue(Category category, Clue clue, boolean practiceMode) {		
+	public void initClue(Category category, Clue clue, boolean practiceMode, boolean internationalMode) {		
 		_clue = clue;
 		_category = category;
-		_practiceMode = practiceMode;	
+		_practiceMode = practiceMode;
+		_internationalMode = internationalMode;
 		if (_practiceMode) {
 			textToggle.setDisable(true);
 			}
@@ -177,7 +179,7 @@ public class AskingController extends Controller {
 	private void checkQuestion(String usrAns) {
 		stopTimer();
 		AnswerQuestionService service = new AnswerQuestionService();
-		service.setAns(usrAns, _clue.showAnswer(), _practiceMode);
+		service.setAns(usrAns, _clue.showAnswer(), _practiceMode, _internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
 	            @Override 

@@ -22,6 +22,11 @@ public class DrawerController extends Controller {
 	}
 	
 	@FXML
+	private void startInternational() {
+		
+	}
+	
+	@FXML
 	private void viewScore() {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.WINNINGS);	
 	}

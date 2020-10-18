@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import resources.progressFiles.RingProgressIndicator;
@@ -36,6 +37,9 @@ public class QuiNZical extends Application {
 		_currentStage.setTitle("QuiNZical");
 		setLoadScreen();
 		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/"+FXMLService.FXMLNames.QUESTIONBOARD));
+		 Scene scene = loader.load();
+		
 		LoadControllerAndModelService service = new LoadControllerAndModelService();
 		service.setApp(this);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -43,8 +47,8 @@ public class QuiNZical extends Application {
             public void handle(WorkerStateEvent t) {
             	try {
             		gmc = (PrimaryController) t.getSource().getValue();
-            		gmc.addNewScene(FXMLService.FXMLNames.HOMESCREEN);	
-        			
+            		gmc.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+
         		} catch(Exception e) {
         			e.printStackTrace();
         		}
@@ -62,7 +66,6 @@ public class QuiNZical extends Application {
 		}
 
 		public void setScene(Scene scene) {
-			//Scene currentScene = _currentStage.getScene();
 			_currentStage.setScene(scene);
 			
         	_currentStage.setMinHeight(700);
