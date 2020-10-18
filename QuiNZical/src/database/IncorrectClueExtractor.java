@@ -67,7 +67,7 @@ public class IncorrectClueExtractor {
 	 * within each category they got wrong. It is then stored into a Category list, which is returned.
 	 * @return list of categories with incorrect clues
 	 */
-	public List<Category> getIncorrect() {
+	public static List<Category> getIncorrect() {
 		List<Category> incorrectCategories = new ArrayList<Category>();
 		File incorrect = new File(PrimaryController.path + "/.incorrect");
 		File [] categoryFiles = incorrect.listFiles();
@@ -88,6 +88,13 @@ public class IncorrectClueExtractor {
 			incorrectCategories.add(category);
 		}
 		return incorrectCategories;
+	}
+	
+	/**
+	 * resetIncorrect is used to remove the incorrect directory, hence resetting it.
+	 */
+	public static void resetIncorrect() {
+		CategoryExtractor.deleteDir(new File(PrimaryController.path + "/.incorrect"));
 	}
 
 }
