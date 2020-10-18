@@ -45,7 +45,7 @@ public class ScoreboardExtractor {
 	 * user names and scores can be displayed. 
 	 * @return list of users
 	 */
-	public List<User> extractScoreBoard() {
+	public static List<User> extractScoreBoard() {
 		//Making a list of users to return for the scoreboard.
 		List<User> ranks = new ArrayList<User>();
 		try {
