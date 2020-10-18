@@ -10,6 +10,9 @@ import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
+import database.IncorrectClueExtractor;
+import database.ScoreboardExtractor;
+import database.User;
 import database.WinningsExtractor;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -34,12 +37,14 @@ public class PrimaryController {
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
 	
 	private QuiNZical app;
-	
+  
+	private ArrayList<Category> _incorrectCategories;
+	private ArrayList<User> _scorers;
 	private ArrayList<Category> _categories;
+  
 	private Category internationalCat; 
-	
 	private boolean _internationalEnabled = false;
-	
+  
 	public Category getInternationalCat() {
 		if (internationalCat == null) {
 			internationalCat = catExtractor.getInternational();
@@ -113,6 +118,7 @@ public class PrimaryController {
 			_categories = catExtractor.getCategories();
 			_internationalEnabled = false;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+			IncorrectClueExtractor.resetIncorrect();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,6 +142,14 @@ public class PrimaryController {
 
 	public Category getCategory(int index) {
 		return _categories.get(index);
+	}
+	
+	public ArrayList<Category> getAllIncorrect() {
+		return _incorrectCategories;
+	}
+	
+	public ArrayList<User> getScoreboard() {
+		return _scorers;
 	}
 	
 	public void addNewScene(FXMLService.FXMLNames fxml) {
@@ -196,6 +210,14 @@ public class PrimaryController {
 			}
 		}
 		return noCompletedCats;
+	}
+	
+	public void setIncorrect () {
+		_incorrectCategories = (ArrayList<Category>) IncorrectClueExtractor.getIncorrect();
+	}
+	
+	public void setScoreboard () {
+		_scorers = (ArrayList<User>) ScoreboardExtractor.extractScoreBoard();
 	}
 }
 
