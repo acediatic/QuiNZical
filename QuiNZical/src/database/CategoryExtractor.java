@@ -63,6 +63,7 @@ public class CategoryExtractor {
 	}
 		
 
+	
 	private ArrayList<Category> pickCategories() throws Exception {
 		ArrayList<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
 		File categoriesFolder = PrimaryController.categoriesFolder;

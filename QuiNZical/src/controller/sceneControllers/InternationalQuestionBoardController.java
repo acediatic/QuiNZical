@@ -29,7 +29,7 @@ public class InternationalQuestionBoardController extends Controller {
 	public void initialize() {
 		
 		internationalCatLbl.setFont(PrimaryController.titleFont);
-		Category internationalCategory = PrimaryController.getInstance().getInternationalCat();
+		/*Category internationalCategory = PrimaryController.getInstance().getInternationalCat();
 		
 		if (internationalCategory.allAnswered()) {
 			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.INTERNATIONALFINISHED);
@@ -58,7 +58,7 @@ public class InternationalQuestionBoardController extends Controller {
 			        }
 			    }
 			}
-		}
+		}*/
 	}
 
 	

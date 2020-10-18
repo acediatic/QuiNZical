@@ -52,13 +52,12 @@ public class PrimaryController {
 	private String winnings;
 	
 	private PrimaryController() {
-		
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 		String categoriesPath = (new File(relevantPath[0])).getParentFile().getParentFile().getAbsolutePath();
 		categoriesFolder = new File(categoriesPath + "/categories");
-
+		
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
