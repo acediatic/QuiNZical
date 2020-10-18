@@ -55,6 +55,7 @@ public class AskingController extends Controller {
 			}
 		showQuestionTextCheck();
 		playAudio();
+		setupTimer();
 	}
 	
 	@FXML 
@@ -75,7 +76,7 @@ public class AskingController extends Controller {
 	@FXML
 	private StackPane stack;
 	
-	private Text timeText = new Text(timer.toString());
+	private Text timeText = new Text(Integer.toString(timer));
 	private Circle timerCircle;
 	private Circle timerDot;
 	private Timeline timeline = new Timeline();
@@ -90,8 +91,10 @@ public class AskingController extends Controller {
 	
 	@FXML 
 	private void initialize() {
-		addMacronButtons();
-
+		addMacronButtons();	
+	}
+	
+	private void setupTimer() {
 		timerDot = new Circle(5, Color.LIGHTGREEN);
 		
 		timerCircle = new Circle(30, Color.GREEN);
@@ -100,6 +103,12 @@ public class AskingController extends Controller {
 		
 		StackPane sp = new StackPane(timerCircle, timerDot);
 		sp.setRotate(-90);
+		
+
+		if (_practiceMode) {
+			timeText.setText("!");
+			timerDot.setVisible(false);
+		}
 		
 		timeText.setBoundsType(TextBoundsType.VISUAL);
 		timeText.setFont(PrimaryController.titleFont);
@@ -125,8 +134,6 @@ public class AskingController extends Controller {
 		                        if (timerFinished) {
 		                            timeline.stop();
 		                            checkQuestion(usrAnsSafety());
-		                        } else {
-		                        	
 		                        }
 		                      }
 		                }));
@@ -141,7 +148,7 @@ public class AskingController extends Controller {
 	// returns true if there is still time in the timer.
 	private boolean decrementTimerAndSetText() {
 		timer--;
-		timeText.setText(timer.toString());
+		timeText.setText(Integer.toString(timer));
 		return timer > 0;
 	}
 
@@ -230,7 +237,9 @@ public class AskingController extends Controller {
 		        }
 				protected void succeeded() {
 					audioFinished = true;
-					startTimer();
+					if(!_practiceMode) {
+						startTimer();
+					}
 				}
 			});
 			th.start();
