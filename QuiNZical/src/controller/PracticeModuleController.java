@@ -21,7 +21,7 @@ public class PracticeModuleController {
 	private PracticeModuleController() {		
 		try {
 			_categories = catExtractor.getMasterCategories();
-			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/homeFont.ttf"), 40);
+			titleFont = PrimaryController.titleFont;
 		} catch (Exception e) {	
 			e.printStackTrace();
 		}
