@@ -9,6 +9,8 @@ import database.Category;
 import database.CategoryExtractor;
 import database.Clue;
 import database.WinningsExtractor;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
@@ -31,6 +33,8 @@ public class PrimaryController {
 	private ArrayList<Category> _categories;
 	public Controller currentController;
 	
+	private String winnings;
+	
 	private PrimaryController() {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
@@ -40,7 +44,6 @@ public class PrimaryController {
 		
 		
 		try {
-			reset();
 			_categories = catExtractor.getCategories();
 			getWinnings();
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
@@ -95,12 +98,13 @@ public class PrimaryController {
 	}
 	
 	public String getWinnings() {
-		String winnings = "0";
-		try {
-			winnings = winExtractor.getWinnings();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		if (winnings == null) {
+			try {
+				winnings = winExtractor.getWinnings();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 		
 		return winnings;
 	}
 	
@@ -113,7 +117,16 @@ public class PrimaryController {
 	}
 	
 	public void addNewScene(FXMLService.FXMLNames fxml) {
-		app.addNewScene(fxml);
+		 FXMLService service = new FXMLService();
+         service.setFXML(fxml);
+		 service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+	            @Override 
+	            public void handle(WorkerStateEvent t) {
+	            	Scene scene = (Scene) t.getSource().getValue();
+	            	setScene(scene);
+	            }
+	     });
+		 service.start();
 	}
 
 	public void setApp(QuiNZical app) {
