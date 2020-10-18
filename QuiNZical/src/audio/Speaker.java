@@ -15,6 +15,7 @@ public class Speaker {
 	private static String path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
 	private static File festivalScheme = new File(path + "/.toSay.scm");
 	private static File nz_voice = new File("/usr/share/festival/voices/english/akl_nz_jdt_diphone");
+	private static Process _process;
 	
 	public static Boolean checkNZVoice () {
 		if (nz_voice.exists()) {
@@ -52,9 +53,12 @@ public class Speaker {
 			String speakingCommand = "festival -b " + festivalScheme;
 			ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 			try {
-				Process speakingProcess = speak.start();
+				_process = speak.start();
+				_process.waitFor();
+				_process.destroy();
+				/*Process speakingProcess = speak.start();
 				speakingProcess.waitFor();
-				speakingProcess.destroy();
+				speakingProcess.destroy();*/
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -84,9 +88,12 @@ public class Speaker {
 				String speakingCommand = "festival -b " + festivalScheme;
 				ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 				try {
-					Process speakingProcess = speak.start();
+					_process = speak.start();
+					_process.waitFor();
+					_process.destroy();
+					/*Process speakingProcess = speak.start();
 					speakingProcess.waitFor();
-					speakingProcess.destroy();
+					speakingProcess.destroy();*/
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -118,9 +125,12 @@ public class Speaker {
 			String speakingCommand = "festival -b " + festivalScheme;
 			ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 			try {
-				Process speakingProcess = speak.start();
+				_process = speak.start();
+				_process.waitFor();
+				_process.destroy();
+				/*Process speakingProcess = speak.start();
 				speakingProcess.waitFor();
-				speakingProcess.destroy();
+				speakingProcess.destroy();*/
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -150,9 +160,12 @@ public class Speaker {
 				String speakingCommand = "festival -b " + festivalScheme;
 				ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 				try {
-					Process speakingProcess = speak.start();
+					_process = speak.start();
+					_process.waitFor();
+					_process.destroy();
+					/*Process speakingProcess = speak.start();
 					speakingProcess.waitFor();
-					speakingProcess.destroy();
+					speakingProcess.destroy();*/
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -184,9 +197,12 @@ public class Speaker {
 			String speakingCommand = "festival -b " + festivalScheme;
 			ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 			try {
-				Process speakingProcess = speak.start();
+				_process = speak.start();
+				_process.waitFor();
+				_process.destroy();
+				/*Process speakingProcess = speak.start();
 				speakingProcess.waitFor();
-				speakingProcess.destroy();
+				speakingProcess.destroy();*/
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -216,9 +232,12 @@ public class Speaker {
 				String speakingCommand = "festival -b " + festivalScheme;
 				ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 				try {
-					Process speakingProcess = speak.start();
+					_process = speak.start();
+					_process.waitFor();
+					_process.destroy();
+					/*Process speakingProcess = speak.start();
 					speakingProcess.waitFor();
-					speakingProcess.destroy();
+					speakingProcess.destroy();*/
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -230,6 +249,27 @@ public class Speaker {
 			incorrect(clue, speed);
 		}
 		CategoryExtractor.deleteDir(festivalScheme);
+	}
+	
+	public static void stopSpeaking() {
+		//try {
+			/*String stopSpeakingCommand = "killall festival";
+			ProcessBuilder stop = new ProcessBuilder("bash", "-c", stopSpeakingCommand);
+			try {
+				Process stoppingProcess = stop.start();
+				stoppingProcess.waitFor();
+				stoppingProcess.destroy();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}*/
+			/*Stream<ProcessHandle> descendants = _process.descendants();
+			descendants.filter(ProcessHandle::isAlive).forEach(ph -> {
+				ph.destroy();
+			});*/
+		_process.destroy();
+		/*} catch (IOException e) {
+			e.printStackTrace();
+		}*/
 	}
 
 }
