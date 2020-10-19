@@ -23,6 +23,42 @@ public class Clue {
 	private List<String> _multiAnswers = new ArrayList<String>();
 	private List<String> _possibleAnswers = new ArrayList<String>();
 	private List<List<String>> _multiAnswersWithPossibilities = new ArrayList<List<String>>();
+	private ClueType _clueTypeEnum;
+	/*
+	 * ClueType enum to simplify clue type usage.
+	 */
+	enum ClueType {
+		WHAT_IS("What is"),
+		WHAT_ARE("What are"),
+		WHO_IS("Who is"),
+		WHO_ARE("Who are"),
+		HOW_IS("How is"),
+		HOW_ARE("How are"),
+		WHERE_IS("Where is"),
+		WHERE_ARE("Where are"),
+		WHEN_IS("When is"),
+		WHEN_ARE("When are"),
+		WHY_IS("Why is"),
+		WHY_ARE("Why are");
+		
+		private String _type;
+		
+		/**
+		 * Constructor to allow String values for the enum.
+		 * @param type
+		 */
+		ClueType(String type) {
+			this._type = type;
+		}
+		
+		/**
+		 * getType is used to return the String value.
+		 * @return the clue type for the enum value.
+		 */
+		public String getType() {
+			return _type;
+		}
+	}
 	
 	/**
 	 * The Clue constructor is used to initialise the question object using
@@ -50,7 +86,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer) {
 		_category = category;
 		_clue  = clue;
-		_clueType = clueType;
+		setupClassType(clueType);
 		_answer = answer;
 		splitAnswer(_answer);
 	}
@@ -67,7 +103,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer, String value) {
 		_category = category;
 		_clue = clue;
-		_clueType = clueType;
+		setupClassType(clueType);
 		_answer = answer;
 		splitAnswer(_answer);
 		_valueString = value;
@@ -87,7 +123,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer, String value, String answered) {
 		_category = category;
 		_clue = clue;
-		_clueType = clueType;
+		setupClassType(clueType);
 		_answer = answer;
 		splitAnswer(_answer);
 		_valueString = value;
@@ -97,6 +133,19 @@ public class Clue {
 		}
 		else {
 			_answered = false;
+		}
+	}
+	
+	/**
+	 * This is used to setup the ClueType enum and String, so that it can be used for the game.
+	 * @param clueType
+	 */
+	private void setupClassType(String clueType) {
+		for (ClueType type: ClueType.values()) {
+			if (type.getType().equalsIgnoreCase(clueType.replaceAll("?", "").trim())) {
+				_clueTypeEnum = type;
+				_clueType = _clueTypeEnum.getType();
+			}
 		}
 	}
 	
