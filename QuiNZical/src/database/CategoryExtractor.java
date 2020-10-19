@@ -13,6 +13,8 @@ import java.util.List;
 import controller.PrimaryController;
 
 public class CategoryExtractor {
+	private Category international = null;
+	
 	
 	public ArrayList<Category> getCategories() throws Exception {
 		ArrayList<Category> gameCategories = new ArrayList<Category>();
@@ -30,7 +32,30 @@ public class CategoryExtractor {
 		else {
 			gameCategories = loadCategories();
 		}
+		
+		for(Category cat : gameCategories) {
+			if(cat.categoryName().equalsIgnoreCase("International")) {
+				international = cat;
+				gameCategories.remove(cat);
+				break;
+			}
+		}
+		
 		return gameCategories; 
+	}
+	
+	public Category getInternational() {
+		if(international != null) {
+			return international;
+		} else {
+			try {
+				getCategories();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return international;
+		}
 	}
 	
 	public ArrayList<Category> getMasterCategories() throws Exception {
@@ -58,10 +83,9 @@ public class CategoryExtractor {
 			} 
 			allCategories.add(category);
 		}
+		
 		return allCategories;
 	}
-		
-
 	
 	private ArrayList<Category> pickCategories() throws Exception {
 		ArrayList<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
@@ -70,13 +94,25 @@ public class CategoryExtractor {
 			ArrayList<Category> categories = extractMasterCategories();
 			ArrayList<Category> randomCategories = new ArrayList<Category>();
 			ArrayList<Integer> done = new ArrayList<Integer>(); 
+			
+			Category internationalCat = null;
+			
+			for (Category cat : categories) {
+				if(cat.categoryName().equalsIgnoreCase("International")) {
+					internationalCat = cat;
+					break;
+				}
+			}
+			
 			while (randomCategories.size() < 5) {
 				int randomIndex = (int)(Math.random() * categories.size());
-				if ((!done.contains(randomIndex))&&(!(categories.get(randomIndex).numberOfClues()<5))) {
+				if ((!done.contains(randomIndex))&&(!(categories.get(randomIndex).numberOfClues()<5))&&categories.get(randomIndex)!=internationalCat) {
 					randomCategories.add(categories.get(randomIndex));
 					done.add(randomIndex);
 				}
 			}
+				
+			randomCategories.add(internationalCat);
 			for (Category category:randomCategories) {
 				Category categoryToBeAdded = new Category(category.categoryName());
 				int clueValue = 100;

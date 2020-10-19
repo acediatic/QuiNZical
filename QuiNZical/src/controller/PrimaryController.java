@@ -12,6 +12,7 @@ import database.IncorrectClueExtractor;
 import database.ScoreboardExtractor;
 import database.User;
 import database.WinningsExtractor;
+import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -33,9 +34,14 @@ public class PrimaryController {
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
 	
 	private QuiNZical app;
-	private ArrayList<Category> _categories;
+  
 	private ArrayList<Category> _incorrectCategories;
 	private ArrayList<User> _scorers;
+	private ArrayList<Category> _categories;
+  
+	private Category internationalCat; 
+	private boolean _internationalEnabled = false;
+
 	public Controller currentController;
 	
 	private String winnings;
@@ -44,17 +50,27 @@ public class PrimaryController {
 		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
 		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
 		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		String categoriesPath = (new File(relevantPath[0])).getParentFile().getParentFile().getAbsolutePath();
-		categoriesFolder = new File(categoriesPath + "/categories");
-		
+		categoriesFolder = new File(path + "/categories");
 		
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
+			checkForInternational();
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
 			e.printStackTrace();
+		} 
+	}
+	
+	public Category getInternationalCat() {
+		if (internationalCat == null) {
+			internationalCat = catExtractor.getInternational();
 		}
+		return internationalCat;
+	}
+
+	public void setInternationalCat(Category internationalCat) {
+		this.internationalCat = internationalCat;
 	}
 	
 	public void setStageListener() {
@@ -96,6 +112,8 @@ public class PrimaryController {
 			winExtractor.resetWinnings();
 			catExtractor.resetCategories();
 			_categories = catExtractor.getCategories();
+			_internationalEnabled = false;
+			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 			IncorrectClueExtractor.resetIncorrect();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -157,7 +175,37 @@ public class PrimaryController {
 	}
 
 	public void setLoadScreen() {
-		app.setLoadScreen();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				app.setLoadScreen();
+			}
+			
+		});
+	}
+
+	public void enableInternational() {
+		_internationalEnabled = true;
+	}
+	
+	public boolean internationalEnabled() {
+		return _internationalEnabled;
+	}
+	
+	private void checkForInternational() {
+		if(getNumberCompletedCategories() >= 2) {
+			enableInternational();
+		}
+	}
+	
+	public int getNumberCompletedCategories() {
+		int noCompletedCats = 0;
+		for (Category c : getCategories()) {
+			if(c.allAnswered()) {
+				noCompletedCats++;
+			}
+		}
+		return noCompletedCats;
 	}
 	
 	public void setIncorrect () {
