@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/se2062020/Assignments/assignment-3-and-project-team-22/QuiNZical/src/resources/jfoenix-9.0.10.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX-11"/>
-	<classpathentry kind="lib" path="/home/se2062020/Assignments/assignment-3-and-project-team-22/QuiNZical/src/resources/progressIndicator.jar"/>
+	<classpathentry kind="lib" path="/home/se206-2020/Assignments/assignment-3-and-project-team-22/QuiNZical/src/resources/jfoenix-9.0.10.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java-FX"/>
+	<classpathentry kind="lib" path="/home/se206-2020/Assignments/assignment-3-and-project-team-22/QuiNZical/src/resources/progressIndicator.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

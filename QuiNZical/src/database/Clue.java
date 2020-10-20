@@ -142,7 +142,7 @@ public class Clue {
 	 */
 	private void setupClassType(String clueType) {
 		for (ClueType type: ClueType.values()) {
-			if (type.getType().equalsIgnoreCase(clueType.replaceAll("?", "").trim())) {
+			if (type.getType().equalsIgnoreCase(clueType.replaceAll("\\?", "").trim())) {
 				_clueTypeEnum = type;
 				_clueType = _clueTypeEnum.getType();
 			}

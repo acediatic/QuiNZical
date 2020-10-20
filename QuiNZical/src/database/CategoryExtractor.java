@@ -19,7 +19,7 @@ public class CategoryExtractor {
 	public ArrayList<Category> getCategories() throws Exception {
 		ArrayList<Category> gameCategories = new ArrayList<Category>();
 		//This is used to get the absolute path, regardless of the location of the code.
-		File history = new File(PrimaryController.path + "/.History");
+		File history = new File(PrimaryController.pathQuiNZical + "/.History");
 		
 		Boolean historyExists = history.exists();
 		// Here it checks for pre-existing data and if there isn't, it throws an Exception. 
@@ -90,6 +90,7 @@ public class CategoryExtractor {
 	private ArrayList<Category> pickCategories() throws Exception {
 		ArrayList<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
 		File categoriesFolder = PrimaryController.categoriesFolder;
+		System.out.println(categoriesFolder.getAbsolutePath());
 		if (categoriesFolder.exists()) {
 			ArrayList<Category> categories = extractMasterCategories();
 			ArrayList<Category> randomCategories = new ArrayList<Category>();
@@ -133,7 +134,7 @@ public class CategoryExtractor {
 	
 	private void makeHistory(List<Category> categories) throws Exception {
 		//The absolute path is found regardless of location of the code.
-		String path = PrimaryController.path;
+		String path = PrimaryController.pathQuiNZical;
 					
 		// The history file is created and stored for updating.
 		File history = new File(path + "/.History");
@@ -176,7 +177,7 @@ public class CategoryExtractor {
 	public ArrayList<Category> loadCategories () {
 		ArrayList<Category> categoriesToReturn = new ArrayList<Category>();
 		//This is used to get the absolute path, regardless of the location of the code.
-		String path = PrimaryController.path;
+		String path = PrimaryController.pathQuiNZical;
 		File history = new File(path + "/.History");
 		File [] categoryFiles = history.listFiles();
 		for (File categoryFile: categoryFiles) {
@@ -199,14 +200,14 @@ public class CategoryExtractor {
 	}
 	
 	public void markQuestionAnswered(Clue clue) throws Exception {
-		File history = new File(PrimaryController.path + "/.History");
+		File history = new File(PrimaryController.pathQuiNZical + "/.History");
 		if (!history.exists()) {
 			throw new Exception("History file not made yet.");
 		}
 		
 		// The clue answered has its file located in history, and the file is copied line by line, excluding
 		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File categoryFile = new File(PrimaryController.path+"/.History/"+clue.getCategory().categoryName());
+		File categoryFile = new File(PrimaryController.pathQuiNZical+"/.History/"+clue.getCategory().categoryName());
 
 		BufferedReader reader = new BufferedReader(new FileReader(categoryFile));
 
@@ -234,7 +235,7 @@ public class CategoryExtractor {
 	}
 	
 	public void resetCategories() throws Exception {
-		File history = new File(PrimaryController.path + "/.History");
+		File history = new File(PrimaryController.pathQuiNZical + "/.History");
 		if (history.exists()) {
 			deleteDir(history);
 		}

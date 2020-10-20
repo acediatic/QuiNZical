@@ -20,7 +20,7 @@ public class IncorrectClueExtractor {
 	public static void makeIncorrectDir() {
 		try {
 			// The incorrect Directory is created.
-			File incorrectDir = new File(PrimaryController.path + "/.incorrect");
+			File incorrectDir = new File(PrimaryController.pathQuiNZical + "/.incorrect");
 			if (!incorrectDir.exists()) {
 				if (incorrectDir.mkdir()) {
 				}
@@ -39,14 +39,14 @@ public class IncorrectClueExtractor {
 	 * @throws Exception 
 	 */
 	public static void addIncorrect(Clue clue) throws Exception {
-		File history = new File(PrimaryController.path + "/.incorrect");
+		File history = new File(PrimaryController.pathQuiNZical + "/.incorrect");
 		if (!history.exists()) {
 			throw new Exception("Directory for incorrect clue not made yet.");
 		}
 		
 		// The clue answered has its file located in history, and the file is copied line by line, excluding
 		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File categoryFile = new File(PrimaryController.path+"/.History/"+clue.getCategory().categoryName());
+		File categoryFile = new File(PrimaryController.pathQuiNZical+"/.History/"+clue.getCategory().categoryName());
 		String lineToAdd = clue.showClue() +"@"+clue.showClueType()+"@"+clue.showAnswer()+"@"+clue.showValue()+"@false";
 		if (!categoryFile.exists()) {
 			categoryFile.createNewFile();
@@ -69,7 +69,7 @@ public class IncorrectClueExtractor {
 	 */
 	public static List<Category> getIncorrect() {
 		List<Category> incorrectCategories = new ArrayList<Category>();
-		File incorrect = new File(PrimaryController.path + "/.incorrect");
+		File incorrect = new File(PrimaryController.pathQuiNZical + "/.incorrect");
 		File [] categoryFiles = incorrect.listFiles();
 		for (File categoryFile: categoryFiles) {
 			Category category = new Category(categoryFile.getName());
@@ -94,7 +94,7 @@ public class IncorrectClueExtractor {
 	 * resetIncorrect is used to remove the incorrect directory, hence resetting it.
 	 */
 	public static void resetIncorrect() {
-		CategoryExtractor.deleteDir(new File(PrimaryController.path + "/.incorrect"));
+		CategoryExtractor.deleteDir(new File(PrimaryController.pathQuiNZical + "/.incorrect"));
 	}
 
 }

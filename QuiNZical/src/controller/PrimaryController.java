@@ -25,7 +25,7 @@ public class PrimaryController {
 	public static Double _currentFontSize = 1.8;
 	public static Font titleFont;
 
-	public static String path;
+	public static String pathQuiNZical;
 	public static File categoriesFolder;
 
 	private static PrimaryController singleton = null;
@@ -47,10 +47,9 @@ public class PrimaryController {
 	private String winnings;
 	
 	private PrimaryController() {
-		String fullPath = (new File((new File(System.getProperty("java.class.path"))).getAbsolutePath())).getAbsolutePath();
-		String [] relevantPath = fullPath.split(System.getProperty("path.separator"));
-		path = (new File(relevantPath[0])).getParentFile().getAbsolutePath();
-		categoriesFolder = new File(path + "/categories");
+		String fullPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split("QuiNZical")[0];
+		pathQuiNZical = fullPath + "/QuiNZical";
+		categoriesFolder = new File(fullPath + "/categories");
 		
 		try {
 			_categories = catExtractor.getCategories();
@@ -76,7 +75,7 @@ public class PrimaryController {
 	public void setStageListener() {
 		Stage currentStage = app.getStage();
 		currentStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-			if(currentStage.getScene() != null) {
+			if(currentStage.getScene() != null && this.currentController != null) {
 				currentController.updateText(oldVal, newVal);
 			}
 		});

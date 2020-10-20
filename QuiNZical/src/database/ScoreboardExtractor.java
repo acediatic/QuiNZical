@@ -26,7 +26,7 @@ public class ScoreboardExtractor {
 	public static void makeScoreBoard() {
 		try {
 			// The scoreBoard file is created.
-			File scoreBoard = new File(PrimaryController.path + "/.scoreBoard");
+			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
 			if (!scoreBoard.exists()) {
 				if (scoreBoard.createNewFile()) {
 				}
@@ -50,7 +50,7 @@ public class ScoreboardExtractor {
 		List<User> ranks = new ArrayList<User>();
 		try {
 			// The scoreBoard file is checked and created if not present.
-			File scoreBoard = new File(PrimaryController.path + "/.scoreBoard");
+			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
 			if (!scoreBoard.exists()) {
 				ScoreboardExtractor.makeScoreBoard();
 			}
@@ -80,7 +80,7 @@ public class ScoreboardExtractor {
 	 */
 	public static void updateScoreBoard(List<User> usersOnBoard) {
 		try {
-			File scoreBoard = new File(PrimaryController.path + "/.scoreBoard");
+			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
 			if (!scoreBoard.exists()) {
 				if (scoreBoard.createNewFile()) {
 				}
