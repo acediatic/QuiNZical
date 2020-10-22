@@ -23,42 +23,6 @@ public class Clue {
 	private List<String> _multiAnswers = new ArrayList<String>();
 	private List<String> _possibleAnswers = new ArrayList<String>();
 	private List<List<String>> _multiAnswersWithPossibilities = new ArrayList<List<String>>();
-	private ClueType _clueTypeEnum;
-	/*
-	 * ClueType enum to simplify clue type usage.
-	 */
-	enum ClueType {
-		WHAT_IS("What is"),
-		WHAT_ARE("What are"),
-		WHO_IS("Who is"),
-		WHO_ARE("Who are"),
-		HOW_IS("How is"),
-		HOW_ARE("How are"),
-		WHERE_IS("Where is"),
-		WHERE_ARE("Where are"),
-		WHEN_IS("When is"),
-		WHEN_ARE("When are"),
-		WHY_IS("Why is"),
-		WHY_ARE("Why are");
-		
-		private String _type;
-		
-		/**
-		 * Constructor to allow String values for the enum.
-		 * @param type
-		 */
-		ClueType(String type) {
-			this._type = type;
-		}
-		
-		/**
-		 * getType is used to return the String value.
-		 * @return the clue type for the enum value.
-		 */
-		public String getType() {
-			return _type;
-		}
-	}
 	
 	/**
 	 * The Clue constructor is used to initialise the question object using
@@ -86,7 +50,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer) {
 		_category = category;
 		_clue  = clue;
-		setupClassType(clueType);
+		_clueType = clueType;
 		_answer = answer;
 		splitAnswer(_answer);
 	}
@@ -103,7 +67,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer, String value) {
 		_category = category;
 		_clue = clue;
-		setupClassType(clueType);
+		_clueType = clueType;
 		_answer = answer;
 		splitAnswer(_answer);
 		_valueString = value;
@@ -123,7 +87,7 @@ public class Clue {
 	public Clue(Category category, String clue, String clueType, String answer, String value, String answered) {
 		_category = category;
 		_clue = clue;
-		setupClassType(clueType);
+		_clueType = clueType;
 		_answer = answer;
 		splitAnswer(_answer);
 		_valueString = value;
@@ -137,19 +101,6 @@ public class Clue {
 	}
 	
 	/**
-	 * This is used to setup the ClueType enum and String, so that it can be used for the game.
-	 * @param clueType
-	 */
-	private void setupClassType(String clueType) {
-		for (ClueType type: ClueType.values()) {
-			if (type.getType().equalsIgnoreCase(clueType.replaceAll("\\?", "").trim())) {
-				_clueTypeEnum = type;
-				_clueType = _clueTypeEnum.getType();
-			}
-		}
-	}
-	
-	/**
 	 * check is used to check if the answer the user gave for the question is correct or not. 
 	 * It utilises the splitting in splitAnswer, and follows the same splitting criteria to check 
 	 * if the answer is correct or not. If multiple answers are needed, all answers need to be present. 
@@ -159,7 +110,7 @@ public class Clue {
 	 * @return if the answer given for the clue is correct or not
 	 */
 	public Boolean check(String answer) {
-		if (answer.replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", ""))) {
+		if ((answer.replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", "")))||(("the "+answer).replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", "")))||(answer.replaceAll(" ", "").equalsIgnoreCase(("the "+_answer).replaceAll(" ", "")))) {
 			return true;
 		}
 		else if  (_possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
@@ -177,12 +128,12 @@ public class Clue {
 				answerArray = answer.split(" ");
 			}
 			for (String s: _possibleAnswers) {
-				if (answer.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+				if ((answer.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+answer).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(answer.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) {
 					return true;
 				}
 				else {
 					for (String ans : answerArray) {
-						if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+						if ((ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+ans).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(ans.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) {
 							return true;
 						}
 					}
@@ -191,7 +142,7 @@ public class Clue {
 			int multiMatch = 0;
 			for (String s : _multiAnswers) {
 				for (String ans: answerArray) {
-					if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", ""))) {
+					if ((ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+ans).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(ans.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) {
 						multiMatch++;
 						break;
 					}
@@ -206,7 +157,7 @@ public class Clue {
 			for (List<String> list: _multiAnswersWithPossibilities) {
 				for (String s : list) {
 					for (String ans: answerArray) {
-						if (ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")) & !checkedAnswers.contains(s)) {
+						if (((ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+ans).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(ans.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) & !checkedAnswers.contains(s)) {
 							multiMatch++;
 							checkedAnswers.add(s);
 							break;
