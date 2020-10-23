@@ -179,6 +179,8 @@ public class AskingController extends Controller {
 			
 	private void checkQuestion(String usrAns) {
 		stopTimer();
+		Speaker.stopSpeaking();
+		
 		AnswerQuestionService service = new AnswerQuestionService();
 		service.setAns(usrAns, _clue.showAnswer(), _practiceMode, _internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -231,29 +233,26 @@ public class AskingController extends Controller {
 
 	@FXML
 	private void playAudio() {
-		if(audioFinished) {
-			audioFinished = false;
-			Thread th = new Thread(new Task<Void>() {
-				protected Void call() throws IOException {
-					Speaker.questionWithNZVoice(_clue, speedSlider.getValue());
-						return null;
-		        }
-				protected void succeeded() {
-					audioFinished = true;
-					if(!_practiceMode && !_timerStarted) {
-						_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
-						startTimer();
-					}
+		Speaker.stopSpeaking();
+		Thread th = new Thread(new Task<Void>() {
+			protected Void call() throws IOException {
+				Speaker.questionWithNZVoice(_clue, speedSlider.getValue());
+					return null;
+	        }
+			protected void succeeded() {
+				if(!_practiceMode && !_timerStarted) {
+					_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
+					startTimer();
 				}
-			});
-			th.start();
-		}
+			}
+		});
+		th.start();
 	}
 	
 	private void speakAnswerResult(boolean correct) {
+		Speaker.stopSpeaking();
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
-				audioFinished = false;
 				if (correct) {
 					Speaker.correctWithNZVoice(_clue, speedSlider.getValue());
 				} else {
@@ -261,9 +260,6 @@ public class AskingController extends Controller {
 				}
 				return null;
 	        }
-			protected void succeeded() {
-				audioFinished = true;
-			}
 		});
 		th.start();
 
