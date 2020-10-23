@@ -46,6 +46,7 @@ public class AskingController extends Controller {
 	private boolean _practiceMode;
 	private Integer timer = 10;
 	private boolean _internationalMode;
+	private boolean _timerStarted = false;
 	
 	public void initClue(Category category, Clue clue, boolean practiceMode, boolean internationalMode) {		
 		_clue = clue;
@@ -239,7 +240,8 @@ public class AskingController extends Controller {
 		        }
 				protected void succeeded() {
 					audioFinished = true;
-					if(!_practiceMode) {
+					if(!_practiceMode && !_timerStarted) {
+						_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
 						startTimer();
 					}
 				}
