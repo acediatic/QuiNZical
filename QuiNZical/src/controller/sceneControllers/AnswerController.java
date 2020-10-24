@@ -1,6 +1,5 @@
 package controller.sceneControllers;
 
-
 import controller.PrimaryController;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -18,11 +17,13 @@ public class AnswerController extends Controller {
 	
 	@FXML
 	private void goHome() {
+		killAudio();
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 	
 	@FXML 
 	private void goQuestionBoard() {
+		killAudio();
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
 	}	
 
@@ -34,5 +35,9 @@ public class AnswerController extends Controller {
 	@Override
 	public void updateTextIndividual() {
 		// TODO Auto-generated method stub
+	}
+	
+	private void killAudio() {
+		PrimaryController.getInstance().stopAudio();
 	}
 }

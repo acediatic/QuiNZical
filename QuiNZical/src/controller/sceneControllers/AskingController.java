@@ -1,7 +1,6 @@
  package controller.sceneControllers;
 
 import java.io.IOException;
-import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,14 +36,14 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 import service.AnswerQuestionService;
 import service.FXMLService;
+import javafx.util.Duration;
 
 public class AskingController extends Controller {
 	private Clue _clue;
-	private boolean audioFinished = true;
 	@SuppressWarnings("unused")
 	private Category _category;
 	private boolean _practiceMode;
-	private Integer timer = 10;
+	private Integer timer = 30;
 	private boolean _internationalMode;
 	private boolean _timerStarted = false;
 	
@@ -118,7 +117,7 @@ public class AskingController extends Controller {
 		timeText.setFill(Color.WHITE);
 		
 		path = new PathTransition(Duration.millis(1000), timerCircle, timerDot);
-		path.setCycleCount(10);
+		path.setCycleCount(timer);
 		path.play();
 		path.pause(); // Added due to bug in JavaFX
 		 
@@ -179,6 +178,7 @@ public class AskingController extends Controller {
 			
 	private void checkQuestion(String usrAns) {
 		stopTimer();
+		
 		AnswerQuestionService service = new AnswerQuestionService();
 		service.setAns(usrAns, _clue.showAnswer(), _practiceMode, _internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -231,39 +231,31 @@ public class AskingController extends Controller {
 
 	@FXML
 	private void playAudio() {
-		if(audioFinished) {
-			audioFinished = false;
-			Thread th = new Thread(new Task<Void>() {
-				protected Void call() throws IOException {
-					Speaker.questionWithNZVoice(_clue, speedSlider.getValue());
-						return null;
-		        }
-				protected void succeeded() {
-					audioFinished = true;
-					if(!_practiceMode && !_timerStarted) {
-						_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
-						startTimer();
-					}
+		Thread th = new Thread(new Task<Void>() {
+			protected Void call() throws IOException {
+				Speaker.question(_clue, speedSlider.getValue());
+					return null;
+	        }
+			protected void succeeded() {
+				if(!_practiceMode && !_timerStarted) {
+					_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
+					startTimer();
 				}
-			});
-			th.start();
-		}
+			}
+		});
+		th.start(); 
 	}
 	
 	private void speakAnswerResult(boolean correct) {
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
-				audioFinished = false;
 				if (correct) {
-					Speaker.correctWithNZVoice(_clue, speedSlider.getValue());
+					Speaker.correct(_clue, speedSlider.getValue());
 				} else {
-					Speaker.incorrectWithNZVoice(_clue, speedSlider.getValue());
+					Speaker.incorrect(_clue, speedSlider.getValue());
 				}
 				return null;
 	        }
-			protected void succeeded() {
-				audioFinished = true;
-			}
 		});
 		th.start();
 
