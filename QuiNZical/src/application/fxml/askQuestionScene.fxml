@@ -75,7 +75,7 @@
             </VBox>
          </bottom>
          <left>
-            <Label fx:id="questionType" alignment="CENTER" contentDisplay="CENTER" prefWidth="110.0" text="Where is" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Label fx:id="questionType" alignment="CENTER" contentDisplay="CENTER" prefWidth="130.0" text="Where is" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="26.0" />
                </font>
