@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 
 import application.QuiNZical;
@@ -92,17 +91,25 @@ public class PrimaryController {
 	}
 	
 	public void update(Clue clue, Boolean correct){
-		try {
-			//Updating in the Model as well.
-			clue.answered();
-			if (correct) {
-				winExtractor.updateWinningFile(clue);
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					//Updating in the Model as well.
+					clue.answered();
+					if (correct) {
+						winExtractor.updateWinningFile(clue);
+					} else {
+						IncorrectClueExtractor.addIncorrect(clue);
+					}
+					catExtractor.markQuestionAnswered(clue);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			catExtractor.markQuestionAnswered(clue);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		};
+		th.start();
 	}	
 	
 	/**
@@ -113,6 +120,7 @@ public class PrimaryController {
 		try {
 			winExtractor.resetWinnings();
 			catExtractor.resetCategories();
+			IncorrectClueExtractor.resetIncorrect();
 			_categories = catExtractor.getCategories();
 			_internationalEnabled = false;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
