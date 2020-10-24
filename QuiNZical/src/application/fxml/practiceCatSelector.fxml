@@ -26,8 +26,8 @@
                   </Label>
                   <VBox spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" prefWidth="215.0" promptText="Practice Category" styleClass="catSelector" VBox.vgrow="ALWAYS" />
-                        <ComboBox fx:id="comboPrevClues" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrevClueSelected" prefWidth="215.0" promptText="Previous Incorrect Clue" styleClass="catSelector" VBox.vgrow="ALWAYS" />
+                        <ComboBox fx:id="comboPracticeCats" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" prefWidth="215.0" promptText="Practice Category" styleClass="catSelector" VBox.vgrow="ALWAYS" />
+                        <ComboBox fx:id="comboPrevClues" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" prefWidth="215.0" promptText="Previous Incorrect Clue" styleClass="catSelector" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
