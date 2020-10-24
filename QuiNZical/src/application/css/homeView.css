@@ -51,6 +51,8 @@
 
 .drawerOpen {
     -fx-background-color: transparent;
+    -fx-font-size: 1em;
+
 }
 
 .button:hover {

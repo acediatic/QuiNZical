@@ -100,6 +100,11 @@ public class QuestionBoardController extends Controller {
 			askQuestion.start();
 		}
 	
+	@FXML
+	private void back() {
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+	}
+	
 	public void updateTextIndividual() {
 		Double currentFontSize = PrimaryController._currentFontSize;
 		gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);

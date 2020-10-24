@@ -3,27 +3,22 @@ package controller.sceneControllers;
 import java.io.IOException;
 
 import controller.PrimaryController;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert.AlertType;
 import service.FXMLService;
 
 public class DrawerController extends Controller {
 	@FXML
-	private void initialize() {	}
+	private VBox homeDrawer;
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);	
-	}
-	
-	@FXML
-	private void startInternational() {
-		
 	}
 	
 	@FXML
@@ -34,6 +29,11 @@ public class DrawerController extends Controller {
 	@FXML
 	private void practice() {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);	
+	}
+
+	@FXML
+	private void leaderboard() {
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.LEADERBOARD);
 	}
 	
 	@FXML
@@ -61,11 +61,6 @@ public class DrawerController extends Controller {
 	            th.start();
 		    }
 		});
-	}
-	
-	@FXML 
-	private void quit() {
-		Platform.exit();
 	}
 
 	public void init() {

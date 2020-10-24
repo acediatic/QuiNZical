@@ -44,7 +44,7 @@ public class FXMLService extends Service<Scene> {
     		INCORRECT("incorrectAnswerScene.fxml"), QUESTIONBOARD("questionBoard.fxml"), WINNINGS("winningsScene.fxml"), GAMECOMPLETE("rewardScene.fxml"),
     		PRACTICESELECTOR("practiceCatSelector.fxml"), INTERNATIONALBOARD("internationalBoard.fxml"), INTERNATIONALQUESTION("internationalAskQuestion.fxml"), 
     		INTERNATIONALFINISHED("internationalRewardScene.fxml"), INTERNATIONALCORRECT("correctAnswerSceneInternational.fxml"), INTERNATIONALINCORRECT("incorrectAnswerSceneInternational.fxml"),
-    		LEADERBOARD("leaderboard.fxml");
+    		LEADERBOARD("leaderboard.fxml"), CHOOSECATEGORIES("chooseCats.fxml");
 
     		private final String _location;
     		

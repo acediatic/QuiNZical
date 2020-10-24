@@ -111,7 +111,7 @@ public class HomeController extends Controller {
             	_drawer.open();
             }
         }); 
-        
+
         JFXRippler rippler = new JFXRippler(_beginBtn);
         _hbox.getChildren().add(rippler);
         
