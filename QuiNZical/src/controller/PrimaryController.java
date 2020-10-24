@@ -121,6 +121,7 @@ public class PrimaryController {
 			winExtractor.resetWinnings();
 			catExtractor.resetCategories();
 			IncorrectClueExtractor.resetIncorrect();
+			winnings = winExtractor.getWinnings();
 			_categories = catExtractor.getCategories();
 			_internationalEnabled = false;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
