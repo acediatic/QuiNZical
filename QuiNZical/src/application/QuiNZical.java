@@ -49,7 +49,7 @@ public class QuiNZical extends Application {
             public void handle(WorkerStateEvent t) {
             	try {
             		gmc = (PrimaryController) t.getSource().getValue();
-            		gmc.addNewScene(FXMLService.FXMLNames.HOMESCREEN);
+            		gmc.addNewScene(FXMLService.FXMLNames.LEADERBOARD);
 
         		} catch(Exception e) {
         			e.printStackTrace();

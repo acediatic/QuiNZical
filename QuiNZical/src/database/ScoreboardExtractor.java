@@ -37,7 +37,7 @@ public class ScoreboardExtractor {
 				else {
 					throw new Exception("ScoreBoard not made.");
 				}
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,9 +55,7 @@ public class ScoreboardExtractor {
 		try {
 			// The scoreBoard file is checked and created if not present.
 			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
-			if (!scoreBoard.exists()) {
-				ScoreboardExtractor.makeScoreBoard();
-			}
+			makeScoreBoard();
 			try (BufferedReader br = new BufferedReader(new FileReader(scoreBoard))) {
 			    String line;
 			    while ((line = br.readLine()) != null) {

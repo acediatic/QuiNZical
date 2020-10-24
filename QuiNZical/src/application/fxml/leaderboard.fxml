@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Scene stylesheets="@../css/leaderboardScene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.LeaderboardController">
+   <VBox alignment="CENTER" minHeight="550.0" minWidth="550.0" prefHeight="550.0" prefWidth="550.0" style="-fx-border-color: white; -fx-border-width: 10;">
+      <children>
+         <Label fx:id="title" alignment="CENTER" text="Leaderboard" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <font>
+               <Font name="System Bold" size="26.0" />
+            </font>
+            <padding>
+               <Insets bottom="20.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+         </Label>
+         <TableView fx:id="leaderboard" prefHeight="200.0" prefWidth="200.0" />
+         <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minHeight="30.0" minWidth="125.0" mnemonicParsing="false" onAction="#back" snapToPixel="false" style="-fx-background-color: #009900; -fx-background-radius: 50; -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 50;" text="Back" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <font>
+               <Font size="16.0" />
+            </font>
+            <VBox.margin>
+               <Insets bottom="10.0" top="20.0" />
+            </VBox.margin>
+         </Button>
+      </children>
+   </VBox>
+</Scene>

@@ -1,0 +1,29 @@
+.root{
+    -fx-font-size: 1em;
+    -fx-font-family: "QuiNZicalFont";
+    -fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, darkGreen, #32cd32);
+}
+
+.table-view {
+    -fx-padding: 0px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .filler{
+    -fx-background-color: transparent;
+}
+
+.animated-option-button {
+    -fx-pref-width: 50px;
+    -fx-background-color: green;
+    -fx-background-radius: 50px;
+    -fx-pref-height: 50px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-font-family: "QuiNZicalFont";
+    -fx-border-colour: white;
+    -fx-border-radius: 50px;
+    -fx-border-width: 4px;
+}
