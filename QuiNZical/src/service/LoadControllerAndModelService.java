@@ -24,7 +24,8 @@ public class LoadControllerAndModelService extends Service<PrimaryController> {
          		PrimaryController pc = PrimaryController.getInstance(); //initialises gmc.
          		pc.setApp(app);
          		pc.setStageListener();
-            	 return pc;
+         		pc.setImage();
+            	return pc;
 	         };
 	     };
      }

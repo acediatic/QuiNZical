@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import application.QuiNZical;
@@ -18,6 +19,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import service.FXMLService;
@@ -51,7 +53,7 @@ public class PrimaryController {
 		String fullPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split("QuiNZical")[0];
 		pathQuiNZical = fullPath + "/QuiNZical";
 		categoriesFolder = new File(fullPath + "/categories");
-		
+
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
@@ -221,6 +223,22 @@ public class PrimaryController {
 			@Override
 			public void run() {
 				Speaker.cleanUp();
+			}
+		};
+		th.start();
+	}
+	
+	public void setImage() {
+		Thread th = new Thread() {
+			@Override 
+			public void run() {
+				String iconUrlStr = getClass().getResource("/application/css/appIcon/quiNZical-Icon.png").toString();
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						app.getStage().getIcons().add(new Image(iconUrlStr));
+					}
+				});
 			}
 		};
 		th.start();

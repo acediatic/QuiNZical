@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import resources.progressFiles.RingProgressIndicator;
 import service.FXMLService;
@@ -29,6 +30,8 @@ public class QuiNZical extends Application {
 	public void start(Stage stage) throws IOException {
 		_currentStage = stage;
 		_currentStage.setTitle("QuiNZical");
+		_currentStage.setResizable(false); // As per Nasser's recommendations
+		
 		setLoadScreen();
 		
 		LoadControllerAndModelService service = new LoadControllerAndModelService();
