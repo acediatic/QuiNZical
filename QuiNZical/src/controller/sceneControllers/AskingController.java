@@ -56,6 +56,7 @@ public class AskingController extends Controller {
 		if (_practiceMode) {
 			textToggle.setDisable(true);
 			}
+		questionType.setText(clue.showClueType());
 		showQuestionTextCheck();
 		playAudio();
 		setupTimer();
@@ -66,6 +67,9 @@ public class AskingController extends Controller {
 	
 	@FXML
 	private Label questionField;
+	
+	@FXML
+	private Label questionType;
 	
 	@FXML
 	private JFXToggleButton textToggle;
