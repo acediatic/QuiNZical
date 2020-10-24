@@ -38,28 +38,24 @@ public class IncorrectClueExtractor {
 	 * @param clue
 	 * @throws Exception 
 	 */
-	public static void addIncorrect(Clue clue) throws Exception {
-		File history = new File(PrimaryController.pathQuiNZical + "/.incorrect");
-		if (!history.exists()) {
-			throw new Exception("Directory for incorrect clue not made yet.");
-		}
+	public static void addIncorrect(Clue clue) throws IOException {
+		makeIncorrectDir();
 		
 		// The clue answered has its file located in history, and the file is copied line by line, excluding
 		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File categoryFile = new File(PrimaryController.pathQuiNZical+"/.History/"+clue.getCategory().categoryName());
+		File categoryFile = new File(PrimaryController.pathQuiNZical+"/.incorrect/"+clue.getCategory().categoryName());
 		String lineToAdd = clue.showClue() +"@"+clue.showClueType()+"@"+clue.showAnswer()+"@"+clue.showValue()+"@false";
+		BufferedWriter writer;
 		if (!categoryFile.exists()) {
 			categoryFile.createNewFile();
 			// False here says to overwrite, rather than append.
-			BufferedWriter writer = new BufferedWriter(new FileWriter(categoryFile, false));
-			writer.write(lineToAdd);
-			writer.close();
+			writer = new BufferedWriter(new FileWriter(categoryFile, false));
 		}
 		else {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(categoryFile));
-			writer.append(lineToAdd);
-			writer.close();
+			writer = new BufferedWriter(new FileWriter(categoryFile));
 		}
+		writer.append(lineToAdd);
+		writer.close();
 	}
 	
 	/**
@@ -68,6 +64,7 @@ public class IncorrectClueExtractor {
 	 * @return list of categories with incorrect clues
 	 */
 	public static List<Category> getIncorrect() {
+		makeIncorrectDir();
 		List<Category> incorrectCategories = new ArrayList<Category>();
 		File incorrect = new File(PrimaryController.pathQuiNZical + "/.incorrect");
 		File [] categoryFiles = incorrect.listFiles();

@@ -1,8 +1,11 @@
 package controller.sceneControllers;
 
+import java.util.List;
+
 import controller.PracticeModuleController;
 import controller.PrimaryController;
 import database.Category;
+import database.IncorrectClueExtractor;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -11,14 +14,17 @@ import service.FXMLService;
 
 public class PracticeCatSelector extends Controller {
 	@FXML
-	private ComboBox<Category> combo;
+	private ComboBox<Category> comboPracticeCats;
+	
+	@FXML
+	private ComboBox<Category> comboPrevClues;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@FXML
 	private void initialize() {
-		combo.getItems().addAll(PracticeModuleController.getInstance().getAllCategories());
-		combo.setEditable(false);
-		combo.setButtonCell(new ListCell(){
+		comboPracticeCats.getItems().addAll(PracticeModuleController.getInstance().getAllCategories());
+		comboPracticeCats.setEditable(false);
+		comboPracticeCats.setButtonCell(new ListCell(){
 
 	        @Override
 	        protected void updateItem(Object item, boolean empty) {
@@ -30,11 +36,39 @@ public class PracticeCatSelector extends Controller {
 	        }	
 
 	    });
+		
+		List<Category> incorrectCats = IncorrectClueExtractor.getIncorrect();
+		if (!(incorrectCats.size() <= 0)) {
+			comboPrevClues.setVisible(true);
+			comboPrevClues.getItems().addAll(incorrectCats);
+			comboPrevClues.setEditable(false);
+			comboPrevClues.setButtonCell(new ListCell(){
+
+		        @Override
+		        protected void updateItem(Object item, boolean empty) {
+		            super.updateItem(item, empty); 
+		            if(empty || item==null){
+		                // styled like -fx-prompt-text-fill:
+		                setStyle("-fx-text-fill: white; -fx-font-size: 1.25em; -fx-font-style: italic");
+		            }
+		        }	
+
+		    });
+		} else {
+			comboPrevClues.setVisible(false);
 		}
+	}
 
 	@FXML 
 	private void selectedCategory() {
-		Category chosenCat = combo.getValue();
+		ComboBox<Category> chosenCombo;
+		if(comboPracticeCats.getValue() == null) {
+			chosenCombo = comboPrevClues;
+		} else {
+			chosenCombo = comboPracticeCats;
+		}
+		
+		Category chosenCat = chosenCombo.getValue();
 		AskPracticeQuestionService askQuestion = new AskPracticeQuestionService();
 		askQuestion.setCategory(chosenCat);
 		PracticeModuleController.getInstance().currentAttempts = 0;

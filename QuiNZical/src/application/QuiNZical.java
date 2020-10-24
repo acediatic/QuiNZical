@@ -6,8 +6,8 @@ import controller.PrimaryController;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import resources.progressFiles.RingProgressIndicator;
 import service.FXMLService;
@@ -17,6 +17,14 @@ import service.LoadControllerAndModelService;
 public class QuiNZical extends Application {
 	private Stage _currentStage;
 	private PrimaryController gmc;
+	
+	/**
+	 * The main method for running the app.
+	 * @param args
+	 */
+		public static void main(String[] args) {
+			launch(args);
+		}
 	
 	/**
 	 * getStage returns the stage to other classes, to allow them to set the stage.
@@ -58,15 +66,6 @@ public class QuiNZical extends Application {
 		}
 
 	}
-	
-	
-	/**
-	 * The main method for running the app.
-	 * @param args
-	 */
-		public static void main(String[] args) {
-			launch(args);
-		}
 
 		public void setScene(Scene scene) {
 			_currentStage.setScene(scene);

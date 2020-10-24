@@ -90,7 +90,6 @@ public class CategoryExtractor {
 	private ArrayList<Category> pickCategories() throws Exception {
 		ArrayList<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
 		File categoriesFolder = PrimaryController.categoriesFolder;
-		System.out.println(categoriesFolder.getAbsolutePath());
 		if (categoriesFolder.exists()) {
 			ArrayList<Category> categories = extractMasterCategories();
 			ArrayList<Category> randomCategories = new ArrayList<Category>();
