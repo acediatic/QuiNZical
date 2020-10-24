@@ -1,8 +1,10 @@
 package service;
 
 import controller.PrimaryController;
+import database.Clue;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
@@ -10,13 +12,13 @@ import javafx.concurrent.Task;
 
 public class AnswerQuestionService extends Service<Boolean> {
 	private StringProperty _usrAns = new SimpleStringProperty();
-	private StringProperty _realAns = new SimpleStringProperty();
+	private SimpleObjectProperty<Clue> _clue = new SimpleObjectProperty<Clue>();
 	private BooleanProperty _practiceMode = new SimpleBooleanProperty();
 	private BooleanProperty _internationalMode = new SimpleBooleanProperty();
 	
-	 public final void setAns(String usrAns, String realAns, boolean practiceMode, boolean internationalMode) {
+	 public final void setAns(String usrAns, Clue clue, boolean practiceMode, boolean internationalMode) {
 		 _usrAns.set(usrAns);
-		 _realAns.set(realAns);
+		 _clue.set(clue);
 		 _practiceMode.set(practiceMode);
 		 _internationalMode.set(internationalMode);
      }
@@ -25,8 +27,8 @@ public class AnswerQuestionService extends Service<Boolean> {
          return _usrAns.get();
      }
      
-     public final String getRealAns() {
-         return _realAns.get();
+     public final Clue getClue() {
+         return _clue.get();
      }
      
      public final Boolean getPracticeMode() {
@@ -39,17 +41,14 @@ public class AnswerQuestionService extends Service<Boolean> {
      
      protected Task<Boolean> createTask() {
          final String usrAns = getUsrAns();
-         final String realAns = getRealAns();
+         final Clue clue = getClue();
          final Boolean _practiceMode = getPracticeMode();
          final Boolean _internationalMode = getInternationalMode();
          return new Task<Boolean>() {
              protected Boolean call() {
-            	String usrAnsStripped = usrAns.strip();
-     			String actualAns = realAns.strip();
-     			boolean correct = false;
      			FXMLService.FXMLNames nextSceneFXML;
-     			if (usrAnsStripped.equalsIgnoreCase(actualAns)) {
-     				correct = true;
+     			boolean correct = clue.check(usrAns);
+     			if (correct) {
      				if(!_internationalMode) {
      					nextSceneFXML = FXMLService.FXMLNames.CORRECT;	
      				} else {

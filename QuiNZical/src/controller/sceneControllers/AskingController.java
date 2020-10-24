@@ -180,7 +180,7 @@ public class AskingController extends Controller {
 		stopTimer();
 		
 		AnswerQuestionService service = new AnswerQuestionService();
-		service.setAns(usrAns, _clue.showAnswer(), _practiceMode, _internationalMode);
+		service.setAns(usrAns, _clue, _practiceMode, _internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
 	            @Override 
