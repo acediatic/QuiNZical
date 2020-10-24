@@ -59,7 +59,9 @@ public class CategoryExtractor {
 	}
 	
 	public ArrayList<Category> getMasterCategories() throws Exception {
-		return extractMasterCategories();
+		ArrayList<Category> cats = extractMasterCategories();
+		cats.removeIf(s -> s.categoryName().equalsIgnoreCase("International"));
+		return cats;
 	}
 	
 	private ArrayList<Category> extractMasterCategories() throws Exception{
