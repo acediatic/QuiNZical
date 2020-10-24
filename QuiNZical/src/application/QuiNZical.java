@@ -48,6 +48,15 @@ public class QuiNZical extends Application {
 		service.start();
 	}
 	
+	@Override
+	public void stop(){
+		if (gmc != null) {
+			gmc.stopAudio();
+		}
+
+	}
+	
+	
 	/**
 	 * The main method for running the app.
 	 * @param args

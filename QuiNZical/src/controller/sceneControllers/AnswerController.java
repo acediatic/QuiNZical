@@ -1,7 +1,5 @@
 package controller.sceneControllers;
 
-
-import audio.Speaker;
 import controller.PrimaryController;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -40,6 +38,6 @@ public class AnswerController extends Controller {
 	}
 	
 	private void killAudio() {
-		Speaker.stopSpeaking();
+		PrimaryController.getInstance().stopAudio();
 	}
 }

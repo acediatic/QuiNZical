@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import application.QuiNZical;
+import audio.Speaker;
 import controller.sceneControllers.Controller;
 import database.Category;
 import database.CategoryExtractor;
@@ -213,6 +214,16 @@ public class PrimaryController {
 	
 	public void setScoreboard () {
 		_scorers = (ArrayList<User>) ScoreboardExtractor.extractScoreBoard();
+	}
+
+	public void stopAudio() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				Speaker.cleanUp();
+			}
+		};
+		th.start();
 	}
 }
 
