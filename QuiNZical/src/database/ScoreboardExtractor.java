@@ -29,6 +29,10 @@ public class ScoreboardExtractor {
 			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
 			if (!scoreBoard.exists()) {
 				if (scoreBoard.createNewFile()) {
+					BufferedWriter writer = new BufferedWriter(new FileWriter(scoreBoard));
+					writer.append("Osama`9000");
+					writer.append("Adam`100");
+					writer.close();
 				}
 				else {
 					throw new Exception("ScoreBoard not made.");
