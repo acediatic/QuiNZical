@@ -184,8 +184,13 @@ public class CategoryExtractor {
 			try (BufferedReader br = new BufferedReader(new FileReader(categoryFile))) {
 			    String line;
 			    while ((line = br.readLine()) != null) {
-			    	String[] data=line.split("@");	    	
-			    	Clue clue = new Clue (category, data[0],data[1], data[2], data[3], data[4]);
+			    	String[] data=line.split("@");	    
+			    	Clue clue;
+			    	try {
+			    		clue = new Clue (category, data[0],data[1], data[2], data[3], data[4]);
+			    	} catch (ArrayIndexOutOfBoundsException e) {
+			    		clue = new Clue(category, data[0],data[1], data[2], data[3], "false");
+			    	}
 			    	category.addClue(clue);			    	
 			    }
 			} catch (FileNotFoundException e) {

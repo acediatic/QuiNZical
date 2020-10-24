@@ -43,8 +43,7 @@ public class DrawerController extends Controller {
 		Alert resetAlert = new Alert(AlertType.CONFIRMATION);
 		resetAlert.setTitle("WARNING!");
 		resetAlert.setHeaderText("Reset?");
-		resetAlert.setContentText("All progress to this point, including clues "
-				+ "answered and current winnings will be reset. Are you sure you want to continue?");
+		resetAlert.setContentText("All progress to this point will be reset.");
 		
 		resetAlert.showAndWait().ifPresent(response -> {
 		    if (response == ButtonType.OK) {
