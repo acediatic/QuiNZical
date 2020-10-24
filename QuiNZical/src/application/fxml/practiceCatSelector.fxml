@@ -7,15 +7,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Scene stylesheets="@../css/questionStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sceneControllers.PracticeCatSelector">
    <root>
       <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0">
          <top>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="235.0" prefWidth="550.0" spacing="20.0">
                <children>
-                  <Label fx:id="questionField" contentDisplay="RIGHT" text="Select a Category: " wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label fx:id="questionField" alignment="CENTER" contentDisplay="RIGHT" prefWidth="250.0" text="Select a ..." wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold Italic" size="26.0" />
                      </font>
@@ -23,7 +24,12 @@
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                   </Label>
-                  <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" promptText="Practice Category" styleClass="catSelector" HBox.hgrow="ALWAYS" />
+                  <VBox spacing="30.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="combo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#selectedCategory" prefWidth="215.0" promptText="Practice Category" styleClass="catSelector" VBox.vgrow="ALWAYS" />
+                        <ComboBox fx:id="comboPrevClues" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onAction="#PrevClueSelected" prefWidth="215.0" promptText="Previous Incorrect Clue" styleClass="catSelector" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
