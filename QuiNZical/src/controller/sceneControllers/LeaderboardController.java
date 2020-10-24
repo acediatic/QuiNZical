@@ -1,5 +1,7 @@
 package controller.sceneControllers;
 
+import java.util.Arrays;
+
 import controller.PrimaryController;
 import database.ScoreboardExtractor;
 import database.User;
@@ -23,17 +25,17 @@ public class LeaderboardController extends Controller {
 		title.setFont(PrimaryController.titleFont);
 		
 		TableColumn<User, String> nameCol = new TableColumn<User, String>("Name");
-		nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
-		nameCol.setMaxWidth(Double.MAX_VALUE);
-		
 		TableColumn<User, String> scoreCol = new TableColumn<User, String>("Score");
-		scoreCol.setCellValueFactory(new PropertyValueFactory<>("Score"));
-		scoreCol.setMaxWidth(Double.MAX_VALUE);
+		
+		for(TableColumn<User, String> tc : Arrays.asList(nameCol, scoreCol)) {
+			tc.setCellValueFactory(new PropertyValueFactory<>(tc.getText()));
+			tc.setMaxWidth(Double.MAX_VALUE);
+			tc.setResizable(false);
+			tc.prefWidthProperty().bind(leaderboard.widthProperty().multiply(0.48));
+		}
 		
 		leaderboard.getColumns().addAll(nameCol, scoreCol);		
 		leaderboard.getItems().addAll(ScoreboardExtractor.extractScoreBoard());
-		
-		leaderboard.autosize();
 	}
 	
 	@FXML

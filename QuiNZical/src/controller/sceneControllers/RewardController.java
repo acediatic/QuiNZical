@@ -2,13 +2,17 @@ package controller.sceneControllers;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 import controller.PrimaryController;
+import database.ScoreboardExtractor;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import service.FXMLService;
+import service.FXMLService.FXMLNames;
 public class RewardController extends Controller {
 	
 	@FXML 
@@ -38,6 +42,30 @@ public class RewardController extends Controller {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
+	@FXML
+	private void scoreboard() {
+		TextInputDialog dialog = new TextInputDialog("Jeff");
+		dialog.setTitle("Add to Leaderboard");
+		dialog.setHeaderText("Get added to the Leaderboard!");
+		dialog.setContentText("Please enter your preferred name:");
+
+		// Traditional way to get the response value.
+		Optional<String> userName = dialog.showAndWait();
+		if (userName.isPresent()){
+		    Thread th = new Thread(new Task<Void>() {
+		    	protected Void call() throws IOException {
+		    		ScoreboardExtractor.updateScoreBoardWithUsr(userName.get());
+		    		return null;
+		    	}
+		    	@Override
+                protected void succeeded() {
+		    		PrimaryController.getInstance().addNewScene(FXMLNames.LEADERBOARD);
+		    	}
+		    });
+		    th.start();
+		}
+	}
+	
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub

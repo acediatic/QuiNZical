@@ -1,5 +1,7 @@
 package database;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * The User class is made to allow users to record their score and come on the scoreboard.
  * @author Osama Kashif (Team 22)
@@ -8,9 +10,10 @@ package database;
  */
 public class User implements Comparable<User> {
 	
-	private String _name;
+	private final SimpleStringProperty _name;
 	private int _score = 0;
-	private String _scoreString = Integer.toString(_score);
+	private final SimpleStringProperty _scoreString;
+	//private String _scoreString = Integer.toString(_score);
 	private Integer _comparableScore = (Integer)_score;
 	
 	
@@ -19,7 +22,8 @@ public class User implements Comparable<User> {
 	 * @param name
 	 */
 	public User(String name) {
-		_name = name;
+		_name = new SimpleStringProperty(name);
+		_scoreString = new SimpleStringProperty("");
 	}
 	
 	/**
@@ -29,9 +33,8 @@ public class User implements Comparable<User> {
 	 * @param score
 	 */
 	public User(String name, String score) {
-		_name = name;
-		_scoreString = score;
-		_score = Integer.parseInt(_scoreString);
+		_name = new SimpleStringProperty(name);
+		_scoreString = new SimpleStringProperty(score);
 		_comparableScore = (Integer)_score;
 	}
 	
@@ -42,9 +45,9 @@ public class User implements Comparable<User> {
 	 * @param score
 	 */
 	public User(String name, int score) {
-		_name = name;
+		_name = new SimpleStringProperty(name);
 		_score = score;
-		_scoreString = Integer.toString(_score);
+		_scoreString = new SimpleStringProperty(Integer.toString(score));
 		_comparableScore = (Integer)_score;
 	}
 	
@@ -53,17 +56,16 @@ public class User implements Comparable<User> {
 	 * @return username
 	 */
 	public String getName() {
-		return _name;
+		return _name.get();
 	}
 	
 	/**
 	 * reportScore returns the String score of the user stored.
 	 * @return user score
 	 */
-	public String reportScore() {
-		return _scoreString;
+	public String getScore() {
+		return _scoreString.get();
 	}
-	
 	/**
 	 * reportCalculableScore returns the users score as an int.
 	 * @return user score
@@ -97,7 +99,7 @@ public class User implements Comparable<User> {
 	 */
 	public void overrideScore(int score) {
 		_score = score;
-		_scoreString = Integer.toString(_score);
+		_scoreString.set(Integer.toString(score));
 		_comparableScore = (Integer)_score;
 	}
 

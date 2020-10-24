@@ -13,13 +13,16 @@
       <children>
          <Label fx:id="title" alignment="CENTER" text="Leaderboard" textAlignment="CENTER" textFill="WHITE" wrapText="true">
             <font>
-               <Font name="System Bold" size="26.0" />
+               <Font name="System Bold" size="40.0" />
             </font>
             <padding>
                <Insets bottom="20.0" left="25.0" right="25.0" top="25.0" />
             </padding>
          </Label>
-         <TableView fx:id="leaderboard" prefHeight="200.0" prefWidth="200.0" />
+         <TableView fx:id="leaderboard" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+               <Insets left="30.0" right="30.0" />
+            </VBox.margin></TableView>
          <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minHeight="30.0" minWidth="125.0" mnemonicParsing="false" onAction="#back" snapToPixel="false" style="-fx-background-color: #009900; -fx-background-radius: 50; -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 50;" text="Back" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
             <font>
                <Font size="16.0" />

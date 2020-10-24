@@ -30,8 +30,8 @@ public class ScoreboardExtractor {
 			if (!scoreBoard.exists()) {
 				if (scoreBoard.createNewFile()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(scoreBoard));
-					writer.append("Osama`9000");
-					writer.append("Adam`100");
+					writer.append("Osama`9000" + System.lineSeparator());
+					writer.append("Adam`100" + System.lineSeparator());
 					writer.close();
 				}
 				else {
@@ -70,7 +70,7 @@ public class ScoreboardExtractor {
 			e.printStackTrace();
 		}
 		Collections.sort(ranks); // sorts ranks from lowest to highest scores.
-		Collections.reverse(ranks); // reverse to go from highest to lowest.
+		//Collections.reverse(ranks); // reverse to go from highest to lowest.
 		return ranks;
 	}
 	
@@ -83,25 +83,26 @@ public class ScoreboardExtractor {
 	public static void updateScoreBoard(List<User> usersOnBoard) {
 		try {
 			File scoreBoard = new File(PrimaryController.pathQuiNZical + "/.scoreBoard");
-			if (!scoreBoard.exists()) {
-				if (scoreBoard.createNewFile()) {
-				}
-				else {
-					throw new Exception("ScoreBoard not made.");
-				}
-			}
+			makeScoreBoard();
 			Collections.sort(usersOnBoard); // sorts user from lowest to highest scores.
-			Collections.reverse(usersOnBoard); // reverse to go from highest to lowest.
+			//Collections.reverse(usersOnBoard); // reverse to go from highest to lowest.
 			File inputFile = scoreBoard;
 			BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
 			for (User user: usersOnBoard) {
-				String lineToAdd = user.getName()+"`"+user.reportScore();
+				String lineToAdd = user.getName()+"`"+user.getScore();
 				writer.write(lineToAdd + System.getProperty("line.separator"));
 			}
 			writer.close(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void updateScoreBoardWithUsr(String userName) {
+		User newUser = new User(userName, PrimaryController.getInstance().getWinnings());
+		List<User> users = extractScoreBoard();
+		users.add(newUser);
+		updateScoreBoard(users);
 	}
 	
 }

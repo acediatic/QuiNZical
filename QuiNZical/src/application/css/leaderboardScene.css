@@ -1,5 +1,5 @@
 .root{
-    -fx-font-size: 1em;
+    -fx-font-size: 1.5em;
     -fx-font-family: "QuiNZicalFont";
     -fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, darkGreen, #32cd32);
 }
@@ -13,6 +13,19 @@
 .table-view .filler{
     -fx-background-color: transparent;
 }
+
+.table-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+  }
+
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+  
 
 .animated-option-button {
     -fx-pref-width: 50px;
