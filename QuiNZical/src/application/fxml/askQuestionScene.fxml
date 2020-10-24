@@ -74,6 +74,19 @@
                </children>
             </VBox>
          </bottom>
+         <left>
+            <Label fx:id="questionType" alignment="CENTER" contentDisplay="CENTER" prefWidth="110.0" text="Where is" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+               <padding>
+                  <Insets bottom="25.0" top="25.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets left="30.0" />
+               </BorderPane.margin>
+            </Label>
+         </left>
       </BorderPane>
    </root>
 </Scene>
