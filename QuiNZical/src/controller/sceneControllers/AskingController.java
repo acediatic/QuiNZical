@@ -46,6 +46,7 @@ public class AskingController extends Controller {
 	private Integer timer = 30;
 	private boolean _internationalMode;
 	private boolean _timerStarted = false;
+	private boolean _submitted = false;
 	
 	public void initClue(Category category, Clue clue, boolean practiceMode, boolean internationalMode) {		
 		_clue = clue;
@@ -55,6 +56,7 @@ public class AskingController extends Controller {
 		if (_practiceMode) {
 			textToggle.setDisable(true);
 			}
+		questionType.setText(clue.showClueType());
 		showQuestionTextCheck();
 		playAudio();
 		setupTimer();
@@ -65,6 +67,9 @@ public class AskingController extends Controller {
 	
 	@FXML
 	private Label questionField;
+	
+	@FXML
+	private Label questionType;
 	
 	@FXML
 	private JFXToggleButton textToggle;
@@ -167,6 +172,7 @@ public class AskingController extends Controller {
 		if (usrAnsSafety().isEmpty()) {
 			// do nothing
 		} else {
+			_submitted = true;
 			checkQuestion(usrAnsField.getText());
 		}
 	}
@@ -178,7 +184,7 @@ public class AskingController extends Controller {
 			
 	private void checkQuestion(String usrAns) {
 		stopTimer();
-		
+
 		AnswerQuestionService service = new AnswerQuestionService();
 		service.setAns(usrAns, _clue, _practiceMode, _internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -202,7 +208,9 @@ public class AskingController extends Controller {
 	            			answerAlert.setTitle("CORRECT!");
 	            			answerAlert.setHeaderText("Congratulations! That's right!");
 	            			answerAlert.showAndWait();
-	            			speakAnswerResult(true);
+	            			if (PracticeModuleController.getInstance().currentAttempts < 3) {
+	            				speakAnswerResult(true);
+	            			}
 	            			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.PRACTICESELECTOR);
 		            	} else {
 		            		answerAlert.setTitle("INCORRECT!");
@@ -211,8 +219,11 @@ public class AskingController extends Controller {
 		            			usrAnsField.setPromptText(_clue.showAnswer().substring(0, 1));
 		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) {
 		            			usrAnsField.setPromptText(_clue.showAnswer());
-		            			speakAnswerResult(false);
-		            		}
+		            			answerAlert.setContentText("Correct Answer: " + _clue.showAnswer());
+		            			if(PracticeModuleController.getInstance().currentAttempts == 3) {
+		            				speakAnswerResult(false);
+		            			}
+		            		} 
 		            		answerAlert.showAndWait();
 		            	}
 	            	}
@@ -224,7 +235,7 @@ public class AskingController extends Controller {
 	// Allows user to submit by using the enter key
 	@FXML
 	private void lookForEnter(KeyEvent keyEvent) {
-		if (keyEvent.getCode() == KeyCode.ENTER) {
+		if (keyEvent.getCode() == KeyCode.ENTER && !_submitted) { //used to ensure user doesn't push enter multiple times
 			handleSubmitButtonAction();
 		}
 	}

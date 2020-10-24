@@ -31,7 +31,6 @@ public class WinningsExtractor {
 		try {
 			// The winnings file is created and stored with 0 initially.
 			File winnings = new File(PrimaryController.pathQuiNZical + "/.winnings");
-			System.out.println(winnings.getAbsolutePath());
 			winnings.createNewFile();
 			if (winnings.exists()) {
 				BufferedWriter initialWriter = new BufferedWriter(new FileWriter(winnings));

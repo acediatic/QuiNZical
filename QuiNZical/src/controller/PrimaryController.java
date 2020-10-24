@@ -60,7 +60,7 @@ public class PrimaryController {
 			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
 			e.printStackTrace();
-		} 
+		}
 	}
 	
 	public Category getInternationalCat() {
