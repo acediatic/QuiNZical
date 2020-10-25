@@ -33,13 +33,13 @@ You will be able to answer questions from any category, but you will go in the o
 
 #### Answering questions:
 
+Once you select a category you will be taken to the answering screen. The clue/question will play out and you can answer it. If you want to play the clue/question at a different speed, just adjust the speed bar and click the play button again. You can toggle to see the clue/question as well. There will be a timer counting down - this shows the time you have to answer the question. To answer the question just type the answer in the text box and click submit.
 
-
-#### Answering questions with multiple answers:
+##### Answering questions with multiple answers/various possible answers:
 
 If the clue you have has multiple answers, for e.g. "The colour of the All Blacks Jersey", you can answer "Black, White", or, "White, Black"; both will be marked correct - i.e. the order does not matter, just separate each of the options by a comma.
 
-If the clue can have multiple potential answers, for e.g. "One colour in the All Blacks Jersey", you can answer "Black/ White", "White/Black", "White", or "Black"; they will all be marked correct.
+If the clue can have various potential answers, for e.g. "One colour in the All Blacks Jersey", you can answer "Black/ White", "White/Black", "White", or "Black"; they will all be marked correct.
 
 In case your clue has multiple answers, but has variations, for e.g. "Two colours in the New Zealand flag", then any of the answers "Blue, Red", "White, Red", or "White, Blue" will be correct - and again order does not matter.
 
