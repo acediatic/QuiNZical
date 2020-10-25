@@ -73,7 +73,7 @@ Just click the x at the top right. It closes the application. Fear not though, a
 
 ### To add new categories of your own:
 
-Go to the categories folder and make a new file, naming it with the name of the category you want.
+Go to the `categories` folder and make a new file, naming it with the name of the category you want.
 Add questions to it from the Text Editor - how to do this is shown below.
 Your category file will need to have at least 5 questions for it to come into the game.
 
@@ -86,8 +86,16 @@ Add a new line at the bottom and enter your clue in the following format:
 
 `Clue_Question@Clue_Type@Clue_Answer`
 
-The Clue Question, Clue Type, and Clue Answer must contain no @ symbols, and there should be no spaces after the @ between them.
+Separate the Clue_Question, Clue_Type, and Clue_Answer with an `@` symbol. The Clue Question, Clue Type, and Clue Answer must not contain any `@` symbols themselves, Clue_Question must not have an `@` before it, Clue_Answer must not have an `@` at the end, and there should be no spaces after the `@` between the  Clue_Question, Clue_Type, and Clue_Answer.
 
+If your Question has multiple answers, for e.g. the Question "Name all the colours in the New Zealand flag ", will have the answer "Blue, Red, White" (irrespective of order), separate the multiple answers with a comma:
+`Clue_Question@Clue_Type@Multiple_Clue_Answer_1,Multiple_Clue_Answer_2,Multiple_Clue_Answer_3`
+
+If your Question has various possible answers, for e.g. the Question "Name one colour in the New Zealand flag ", will have the answer "Blue", "Red", or "White", separate the variations (possible answers) with a forward slash:
+`Clue_Question@Clue_Type@Possible_Clue_Answer_1/Possible_Clue_Answer_2/Possible_Clue_Answer_3`
+
+If your Question has multiple answers, where some or all of the multiplicities have a variation, for e.g. the Question "Name two colours in the New Zealand flag ", will have the answer "Blue, Red",  "Blue, White", or "White, Red" (irrespective of order), you can separate the multiple answers with a comma, and each variation with a forward slash:
+`Clue_Question@Clue_Type@Multiple_1_Possible_Clue_Answer_1/Multiple_1_Possible_Clue_Answer_2,Multiple_2_Possible_Clue_Answer_1/Multiple_2_Possible_Clue_Answer_2`
 
 ### Dependencies:
 
