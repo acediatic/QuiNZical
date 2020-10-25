@@ -17,10 +17,10 @@ Navigate to "Assignment_3_and_project", where you'll find /quinzical.sh
 ### To run:
 Open the terminal in that directory and copy paste and run the following command in it to run QuiNZical:
 
-`./quinzical.sh`
+`./quiNZical.sh`
 
 (In case it doesn't work you will need to give it executable rights by running the following command instead:
- `chmod +x quinzical.sh; ./quinzical.sh`)
+ `chmod +x quiNZical.sh; ./quiNZical.sh`)
 
 ### To add new categories:
 
