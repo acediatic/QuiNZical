@@ -31,6 +31,8 @@ By pressing the `Begin` button, or going to the hamburger menu and selecting `NZ
 In the games module you will have a table of questions. There will be 5 columns, one for each category you selected. The first row will have the name of the category, after which the following 5 rows will be questions  randomly selected from the category.
 You will be able to answer questions from any category, but you will go in the order of low to high value questions, i.e. questions will range from $100 to $500 - you will only be able to do the $100 one initially; then the $200 after you answer the $100 one for the category, and so on. As you answer each question it is removed from the question board.
 
+![Image of Question Board](README_Images/question_board.png)
+
 #### Answering questions:
 
 Once you select a category you will be taken to the answering screen. The clue/question will play out and you can answer it. If you want to play the clue/question at a different speed, just adjust the speed bar and click the play button again. You can toggle to see the clue/question as well. There will be a timer counting down - this shows the time you have to answer the question. To answer the question just type the answer in the text box and click submit.
@@ -43,15 +45,33 @@ If the clue can have various potential answers, for e.g. "One colour in the All 
 
 In case your clue has multiple answers, but has variations, for e.g. "Two colours in the New Zealand flag", then any of the answers "Blue, Red", "White, Red", or "White, Blue" will be correct - and again order does not matter.
 
+#### Correct:
+
+If your answer is correct, the correct screen is shown.
+
+![Image of Correct](README_Images/correct.png)
+
+#### Incorrect:
+
+If your answer is incorrect, the incorrect screen is shown.
+
+![Image of Incorrect](README_Images/incorrect.png)
+
 #### Hamburger Menu:
 
 The hamburger menu can be toggled using the icon at the top right corner of the screen. It gives the options for `NZ QUESTIONS`, `VIEW SCORE`,  `PRACTICE`, `LEADERBOARD`, and `RESET` (along with `INTERNATIONAL` once you unlock that mode).
+
+![Image of Hamburger Menu Toggle](README_Images/hamburger_menu_toggle.png)
+
+![Image of Hamburger Menu](README_Images/menu.png)
 
 #### Begin Game:
 
 This one does what you think - begin/continue the QuiNZical game!
 
-#### Practice:
+![Image of Begin](README_Images/begin.png)
+
+### Practice:
 
 The practice module is where you can hone your New Zealand skills. Navigate to the hamburger icon on the home screen, then select "Practice Module". On the next screen, choose a category, and you'll be taken to a random question. From here, you can attempt it. On your 3rd attempt, you'll be given the first letter as a prompt in the text box. On the fourth, you'll be given the answer, both in text and audio. You still have to type it in for practice though!
 
@@ -65,8 +85,11 @@ From the Hamburger menu on the home screen, you can select the tab to view your 
 
 #### Reset:
 
-Here, you can reset the game. This will clear your winnings, and the current questions, resetting with new categories for you to keep learning!
+Here, you can reset the game. This will clear your winnings, and the current questions, resetting with new categories for you to keep learning! QuiNZical will ask you a confirmation just to be sure!
 
+![Image of Reset Option](README_Images/reset_option.png)
+
+![Image of Reset Confirmation](README_Images/reset_confirmation.png)
 
 ### Exiting the Game
 Just click the x at the top right. It closes the application. Fear not though, all your hard work is preserved!
