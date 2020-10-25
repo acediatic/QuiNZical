@@ -73,9 +73,9 @@ From the Hamburger menu on the home screen, you can select the tab to view your 
 
 Here, you can reset the game. This will clear your winnings, and the current questions, resetting with new categories for you to keep learning!
 
-#### Quit:
 
-This has the same effect as pushing the x at the top right. It closes the application. Fear not though, all your hard work is preserved!
+### Exiting the Game
+Just click the x at the top right. It closes the application. Fear not though, all your hard work is preserved!
 
 ### Dependencies:
 
