@@ -35,15 +35,30 @@ You will be able to answer questions from any category, but you will go in the o
 
 #### Answering questions:
 
-Once you select a category you will be taken to the answering screen. The clue/question will play out and you can answer it. If you want to play the clue/question at a different speed, just adjust the speed bar and click the play button again. You can toggle to see the clue/question as well. There will be a timer counting down - this shows the time you have to answer the question. To answer the question just type the answer in the text box and click submit.
+Once you select a category you will be taken to the answering screen. The clue/question will play out and you can answer it. 
+![Image of Asking](README_Images/asking.png)
+If you want to play the clue/question at a different speed, just adjust the speed bar and click the play button again. 
+![Image of Play](README_Images/play.png)
+You can toggle to see the clue/question as well. 
+![Image of Mouse On Toggle](README_Images/toggle_mouse.png)
+![Image of Toggled](README_Images/clue_toggled.png)
+There will be a timer counting down - this shows the time you have to answer the question. To answer the question just type the answer in the text box and click submit.
+
+![Image of Type and Submit](README_Images/submit.png)
 
 ##### Answering questions with multiple answers/various possible answers:
 
 If the clue you have has multiple answers, for e.g. "The colour of the All Blacks Jersey", you can answer "Black, White", or, "White, Black"; both will be marked correct - i.e. the order does not matter, just separate each of the options by a comma.
 
+![Image of Comma Answer](README_Images/comma_answer.png)
+
 If the clue can have various potential answers, for e.g. "One colour in the All Blacks Jersey", you can answer "Black/ White", "White/Black", "White", or "Black"; they will all be marked correct.
 
+![Image of Slash Answer](README_Images/slash_answer.png)
+
 In case your clue has multiple answers, but has variations, for e.g. "Two colours in the New Zealand flag", then any of the answers "Blue, Red", "White, Red", or "White, Blue" will be correct - and again order does not matter.
+
+![Image of Comma and Slash Answer](README_Images/comma_and_slash_answer.png)
 
 #### Correct:
 
@@ -75,6 +90,18 @@ This one does what you think - begin/continue the QuiNZical game!
 
 The practice module is where you can hone your New Zealand skills. Navigate to the hamburger icon on the home screen, then select "Practice Module". On the next screen, choose a category, and you'll be taken to a random question. From here, you can attempt it. On your 3rd attempt, you'll be given the first letter as a prompt in the text box. On the fourth, you'll be given the answer, both in text and audio. You still have to type it in for practice though!
 
+![Image of Practice](README_Images/practice.png)
+
+![Image of Practice Category Selection](README_Images/practice_category_Selection.png)
+
+![Image of Practice Third Try](README_Images/practice_third_try.png)
+
+![Image of Practice Fourth Try](README_Images/practice_fourth_try.png)
+
+If you get clues/questions wrong in the games module, they are recorded for you to attempt in the practice module.
+
+![Image of Recorded Incorrect](README_Images/recorded_incorrect.png)
+
 #### View Winnings:
 
 From the Hamburger menu on the home screen, you can select the tab to view your current winnings. The next screen will show you how many QuiNZical dollars you've earnt for your efforts. Nice!
@@ -91,8 +118,16 @@ Here, you can reset the game. This will clear your winnings, and the current que
 
 ![Image of Reset Confirmation](README_Images/reset_confirmation.png)
 
+### International Section:
+
+An International section gets unlocked once you have completed two categories in the NZ Questions Section. Besides the new bank of questions available, everything else is the same.
+
+![Image of International](README_Images/international.png)
+
 ### Exiting the Game
 Just click the x at the top right. It closes the application. Fear not though, all your hard work is preserved!
+
+![Image of Closing](README_Images/closing.png)
 
 ### To add new categories of your own:
 
@@ -100,6 +135,9 @@ Go to the `categories` folder and make a new file, naming it with the name of th
 Add questions to it from the Text Editor - how to do this is shown below.
 Your category file will need to have at least 5 questions for it to come into the game.
 
+![Image of Categories](README_Images/categories.png)
+
+![Image of Category Files](README_Images/within_categories.png)
 
 ### To add new clues to existing (or new) categories
 
@@ -110,6 +148,8 @@ Add a new line at the bottom and enter your clue in the following format:
 `Clue_Question@Clue_Type@Clue_Answer`
 
 Separate the Clue_Question, Clue_Type, and Clue_Answer with an `@` symbol. The Clue Question, Clue Type, and Clue Answer must not contain any `@` symbols themselves, Clue_Question must not have an `@` before it, Clue_Answer must not have an `@` at the end, and there should be no spaces after the `@` between the  Clue_Question, Clue_Type, and Clue_Answer.
+
+![Image of Clue Format](README_Images/clue.png)
 
 If your Question has multiple answers, for e.g. the Question "Name all the colours in the New Zealand flag ", will have the answer "Blue, Red, White" (irrespective of order), separate the multiple answers with a comma:
 `Clue_Question@Clue_Type@Multiple_Clue_Answer_1,Multiple_Clue_Answer_2,Multiple_Clue_Answer_3`
