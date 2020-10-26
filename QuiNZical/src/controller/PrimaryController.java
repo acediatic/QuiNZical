@@ -96,6 +96,7 @@ public class PrimaryController {
 			public void run() {
 				try {
 					catExtractor.markQuestionAnswered(clue);
+					checkForInternational();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -110,7 +111,8 @@ public class PrimaryController {
 			public void run() {
 				try {
 					if (correct) {
-						winnings = winExtractor.updateWinningFile(clue).toString();
+						winnings = Integer.toString(Integer.parseInt(winnings) + Integer.parseInt(clue.showValue()));
+						winExtractor.updateWinningFile(clue).toString();
 					} else {
 						IncorrectClueExtractor.addIncorrect(clue);
 					}
@@ -138,7 +140,6 @@ public class PrimaryController {
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 			IncorrectClueExtractor.resetIncorrect();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -206,7 +207,7 @@ public class PrimaryController {
 		});
 	}
 
-	public void enableInternational() {
+	private void enableInternational() {
 		_internationalEnabled = true;
 	}
 	

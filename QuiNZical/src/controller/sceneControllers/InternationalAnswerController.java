@@ -13,7 +13,8 @@ public class InternationalAnswerController extends Controller {
 	
 	@FXML
 	private void initialize() {
-		winningsMsg.setText("Your Current Winnings: $" + PrimaryController.getInstance().getWinnings());
+		winningsMsg.setText("$" + PrimaryController.getInstance().getWinnings());
+		winningsMsg.setVisible(false);
 	}
 	
 	@FXML

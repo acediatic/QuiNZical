@@ -24,12 +24,17 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Text fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" text="Oh no! That's incorrect." textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" textAlignment="CENTER" visible="false" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold Italic" size="26.0" />
                      </font>
                   </Text>
-                  <Text fx:id="winningsMsg" fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" text="Your Winnings: $0" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" textAlignment="CENTER" visible="false" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="26.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="winningsMsg" fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" styleClass="usrWinnings" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="26.0" />
                      </font>

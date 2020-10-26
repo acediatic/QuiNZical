@@ -29,7 +29,7 @@
                         <Font name="System Bold Italic" size="26.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fill="WHITE" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" textAlignment="CENTER" visible="false" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold Italic" size="26.0" />
                      </font>

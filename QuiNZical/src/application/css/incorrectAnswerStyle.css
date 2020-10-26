@@ -12,3 +12,14 @@
     -fx-stroke: black;
     -fx-stroke-width: 4px;
 }
+
+.button {
+    -fx-background-color: rgba(256,256,256,0.2);
+    -fx-background-radius: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-font-size: 2em;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
