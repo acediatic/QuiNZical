@@ -50,7 +50,7 @@ public class PrimaryController {
 	
 	private PrimaryController() {
 		String fullPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split("QuiNZical")[0];
-		pathQuiNZical = fullPath + "/QuiNZical";
+		pathQuiNZical = fullPath;
 		categoriesFolder = new File(fullPath + "/categories");
 
 		try {
@@ -98,7 +98,7 @@ public class PrimaryController {
 					//Updating in the Model as well.
 					clue.answered();
 					if (correct) {
-						winExtractor.updateWinningFile(clue);
+						winnings = winExtractor.updateWinningFile(clue).toString();
 					} else {
 						IncorrectClueExtractor.addIncorrect(clue);
 					}

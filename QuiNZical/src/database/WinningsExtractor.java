@@ -67,7 +67,8 @@ public class WinningsExtractor {
 		return currentWinnings;
 	}
 
-	public void updateWinningFile(Clue clue)  {
+	public Integer updateWinningFile(Clue clue)  {
+		Integer winnings = 0;
 		try {
 			File winningsFile = new File(PrimaryController.pathQuiNZical + "/.winnings");
 			// Winnings should be present when updating them, so if it's not, an exception is thrown.
@@ -77,16 +78,17 @@ public class WinningsExtractor {
 			
 			Integer currentWinnings = Integer.parseInt(readWinnings());
 			Integer clueWinnings = Integer.parseInt(clue.showValue());
-			Integer newWinnings = currentWinnings + clueWinnings;
-			
+			winnings = currentWinnings + clueWinnings;
 			
 			BufferedWriter winningWriter = new BufferedWriter(new FileWriter(winningsFile, false));
-			winningWriter.write(newWinnings + System.getProperty("line.separator"));
+			winningWriter.write(winnings.toString() + System.getProperty("line.separator"));
 			winningWriter.close();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		return winnings;
 	}
 
 	public void resetWinnings() {
