@@ -1,11 +1,17 @@
 #!/bin/bash
 
-if [ ( ! -d "/usr/share/festival/voices/english/akl_nz_jdt_diphone" ) -a ( -e "$pwd/akl_nz_jdt_diphone.zip" ) ]
+if [ ! -d "/usr/share/festival/voices/english/akl_nz_jdt_diphone" ]
 then
-	sudo unzip akl_nz_jdt_diphone.zip -d /usr/share/festival/voices/english
+	if [ -e "$pwd/akl_nz_jdt_diphone.zip" ]
+	then
+		sudo unzip akl_nz_jdt_diphone.zip -d /usr/share/festival/voices/english
+	fi	
 fi
-if [ ( ! -d "/usr/share/festival/voices/english/akl_nz_cw_cg_cg" ) -a ( -e "$pwd/akl_nz_cw_cg_cg.zip" ) ]
+if [ ! -d "/usr/share/festival/voices/english/akl_nz_cw_cg_cg" ]
 then
-	sudo unzip akl_nz_cw_cg_cg.zip -d /usr/share/festival/voices/english
+	if [ -e "$pwd/akl_nz_cw_cg_cg.zip" ]
+	then
+		sudo unzip akl_nz_cw_cg_cg.zip -d /usr/share/festival/voices/english
+	fi
 fi
 
