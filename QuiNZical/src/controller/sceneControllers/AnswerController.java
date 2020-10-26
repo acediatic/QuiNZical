@@ -12,7 +12,7 @@ public class AnswerController extends Controller {
 	
 	@FXML
 	private void initialize() {
-		winningsMsg.setText("Your Current Winnings: $" + PrimaryController.getInstance().getWinnings());
+		winningsMsg.setText("$" + PrimaryController.getInstance().getWinnings());
 	}
 	
 	@FXML

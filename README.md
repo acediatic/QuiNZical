@@ -1,3 +1,4 @@
+
 # QuiNZical
 
 
@@ -12,8 +13,6 @@ So whether you're here to play to learn about New Zealand trivia, culture, and h
 Make sure the `categories` folder and the `quiNZical.jar` file are in the same directory, as well as `quiNZical.sh`.
 DO NOT DELETE ANY OF THE FILES IN THE `categories` FOLDER, IT MUST HAVE AT LEAST 5 FILES, NOR DELETE ANY LINES ALREADY EXISTING IN THE FILES, THERE MUST BE AT LEAST 5 FILES.
 
-Navigate to "Assignment_3_and_project", where you'll find `quiNZical.sh`.
-
 ### To run:
 Open the terminal in that directory and copy paste and run the following command in it to run QuiNZical:
 
@@ -25,7 +24,7 @@ Open the terminal in that directory and copy paste and run the following command
 
 ### Games module:
 
-By pressing the `Begin` button, or going to the hamburger menu and selecting `NZ Questions` (or `International`, if you have unlocked that section) you will be able to begin the game. You will then choose 5 categories, from which the questions will be asked. Then the game will begin and take you to the question board.
+By pressing the `Begin` button, or going to the hamburger menu and selecting `NZ Questions` you will be able to begin the game. You will then choose 5 categories, from which the questions will be asked. Then the game will begin and take you to the question board.
 
 #### Question Board:
 In the games module you will have a table of questions. There will be 5 columns, one for each category you selected. The first row will have the name of the category, after which the following 5 rows will be questions  randomly selected from the category.
@@ -74,7 +73,7 @@ If your answer is incorrect, the incorrect screen is shown.
 
 #### Hamburger Menu:
 
-The hamburger menu can be toggled using the icon at the top right corner of the screen. It gives the options for `NZ QUESTIONS`, `VIEW SCORE`,  `PRACTICE`, `LEADERBOARD`, and `RESET` (along with `INTERNATIONAL` once you unlock that mode).
+The hamburger menu can be toggled using the icon at the top right corner of the screen. It gives the options for `NZ QUESTIONS`, `VIEW SCORE`,  `PRACTICE`, `LEADERBOARD`, and `RESET`.
 
 ![Image of Hamburger Menu Toggle](README_Images/hamburger_menu_toggle.png)
 
@@ -110,6 +109,14 @@ From the Hamburger menu on the home screen, you can select the tab to view your 
 
 ![Image of Winnings](README_Images/winnings.png)
 
+#### Leaderboard:
+
+At the end of each game you can save your score by entering your name. Then your name and score are recorded on the leaderboard.
+
+![Image of Leaderboard Option](README_Images/leaderboard_option.png)
+
+![Image of Leaderboard](README_Images/leaderboard.png)
+
 #### Reset:
 
 Here, you can reset the game. This will clear your winnings, and the current questions, resetting with new categories for you to keep learning! QuiNZical will ask you a confirmation just to be sure!
@@ -121,6 +128,8 @@ Here, you can reset the game. This will clear your winnings, and the current que
 ### International Section:
 
 An International section gets unlocked once you have completed two categories in the NZ Questions Section. Besides the new bank of questions available, everything else is the same.
+
+![Image of International Option](README_Images/international_option.png)
 
 ![Image of International](README_Images/international.png)
 
@@ -150,6 +159,8 @@ Add a new line at the bottom and enter your clue in the following format:
 Separate the Clue_Question, Clue_Type, and Clue_Answer with an `@` symbol. The Clue Question, Clue Type, and Clue Answer must not contain any `@` symbols themselves, Clue_Question must not have an `@` before it, Clue_Answer must not have an `@` at the end, and there should be no spaces after the `@` between the  Clue_Question, Clue_Type, and Clue_Answer.
 
 ![Image of Clue Format](README_Images/clue.png)
+
+![Image of Clue Format](README_Images/clue_with_@_marked.png)
 
 If your Question has multiple answers, for e.g. the Question "Name all the colours in the New Zealand flag ", will have the answer "Blue, Red, White" (irrespective of order), separate the multiple answers with a comma:
 `Clue_Question@Clue_Type@Multiple_Clue_Answer_1,Multiple_Clue_Answer_2,Multiple_Clue_Answer_3`
