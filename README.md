@@ -1,3 +1,4 @@
+
 # QuiNZical
 
 
@@ -109,6 +110,14 @@ From the Hamburger menu on the home screen, you can select the tab to view your 
 ![Image of Winnings Option](README_Images/winnings_option.png)
 
 ![Image of Winnings](README_Images/winnings.png)
+
+#### Leaderboard:
+
+At the end of each game you can save your score by entering your name. Then your name and score are recorded on the leaderboard.
+
+![Image of Leaderboard Option](README_Images/leaderboard_option.png)
+
+![Image of Leaderboard](README_Images/leaderboard.png)
 
 #### Reset:
 
