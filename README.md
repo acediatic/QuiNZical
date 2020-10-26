@@ -162,6 +162,8 @@ Separate the Clue_Question, Clue_Type, and Clue_Answer with an `@` symbol. The C
 
 ![Image of Clue Format](README_Images/clue.png)
 
+![Image of Clue Format](README_Images/clue_with_@_marked.png)
+
 If your Question has multiple answers, for e.g. the Question "Name all the colours in the New Zealand flag ", will have the answer "Blue, Red, White" (irrespective of order), separate the multiple answers with a comma:
 `Clue_Question@Clue_Type@Multiple_Clue_Answer_1,Multiple_Clue_Answer_2,Multiple_Clue_Answer_3`
 
