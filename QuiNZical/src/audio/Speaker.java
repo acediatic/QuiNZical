@@ -37,6 +37,11 @@ public class Speaker {
 	
 	public static void stopSpeaking() {
 		// credit to Shrey Tailor on Piazza for this solution.
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (_process != null) {
 			Stream<ProcessHandle> descendents = _process.descendants();
 			descendents.filter(ProcessHandle::isAlive).forEach(ph -> {
