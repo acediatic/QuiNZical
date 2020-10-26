@@ -13,8 +13,6 @@ So whether you're here to play to learn about New Zealand trivia, culture, and h
 Make sure the `categories` folder and the `quiNZical.jar` file are in the same directory, as well as `quiNZical.sh`.
 DO NOT DELETE ANY OF THE FILES IN THE `categories` FOLDER, IT MUST HAVE AT LEAST 5 FILES, NOR DELETE ANY LINES ALREADY EXISTING IN THE FILES, THERE MUST BE AT LEAST 5 FILES.
 
-Navigate to "Assignment_3_and_project", where you'll find `quiNZical.sh`.
-
 ### To run:
 Open the terminal in that directory and copy paste and run the following command in it to run QuiNZical:
 
