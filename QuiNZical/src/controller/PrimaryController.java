@@ -90,13 +90,25 @@ public class PrimaryController {
 		return singleton;
 	}
 	
+	public void setAnswered(Clue clue) {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					catExtractor.markQuestionAnswered(clue);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		th.start();
+	}
+	
 	public void update(Clue clue, Boolean correct){
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					//Updating in the Model as well.
-					clue.answered();
 					if (correct) {
 						winnings = winExtractor.updateWinningFile(clue).toString();
 					} else {
@@ -104,7 +116,6 @@ public class PrimaryController {
 					}
 					catExtractor.markQuestionAnswered(clue);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

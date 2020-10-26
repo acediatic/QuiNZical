@@ -60,6 +60,7 @@ public class AskingController extends Controller {
 		showQuestionTextCheck();
 		playAudio();
 		setupTimer();
+		PrimaryController.getInstance().setAnswered(_clue);
 	}
 	
 	@FXML 

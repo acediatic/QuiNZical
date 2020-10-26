@@ -206,38 +206,41 @@ public class CategoryExtractor {
 	}
 	
 	public void markQuestionAnswered(Clue clue) throws Exception {
-		File history = new File(PrimaryController.pathQuiNZical + "/.History");
-		if (!history.exists()) {
-			throw new Exception("History file not made yet.");
-		}
-		
-		// The clue answered has its file located in history, and the file is copied line by line, excluding
-		// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
-		File categoryFile = new File(PrimaryController.pathQuiNZical+"/.History/"+clue.getCategory().categoryName());
+		if (!clue.isAnswered()) {
+			clue.answered();
+			File history = new File(PrimaryController.pathQuiNZical + "/.History");
+			if (!history.exists()) {
+				throw new Exception("History file not made yet.");
+			}
+			
+			// The clue answered has its file located in history, and the file is copied line by line, excluding
+			// the one of the clue answered, and then the new file gets renamed to the old one, replacing it.
+			File categoryFile = new File(PrimaryController.pathQuiNZical+"/.History/"+clue.getCategory().categoryName());
 
-		BufferedReader reader = new BufferedReader(new FileReader(categoryFile));
+			BufferedReader reader = new BufferedReader(new FileReader(categoryFile));
 
-		String lineToRemovePrefix = clue.showClue();
-		String currentLine;
+			String lineToRemovePrefix = clue.showClue();
+			String currentLine;
 
-		ArrayList<String> updatedText = new ArrayList<String>();
-		
-		while((currentLine = reader.readLine()) != null) {
-		    if(!currentLine.startsWith(lineToRemovePrefix)) {
-		    	updatedText.add(currentLine + System.getProperty("line.separator"));
-		    }
-		    else {
-		    	updatedText.add(currentLine.substring(0, currentLine.length()-5) + "true"+ System.getProperty("line.separator"));
-		    }
+			ArrayList<String> updatedText = new ArrayList<String>();
+			
+			while((currentLine = reader.readLine()) != null) {
+			    if(!currentLine.startsWith(lineToRemovePrefix)) {
+			    	updatedText.add(currentLine + System.getProperty("line.separator"));
+			    }
+			    else {
+			    	updatedText.add(currentLine.substring(0, currentLine.indexOf("false")) + "true"+ System.getProperty("line.separator"));
+			    }
+			}
+			reader.close();
+			//false here says to overwrite, rather than append.
+			BufferedWriter writer = new BufferedWriter(new FileWriter(categoryFile, false));
+			
+			for (String line : updatedText) {
+				writer.write(line);
+			}
+			writer.close(); 	
 		}
-		reader.close();
-		//false here says to overwrite, rather than append.
-		BufferedWriter writer = new BufferedWriter(new FileWriter(categoryFile, false));
-		
-		for (String line : updatedText) {
-			writer.write(line);
-		}
-		writer.close(); 	
 	}
 	
 	public void resetCategories() throws Exception {
