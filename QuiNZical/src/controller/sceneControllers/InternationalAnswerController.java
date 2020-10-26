@@ -14,7 +14,6 @@ public class InternationalAnswerController extends Controller {
 	@FXML
 	private void initialize() {
 		winningsMsg.setText("$" + PrimaryController.getInstance().getWinnings());
-		winningsMsg.setVisible(false);
 	}
 	
 	@FXML

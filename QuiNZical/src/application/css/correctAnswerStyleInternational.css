@@ -1,5 +1,5 @@
 .root{
-    -fx-background-image: url("correctQuestionBackgroundInternational.jpg");
+    -fx-background-image: url("correctQuestionBackgroundInternational-text.jpg");
     -fx-background-repeat: stretch; 
     -fx-background-position: center center;
     -fx-background-size: 100% 100%;
@@ -16,4 +16,11 @@
     -fx-font-style: italic;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+}
+
+.usrWinnings {
+    -fx-text-fill: gold;
+    -fx-font-size: 8em;
+    -fx-stroke: black;
+    -fx-stroke-width: 4px;
 }
