@@ -26,7 +26,7 @@ Open the terminal in that directory and copy paste and run the following command
 
 ### Games module:
 
-By pressing the `Begin` button, or going to the hamburger menu and selecting `NZ Questions` (or `International`, if you have unlocked that section) you will be able to begin the game. You will then choose 5 categories, from which the questions will be asked. Then the game will begin and take you to the question board.
+By pressing the `Begin` button, or going to the hamburger menu and selecting `NZ Questions` you will be able to begin the game. You will then choose 5 categories, from which the questions will be asked. Then the game will begin and take you to the question board.
 
 #### Question Board:
 In the games module you will have a table of questions. There will be 5 columns, one for each category you selected. The first row will have the name of the category, after which the following 5 rows will be questions  randomly selected from the category.
@@ -75,7 +75,7 @@ If your answer is incorrect, the incorrect screen is shown.
 
 #### Hamburger Menu:
 
-The hamburger menu can be toggled using the icon at the top right corner of the screen. It gives the options for `NZ QUESTIONS`, `VIEW SCORE`,  `PRACTICE`, `LEADERBOARD`, and `RESET` (along with `INTERNATIONAL` once you unlock that mode).
+The hamburger menu can be toggled using the icon at the top right corner of the screen. It gives the options for `NZ QUESTIONS`, `VIEW SCORE`,  `PRACTICE`, `LEADERBOARD`, and `RESET`.
 
 ![Image of Hamburger Menu Toggle](README_Images/hamburger_menu_toggle.png)
 
