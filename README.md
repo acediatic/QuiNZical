@@ -131,6 +131,8 @@ Here, you can reset the game. This will clear your winnings, and the current que
 
 An International section gets unlocked once you have completed two categories in the NZ Questions Section. Besides the new bank of questions available, everything else is the same.
 
+![Image of International Option](README_Images/international_option.png)
+
 ![Image of International](README_Images/international.png)
 
 ### Exiting the Game
