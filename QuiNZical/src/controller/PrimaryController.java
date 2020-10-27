@@ -51,7 +51,6 @@ public class PrimaryController {
 	private PrimaryController() {
 		String binPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split(File.pathSeparator)[0];
 		String fullPath = new File(binPath).getParentFile().getAbsolutePath();
-		System.out.println(fullPath);
 		pathQuiNZical = fullPath;
 		categoriesFolder = new File(fullPath + "/categories");
 
