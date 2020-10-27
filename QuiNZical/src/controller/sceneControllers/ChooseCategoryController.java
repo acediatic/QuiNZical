@@ -79,12 +79,12 @@ public class ChooseCategoryController extends Controller {
 
             // observe item's on property and display message if it changes:
             catCheckbox.onProperty().addListener((obs, wasOn, isNowOn) -> {
-                if (isNowOn && !wasOn && gameCategories.size() < 5) {
+                if (isNowOn && !wasOn) {
                 	gameCategories.add(catCheckbox.getCategory());
                 } else if (!isNowOn && wasOn) {
                 	gameCategories.remove(catCheckbox.getCategory());
                 }
-                startGame.setDisable((gameCategories.size() != 5));
+                startGameBtn.setDisable((gameCategories.size() != 5));
           });
             categoryChooser.getItems().add(catCheckbox);
         }
