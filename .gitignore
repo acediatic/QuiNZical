@@ -23,7 +23,7 @@
 hs_err_pid*
 
 # Folders made for the game:
-.History
-.winnings
-.scoreBoard
-.incorrect
+/.History
+/.winnings
+/.scoreBoard
+/.incorrect
