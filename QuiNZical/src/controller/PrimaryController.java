@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 import application.QuiNZical;
 import audio.Speaker;
@@ -48,20 +49,28 @@ public class PrimaryController {
 	
 	private String winnings;
 	
+	public CountDownLatch latch = new CountDownLatch(1);
+	
 	private PrimaryController() {
 		String binPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split(File.pathSeparator)[0];
 		String fullPath = new File(binPath).getParentFile().getAbsolutePath();
 		pathQuiNZical = fullPath;
 		categoriesFolder = new File(fullPath + "/categories");
-
+		titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
+	}
+	
+	public void setupGame() {
 		try {
 			_categories = catExtractor.getCategories();
 			getWinnings();
 			checkForInternational();
-			titleFont = Font.loadFont(getClass().getResourceAsStream("/fonts/QuiNZicalFont.ttf"), 40);
 		} catch (Exception e) {	
-			e.printStackTrace();
+				e.printStackTrace();
 		}
+	}
+	
+	public boolean historyExists() {
+		return catExtractor.historyExists();
 	}
 	
 	public Category getInternationalCat() {
@@ -265,5 +274,27 @@ public class PrimaryController {
 		};
 		th.start();
 	}
+	
+	public ArrayList<Category> getMasterCategories() {
+		ArrayList<Category> cats = new ArrayList<Category>();
+		
+		try {
+			cats = catExtractor.getMasterCategories();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cats;
+	}
+
+	public void setCategories(ArrayList<Category> gameCategories) {
+		catExtractor.setCategories(gameCategories);
+	}
+	
+	public void setRandomCategories() {
+		catExtractor.setRandomCategories();
+	}
+	
+	
 }
 

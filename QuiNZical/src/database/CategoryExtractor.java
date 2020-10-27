@@ -9,36 +9,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import controller.PrimaryController;
+import service.FXMLService;
 
 public class CategoryExtractor {
 	private Category international = null;
+	private ArrayList<Category> gameCategories = null;
+	
+	public boolean historyExists() {
+		File history = new File(PrimaryController.pathQuiNZical + "/.History");
+		return history.exists();
+	}
 	
 	
 	public ArrayList<Category> getCategories() throws Exception {
-		ArrayList<Category> gameCategories = new ArrayList<Category>();
-		//This is used to get the absolute path, regardless of the location of the code.
-		File history = new File(PrimaryController.pathQuiNZical + "/.History");
-		
-		Boolean historyExists = history.exists();
-		// Here it checks for pre-existing data and if there isn't, it throws an Exception. 
-
-		if (!historyExists) {
-			gameCategories = pickCategories();
-			makeHistory(gameCategories);
+		if (!historyExists()) {
+			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.CHOOSECATEGORIES);
+			PrimaryController.getInstance().latch = new CountDownLatch(1);
+			PrimaryController.getInstance().latch.await(); //awaits gameCategories being filled with the gameCategories chosen.
+			
+			ArrayList<Category> historyCats = new ArrayList<Category>();
+			historyCats.addAll(gameCategories);
+			historyCats.add(international);
+			makeHistory(historyCats);
 		}
 		// Otherwise it extracts from the history directory and winnings file already made.
 		else {
 			gameCategories = loadCategories();
-		}
-		
-		for(Category cat : gameCategories) {
-			if(cat.categoryName().equalsIgnoreCase("International")) {
-				international = cat;
-				gameCategories.remove(cat);
-				break;
-			}
 		}
 		
 		return gameCategories; 
@@ -60,7 +59,20 @@ public class CategoryExtractor {
 	
 	public ArrayList<Category> getMasterCategories() throws Exception {
 		ArrayList<Category> cats = extractMasterCategories();
-		cats.removeIf(s -> s.categoryName().equalsIgnoreCase("International"));
+		return removeInternational(cats);
+	}
+	
+	private ArrayList<Category> removeInternational(ArrayList<Category> cats) {
+		for(Category cat : cats) {
+			if(cat.categoryName().equalsIgnoreCase("International")) {
+				ArrayList<Category> internationalPoints = new ArrayList<Category>();
+				internationalPoints.add(cat);
+				internationalPoints = assignPoints(internationalPoints);
+				international = internationalPoints.get(0);
+				cats.remove(cat);
+				break;
+			}
+		}
 		return cats;
 	}
 	
@@ -90,46 +102,40 @@ public class CategoryExtractor {
 	}
 	
 	private ArrayList<Category> pickCategories() throws Exception {
-		ArrayList<Category> randomCategoriesWithRandomClues = new ArrayList<Category>();
+		ArrayList<Category> randomCategories = new ArrayList<Category>();
 		File categoriesFolder = PrimaryController.categoriesFolder;
 		if (categoriesFolder.exists()) {
-			ArrayList<Category> categories = extractMasterCategories();
-			ArrayList<Category> randomCategories = new ArrayList<Category>();
+			ArrayList<Category> categories = getMasterCategories();
 			ArrayList<Integer> done = new ArrayList<Integer>(); 
-			
-			Category internationalCat = null;
-			
-			for (Category cat : categories) {
-				if(cat.categoryName().equalsIgnoreCase("International")) {
-					internationalCat = cat;
-					break;
-				}
-			}
 			
 			while (randomCategories.size() < 5) {
 				int randomIndex = (int)(Math.random() * categories.size());
-				if ((!done.contains(randomIndex))&&(!(categories.get(randomIndex).numberOfClues()<5))&&categories.get(randomIndex)!=internationalCat) {
+				if ((!done.contains(randomIndex))&&(!(categories.get(randomIndex).numberOfClues()<5))&&categories.get(randomIndex)!=international) {
 					randomCategories.add(categories.get(randomIndex));
 					done.add(randomIndex);
 				}
 			}
-				
-			randomCategories.add(internationalCat);
-			for (Category category:randomCategories) {
-				Category categoryToBeAdded = new Category(category.categoryName());
-				int clueValue = 100;
-				for (Clue clue: category.getRandomClues()) {
-					clue.giveValue(String.valueOf(clueValue));
-					clueValue += 100;
-					categoryToBeAdded.addClue(clue);
-				}
-				randomCategoriesWithRandomClues.add(categoryToBeAdded);
-			}
+			randomCategories = assignPoints(randomCategories);
 		}
 		else {
 			throw new FileNotFoundException("No data files found.");
 		}
-		return randomCategoriesWithRandomClues;
+		return randomCategories;
+	}
+	
+	private ArrayList<Category> assignPoints(ArrayList<Category> categories) {
+		ArrayList<Category> selectedCatsAndClues = new ArrayList<Category>();
+		for (Category category : categories) {
+			Category categoryToBeAdded = new Category(category.categoryName());
+			int clueValue = 100;
+			for (Clue clue: category.getRandomClues()) {
+				clue.giveValue(String.valueOf(clueValue));
+				clueValue += 100;
+				categoryToBeAdded.addClue(clue);
+			}
+			selectedCatsAndClues.add(categoryToBeAdded);
+		}
+		return selectedCatsAndClues;
 	}
 	
 	
@@ -202,7 +208,7 @@ public class CategoryExtractor {
 			}
 			categoriesToReturn.add(category);
 		}
-		return categoriesToReturn;
+		return removeInternational(categoriesToReturn);
 	}
 	
 	public void markQuestionAnswered(Clue clue) throws Exception {
@@ -256,7 +262,7 @@ public class CategoryExtractor {
 	 * It's major use is to be used to delete the history directory when the game is reset.
 	 * @param fileOrDir
 	 */
-	public static void deleteDir(File fileOrDir) {
+	static void deleteDir(File fileOrDir) {
 	    File[] files = fileOrDir.listFiles();
 	    if(files != null) {
 	        for (final File file : files) {
@@ -264,6 +270,19 @@ public class CategoryExtractor {
 	        }
 	    }
 	    fileOrDir.delete();
+	}
+
+	public void setCategories(ArrayList<Category> gameCategories) {
+		this.gameCategories = gameCategories;
+		this.gameCategories = assignPoints(gameCategories);
+	}
+
+	public void setRandomCategories() {
+		try {
+			gameCategories = pickCategories();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

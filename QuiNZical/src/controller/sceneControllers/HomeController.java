@@ -139,7 +139,7 @@ public class HomeController extends Controller {
 	
 	@FXML
 	private void startGame(ActionEvent e) {	
-		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);		
+		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.QUESTIONBOARD);
 	}
 
 	@Override
