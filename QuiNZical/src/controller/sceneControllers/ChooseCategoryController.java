@@ -63,7 +63,7 @@ public class ChooseCategoryController extends Controller {
 	private ListView<CatCheckbox>  categoryChooser;
 	
 	@FXML
-	private Button startGame;
+	private Button startGameBtn;
 	
 	private ArrayList<Category> gameCategories = new ArrayList<Category>();
 	
@@ -202,6 +202,13 @@ public class ChooseCategoryController extends Controller {
     	PrimaryController.getInstance().setCategories(gameCategories);
     	PrimaryController.getInstance().latch.countDown();
     	PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);	
+	}
+	
+	@FXML
+	private void random(ActionEvent e) {
+		PrimaryController.getInstance().setRandomCategories();
+		PrimaryController.getInstance().latch.countDown();
+    	PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
 	@Override
