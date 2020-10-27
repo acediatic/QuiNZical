@@ -97,6 +97,10 @@ public class ChooseCategoryController extends Controller {
         }));
     }
 
+	
+	/* A static class that facillitates the adding of checkboxes to the listview. 
+	 * Credit for solution: James_D at https://stackoverflow.com/questions/28843858/javafx-8-listview-with-checkboxes/28845460 
+	 */
     public static class CatCheckbox extends ListCell<CatCheckbox> {
     	private final ObjectProperty<Category> cat = new SimpleObjectProperty<Category>();
     	private final StringProperty name = new SimpleStringProperty();
