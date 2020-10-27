@@ -49,7 +49,9 @@ public class PrimaryController {
 	private String winnings;
 	
 	private PrimaryController() {
-		String fullPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split("QuiNZical")[0];
+		String binPath = (new File(System.getProperty("java.class.path"))).getAbsolutePath().split(File.pathSeparator)[0];
+		String fullPath = new File(binPath).getParentFile().getAbsolutePath();
+		System.out.println(fullPath);
 		pathQuiNZical = fullPath;
 		categoriesFolder = new File(fullPath + "/categories");
 
