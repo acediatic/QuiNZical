@@ -183,3 +183,11 @@ Keep the script file along with the zip files ("akl_nz_jdt_diphone.zip" and "akl
 
 
 (In case it doesn't work you will need to give it executable rights by running the following command in the terminal: `chmod +x festivalNZVoiceSetup.sh`)
+
+### References:
+
+.jar libraries used:
+
+https://github.com/torakiki/fx-progress-circle
+
+https://github.com/jfoenixadmin/JFoenix
