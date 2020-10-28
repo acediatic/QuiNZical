@@ -14,6 +14,13 @@ import service.FXMLService;
 import service.LoadControllerAndModelService;
 
 
+
+/**
+ * The QuiNZical application main class, responsible for running the game
+ * and generating the stage. Changes to the views are also processed here.
+ * @author Adam and Osama
+ *
+ */
 public class QuiNZical extends Application {
 	private Stage _currentStage;
 	private PrimaryController gmc;
@@ -49,7 +56,7 @@ public class QuiNZical extends Application {
             public void handle(WorkerStateEvent t) {
             	try {
             		gmc = (PrimaryController) t.getSource().getValue();
-            			setLoadScreen();
+            			setLoadScreen(); // sets the load screen while the game is setup
             			Thread th = new Thread(
             					new Task<Void>() {
             				         @Override protected Void call() throws Exception {
@@ -70,6 +77,10 @@ public class QuiNZical extends Application {
 		service.start();
 	}
 	
+	
+	/**
+	 * Utility method to stop audio if it's still playing on game exit.
+	 */
 	@Override
 	public void stop(){
 		if (gmc != null) {
@@ -78,24 +89,32 @@ public class QuiNZical extends Application {
 
 	}
 
-		public void setScene(Scene scene) {
-			_currentStage.setScene(scene);
-			
-        	_currentStage.setMinHeight(700);
-			_currentStage.setMinWidth(700);
-			
-			_currentStage.setWidth(700);
-			_currentStage.setHeight(700);
-			
-			_currentStage.show();
-		}
+	/**
+	 * Sets the input scene on the stage
+	 * @param scene to be added to the stage.
+	 */
+	public void setScene(Scene scene) {
+		_currentStage.setScene(scene);
 		
-		public void setLoadScreen() {
-			RingProgressIndicator timerVisual = new RingProgressIndicator();
-			timerVisual.setRingWidth(200);
-			timerVisual.makeIndeterminate();
-			
-			Scene loadScene = new Scene(timerVisual, 700, 700);
-			setScene(loadScene);
-		}
+    	_currentStage.setMinHeight(700);
+		_currentStage.setMinWidth(700);
+		
+		_currentStage.setWidth(700);
+		_currentStage.setHeight(700);
+		
+		_currentStage.show();
+	}
+	
+	
+	/**
+	 * Adds the load screen to the display while game elements are loading.
+	 */
+	public void setLoadScreen() {
+		RingProgressIndicator timerVisual = new RingProgressIndicator();
+		timerVisual.setRingWidth(200);
+		timerVisual.makeIndeterminate();
+		
+		Scene loadScene = new Scene(timerVisual, 700, 700);
+		setScene(loadScene);
+	}
 }
