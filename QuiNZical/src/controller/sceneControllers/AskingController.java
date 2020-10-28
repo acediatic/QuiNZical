@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -255,7 +256,11 @@ public class AskingController extends Controller {
 	            		if ((boolean) t.getSource().getValue()) {
 	            			answerAlert.setTitle("CORRECT!");
 	            			answerAlert.setHeaderText("Congratulations! That's right!");
-	            			answerAlert.showAndWait();
+	            			answerAlert.showAndWait().ifPresent(response -> {
+		            		    if (response == ButtonType.OK) {
+		            		    	PrimaryController.getInstance().stopAudio();
+		            		    }
+		            		});
 	            			if (PracticeModuleController.getInstance().currentAttempts < 3) {
 	            				speakAnswerResult(true);
 	            			}
@@ -272,7 +277,11 @@ public class AskingController extends Controller {
 		            				speakAnswerResult(false);
 		            			}
 		            		} 
-		            		answerAlert.showAndWait();
+		            		answerAlert.showAndWait().ifPresent(response -> {
+		            		    if (response == ButtonType.OK) {
+		            		    	PrimaryController.getInstance().stopAudio();
+		            		    }
+		            		});
 		            	}
 	            	}
 	            }
