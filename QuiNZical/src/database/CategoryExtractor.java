@@ -14,16 +14,25 @@ import java.util.concurrent.CountDownLatch;
 import controller.PrimaryController;
 import service.FXMLService;
 
+/**
+ * Category Extractor is responsible for loading categories from memory,
+ * creating the game history, and manipulation of these categories.
+ * It is called from the Primary Controller, and is a large part of
+ * the model. 
+ * @author Adam and Osama
+ */
 public class CategoryExtractor {
 	private Category international = null;
 	private ArrayList<Category> gameCategories = null;
 	
-	public boolean historyExists() {
-		File history = new File(PrimaryController.pathQuiNZical + "/.History");
-		return history.exists();
-	}
-	
-	
+	/**
+	 * GetCategories retrieves the categories for the game. 
+	 * If none exist, it delegates to the select category screen
+	 * resuming after these categories have been chosen. It is called
+	 * on a new thread for concurrency.
+	 * @return game categories.
+	 * @throws Exception, if the categories can't be loaded properly.
+	 */
 	public ArrayList<Category> getCategories() throws Exception {
 		if (!historyExists()) {
 			PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.CHOOSECATEGORIES);
@@ -43,6 +52,19 @@ public class CategoryExtractor {
 		return gameCategories; 
 	}
 	
+	/**
+	 * Determines if the game has been played, and thus a history exists.
+	 * @return the history file.
+	 */
+	public boolean historyExists() {
+		File history = new File(PrimaryController.pathQuiNZical + "/.History");
+		return history.exists();
+	}
+	
+	/**
+	 * Retrieves the category object representing the international section
+	 * @return the international category object.
+	 */
 	public Category getInternational() {
 		if(international != null) {
 			return international;
@@ -50,18 +72,29 @@ public class CategoryExtractor {
 			try {
 				getCategories();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return international;
 		}
 	}
 	
-	public ArrayList<Category> getMasterCategories() throws Exception {
-		ArrayList<Category> cats = extractMasterCategories();
+	/**
+	 * Retrieves the master categories list, minus the international category
+	 * Used in the practice module, and when selecting game categories.
+	 * @return the NZ Master Categories
+	 * @throws Exception, if these cannot be retrieved.
+	 */
+	public ArrayList<Category> getNZMasterCategories() throws Exception {
+		ArrayList<Category> cats = extractAllMasterCategories();
 		return removeInternational(cats);
 	}
 	
+	/**
+	 * Removes the international category from the input list, and sets
+	 * the international section in the current model (RAM).
+	 * @param cats, the input category list from which to remove the international section
+	 * @return the list wihtout the international section. 
+	 */
 	private ArrayList<Category> removeInternational(ArrayList<Category> cats) {
 		for(Category cat : cats) {
 			if(cat.categoryName().equalsIgnoreCase("International")) {
@@ -76,7 +109,13 @@ public class CategoryExtractor {
 		return cats;
 	}
 	
-	private ArrayList<Category> extractMasterCategories() throws Exception{
+	/**
+	 * Extracts all categories from the Categories folder, 
+	 * returning the master list of available categories.
+	 * @return all categories
+	 * @throws Exception, if the categories folder cannot be found
+	 */
+	private ArrayList<Category> extractAllMasterCategories() throws Exception{
 		ArrayList<Category> allCategories = new ArrayList<Category>();
 		File categoriesDirectory = PrimaryController.categoriesFolder;
 		if (!categoriesDirectory.exists()) {
@@ -101,11 +140,16 @@ public class CategoryExtractor {
 		return allCategories;
 	}
 	
-	private ArrayList<Category> pickCategories() throws Exception {
+	/**
+	 * Picks random categories from the master NZ categories list.
+	 * @return a random selection of 5 categories
+	 * @throws Exception, if the categories folder cannot be found.
+	 */
+	private ArrayList<Category> pickRandomCategories() throws Exception {
 		ArrayList<Category> randomCategories = new ArrayList<Category>();
 		File categoriesFolder = PrimaryController.categoriesFolder;
 		if (categoriesFolder.exists()) {
-			ArrayList<Category> categories = getMasterCategories();
+			ArrayList<Category> categories = getNZMasterCategories();
 			ArrayList<Integer> done = new ArrayList<Integer>(); 
 			
 			while (randomCategories.size() < 5) {
@@ -123,6 +167,12 @@ public class CategoryExtractor {
 		return randomCategories;
 	}
 	
+	/**
+	 * Randomly selects 5 clues from the category, and assigns each an increasing
+	 * point value up to 500. 
+	 * @param categories, the categories to which to add points for their clues
+	 * @return, the new category objects, with 5 clues, all with unique points assigned
+	 */
 	private ArrayList<Category> assignPoints(ArrayList<Category> categories) {
 		ArrayList<Category> selectedCatsAndClues = new ArrayList<Category>();
 		for (Category category : categories) {
@@ -139,6 +189,11 @@ public class CategoryExtractor {
 	}
 	
 	
+	/**
+	 * Makes the game history, and writes it to memory.
+	 * @param categories, the categories to write to memory
+	 * @throws Exception, if there is an error and the history cannot succesfully be made.
+	 */
 	private void makeHistory(List<Category> categories) throws Exception {
 		//The absolute path is found regardless of location of the code.
 		String path = PrimaryController.pathQuiNZical;
@@ -211,6 +266,11 @@ public class CategoryExtractor {
 		return removeInternational(categoriesToReturn);
 	}
 	
+	/**
+	 * Marks the question as answered in History in Memory. 
+	 * @param clue, the clue to mark as answered.
+	 * @throws Exception, if the history file does not yet exist.
+	 */
 	public void markQuestionAnswered(Clue clue) throws Exception {
 		if (!clue.isAnswered()) {
 			clue.answered();
@@ -249,6 +309,10 @@ public class CategoryExtractor {
 		}
 	}
 	
+	/**
+	 * Resets the categories back by deleting the History directory.
+	 * @throws Exception, if there is an IOError.
+	 */
 	public void resetCategories() throws Exception {
 		File history = new File(PrimaryController.pathQuiNZical + "/.History");
 		if (history.exists()) {
@@ -272,14 +336,22 @@ public class CategoryExtractor {
 	    fileOrDir.delete();
 	}
 
+	/**
+	 * Sets the input categories as the game categories, and assigns
+	 * it points.
+	 * @param gameCategories
+	 */
 	public void setCategories(ArrayList<Category> gameCategories) {
 		this.gameCategories = gameCategories;
 		this.gameCategories = assignPoints(gameCategories);
 	}
 
+	/**
+	 * Chooses random categories, and sets them as the game categories.
+	 */
 	public void setRandomCategories() {
 		try {
-			gameCategories = pickCategories();
+			gameCategories = pickRandomCategories();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

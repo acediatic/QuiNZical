@@ -14,15 +14,23 @@ import javafx.scene.layout.GridPane;
 import service.AskQuestionInternationalService;
 import service.FXMLService;
 
-public class InternationalQuestionBoardController extends Controller {	
-	public void init() {}
-	
+/**
+ * Controls the International Question Board, 
+ * allowing the user to select from the 
+ * international grid.
+ * @author Adam and Osama
+ */
+public class InternationalQuestionBoardController extends Controller {		
 	@FXML 
 	private GridPane gp;
 	
 	@FXML
 	private Label internationalCatLbl;
 	
+	/**
+	 * Sets up the question board, adding the international
+	 * category and its respective available clue values.
+	 */
 	public void initialize() {
 		
 		internationalCatLbl.setFont(PrimaryController.titleFont); 
@@ -59,7 +67,11 @@ public class InternationalQuestionBoardController extends Controller {
 		}
 	}
 
-	
+	/**
+	 * Determines the clue pressed by its location in the gridpane.
+	 * and begins asking the user that clue.
+	 * @param e, the action event fired by the button pushed
+	 */
 	@FXML
 	private void buttonPressed(ActionEvent e) {
 
@@ -72,10 +84,21 @@ public class InternationalQuestionBoardController extends Controller {
 			askQuestion.start();
 		}
 	
+	
+	/**
+	 * Updates text size when the window is resized, by adjusting the 
+	 * size of the root.
+	 */
 	public void updateTextIndividual() {
-		Double currentFontSize = PrimaryController._currentFontSize;
+		Double currentFontSize = PrimaryController.currentFontSize;
 		gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
 		gp.setVgap(pow(2,currentFontSize));
 		gp.setHgap(pow(2,currentFontSize));
 	}
+	
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
+	@Override
+	public void init() {}
 }

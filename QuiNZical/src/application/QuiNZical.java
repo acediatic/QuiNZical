@@ -13,8 +13,6 @@ import resources.progressFiles.RingProgressIndicator;
 import service.FXMLService;
 import service.LoadControllerAndModelService;
 
-
-
 /**
  * The QuiNZical application main class, responsible for running the game
  * and generating the stage. Changes to the views are also processed here.
@@ -22,7 +20,7 @@ import service.LoadControllerAndModelService;
  *
  */
 public class QuiNZical extends Application {
-	private Stage _currentStage;
+	private Stage currentStage;
 	private PrimaryController gmc;
 	
 	/**
@@ -38,14 +36,14 @@ public class QuiNZical extends Application {
 	 * @return currentStage
 	 */
 	public Stage getStage() {
-        return _currentStage;
+        return currentStage;
     }
 	
 	@Override
 	public void start(Stage stage) throws IOException {
-		_currentStage = stage;
-		_currentStage.setTitle("QuiNZical");
-		_currentStage.setResizable(false); // As per Nasser's recommendations
+		currentStage = stage;
+		currentStage.setTitle("QuiNZical");
+		currentStage.setResizable(false); // As per Nasser's recommendations
 		
 		setLoadScreen();
 		
@@ -94,15 +92,15 @@ public class QuiNZical extends Application {
 	 * @param scene to be added to the stage.
 	 */
 	public void setScene(Scene scene) {
-		_currentStage.setScene(scene);
+		currentStage.setScene(scene);
 		
-    	_currentStage.setMinHeight(700);
-		_currentStage.setMinWidth(700);
+    	currentStage.setMinHeight(700);
+		currentStage.setMinWidth(700);
 		
-		_currentStage.setWidth(700);
-		_currentStage.setHeight(700);
+		currentStage.setWidth(700);
+		currentStage.setHeight(700);
 		
-		_currentStage.show();
+		currentStage.show();
 	}
 	
 	

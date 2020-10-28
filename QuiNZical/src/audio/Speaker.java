@@ -20,8 +20,8 @@ import database.Clue;
 public class Speaker {
 	private static String path = PrimaryController.pathQuiNZical;
 	private static File festivalScheme = new File(path + "/.toSay.scm");
-	private static File nz_voice = new File("/usr/share/festival/voices/english/akl_nz_jdt_diphone");
-	private static Process _process;
+	private static File nzVoice = new File("/usr/share/festival/voices/english/akl_nz_jdt_diphone");
+	private static Process process;
 	
 	
 	/**
@@ -80,8 +80,8 @@ public class Speaker {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (_process != null) {
-			Stream<ProcessHandle> descendents = _process.descendants();
+		if (process != null) {
+			Stream<ProcessHandle> descendents = process.descendants();
 			descendents.filter(ProcessHandle::isAlive).forEach(ph -> {
 			    ph.destroy();
 			});
@@ -95,8 +95,8 @@ public class Speaker {
 		String speakingCommand = "festival -b " + festivalScheme;
 		ProcessBuilder speak = new ProcessBuilder("bash", "-c", speakingCommand);
 		try {
-			_process = speak.start();
-			_process.waitFor();
+			process = speak.start();
+			process.waitFor();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -134,7 +134,7 @@ public class Speaker {
 	 */
 	private static String getNZVoiceParam () {
 		String nzVoiceParam = "";
-		if(nz_voice.exists()) {
+		if(nzVoice.exists()) {
 			nzVoiceParam = "(voice_akl_nz_jdt_diphone)" + System.getProperty("line.separator");
 		}
 		return nzVoiceParam;

@@ -1,21 +1,12 @@
 package controller.sceneControllers;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import controller.PrimaryController;
 import database.Category;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -23,38 +14,19 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.css.converter.StringConverter;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Callback;
+
 import service.FXMLService;
 
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-
-@SuppressWarnings("unused")
 public class ChooseCategoryController extends Controller {
 	@FXML 
-	private JFXHamburger _hamMenu;
+	private JFXHamburger hamMenu;
 	
 	@FXML
 	private Text mainTxt;
@@ -67,6 +39,10 @@ public class ChooseCategoryController extends Controller {
 	
 	private ArrayList<Category> gameCategories = new ArrayList<Category>();
 	
+	/**
+	 * Sets up the category chooser list view, with listeners to determine
+	 * when the user has selected 5 categories.
+	 */
 	@FXML
 	private void initialize() {	
         mainTxt.setFont(PrimaryController.titleFont);
@@ -98,7 +74,7 @@ public class ChooseCategoryController extends Controller {
     }
 
 	
-	/* A static class that facillitates the adding of checkboxes to the listview. 
+	/* A static class that facilitates the adding of checkboxes to the listview. 
 	 * Credit for solution: James_D at https://stackoverflow.com/questions/28843858/javafx-8-listview-with-checkboxes/28845460 
 	 */
     public static class CatCheckbox extends ListCell<CatCheckbox> {
@@ -159,6 +135,9 @@ public class ChooseCategoryController extends Controller {
 
     }
 	
+    /* A static class that facilitates the adding of checkboxes to the listview. 
+	 * Credit for solution: James_D at https://stackoverflow.com/questions/28843858/javafx-8-listview-with-checkboxes/28845460 
+	 */
 	public static class categoryOption {
         private final StringProperty name = new SimpleStringProperty();
         private final BooleanProperty on = new SimpleBooleanProperty();
@@ -198,26 +177,35 @@ public class ChooseCategoryController extends Controller {
         }
     }
 	
-	public void init() {}
-	
-	
+	/**
+	 * Starts the game with the chosen categories.
+	 */
 	@FXML
-	private void startGame(ActionEvent e) {	
+	private void startGame() {	
     	PrimaryController.getInstance().setCategories(gameCategories);
     	PrimaryController.getInstance().latch.countDown();
     	PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);	
 	}
 	
+	/**
+	 * Starts the game with random categories.
+	 */
 	@FXML
-	private void random(ActionEvent e) {
+	private void random() {
 		PrimaryController.getInstance().setRandomCategories();
 		PrimaryController.getInstance().latch.countDown();
     	PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
+	
+	/**
+	 * An unused utility method from the superclass
+	 */
+	public void init() {}
+	
+	/**
+	 * An unused utility method from the superclass
+	 */
 	@Override
-	public void updateTextIndividual() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTextIndividual() {}
 }

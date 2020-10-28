@@ -12,22 +12,30 @@ import javafx.scene.control.ListCell;
 import service.AskPracticeQuestionService;
 import service.FXMLService;
 
+/**
+ * Selection controller for the practice module
+ * @author Adam and Osama
+ *
+ */
 public class PracticeCatSelector extends Controller {
 	@FXML
 	private ComboBox<Category> comboPracticeCats;
 	
 	@FXML
 	private ComboBox<Category> comboPrevClues;
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+
+	/**
+	 * Sets up the practice category selector and 
+	 * the incorrect category selector, if applicable.
+	 */
 	@FXML
 	private void initialize() {
 		comboPracticeCats.getItems().addAll(PracticeModuleController.getInstance().getAllCategories());
 		comboPracticeCats.setEditable(false);
-		comboPracticeCats.setButtonCell(new ListCell(){
+		comboPracticeCats.setButtonCell(new ListCell<Category>(){
 
 	        @Override
-	        protected void updateItem(Object item, boolean empty) {
+	        protected void updateItem(Category item, boolean empty) {
 	            super.updateItem(item, empty); 
 	            if(empty || item==null){
 	                // styled like -fx-prompt-text-fill:
@@ -42,10 +50,10 @@ public class PracticeCatSelector extends Controller {
 			comboPrevClues.setVisible(true);
 			comboPrevClues.getItems().addAll(incorrectCats);
 			comboPrevClues.setEditable(false);
-			comboPrevClues.setButtonCell(new ListCell(){
+			comboPrevClues.setButtonCell(new ListCell<Category>(){
 
 		        @Override
-		        protected void updateItem(Object item, boolean empty) {
+		        protected void updateItem(Category item, boolean empty) {
 		            super.updateItem(item, empty); 
 		            if(empty || item==null){
 		                // styled like -fx-prompt-text-fill:
@@ -59,6 +67,10 @@ public class PracticeCatSelector extends Controller {
 		}
 	}
 
+	/**
+	 * Fetches the selected category, and begins the 
+	 * askPracticeQuestionService
+	 */
 	@FXML 
 	private void selectedCategory() {
 		ComboBox<Category> chosenCombo;
@@ -75,20 +87,23 @@ public class PracticeCatSelector extends Controller {
 		askQuestion.start();
 	}
 		
+	/**
+	 * Takes the user back to the homescreen.
+	 */
 	@FXML
 	private void back() {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);		
 	}
 	
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void updateTextIndividual() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init() {}
 
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTextIndividual() {}
 }

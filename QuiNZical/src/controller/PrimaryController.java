@@ -30,7 +30,7 @@ import service.FXMLService;
  * @author Adam and Osama
  */
 public class PrimaryController {
-	public static Double _currentFontSize = 1.8;
+	public static Double currentFontSize = 1.8;
 	public static Font titleFont;
 
 	public static String pathQuiNZical;
@@ -43,12 +43,12 @@ public class PrimaryController {
 	
 	private QuiNZical app;
   
-	private ArrayList<Category> _incorrectCategories;
+	private ArrayList<Category> incorrectCategories;
 	private ArrayList<User> _scorers;
 	private ArrayList<Category> _categories;
   
 	private Category internationalCat; 
-	private boolean _internationalEnabled = false;
+	private boolean internationalEnabled = false;
 
 	public Controller currentController;
 	
@@ -164,7 +164,7 @@ public class PrimaryController {
 				try {
 					if (correct) {
 						winnings = Integer.toString(Integer.parseInt(winnings) + Integer.parseInt(clue.showValue()));
-						winExtractor.updateWinningFile(clue).toString();
+						winExtractor.updateWinningFileCorrect(clue).toString();
 					} else {
 						IncorrectClueExtractor.addIncorrect(clue);
 					}
@@ -188,7 +188,7 @@ public class PrimaryController {
 			IncorrectClueExtractor.resetIncorrect();
 			winnings = winExtractor.getWinnings();
 			_categories = catExtractor.getCategories();
-			_internationalEnabled = false;
+			internationalEnabled = false;
 			addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 			IncorrectClueExtractor.resetIncorrect();
 		} catch (Exception e) {
@@ -233,7 +233,7 @@ public class PrimaryController {
 	 * questions.
 	 */
 	public ArrayList<Category> getAllIncorrect() {
-		return _incorrectCategories;
+		return incorrectCategories;
 	}
 	
 	/**
@@ -274,7 +274,7 @@ public class PrimaryController {
 	 */
 	public void updateRoot() {
     	Parent root = app.getStage().getScene().getRoot();
-		root.setStyle("-fx-font-size: " + PrimaryController._currentFontSize + "em");
+		root.setStyle("-fx-font-size: " + PrimaryController.currentFontSize + "em");
 	}
 
 	/**
@@ -302,15 +302,15 @@ public class PrimaryController {
 	 * Enables the international section in RAM.
 	 */
 	private void enableInternational() {
-		_internationalEnabled = true;
+		internationalEnabled = true;
 	}
 	
 	/**
 	 * Checks if the international section is enabled
-	 * @return _internationalEnabled, whether the international section is enabled.
+	 * @return internationalEnabled, whether the international section is enabled.
 	 */
 	public boolean internationalEnabled() {
-		return _internationalEnabled;
+		return internationalEnabled;
 	}
 	
 	/**
@@ -340,7 +340,7 @@ public class PrimaryController {
 	 * Populates incorrect categories from memory
 	 */
 	public void setIncorrect () {
-		_incorrectCategories = (ArrayList<Category>) IncorrectClueExtractor.getIncorrect();
+		incorrectCategories = (ArrayList<Category>) IncorrectClueExtractor.getIncorrect();
 	}
 	
 	/**
@@ -390,7 +390,7 @@ public class PrimaryController {
 		ArrayList<Category> cats = new ArrayList<Category>();
 		
 		try {
-			cats = catExtractor.getMasterCategories();
+			cats = catExtractor.getNZMasterCategories();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -413,7 +413,4 @@ public class PrimaryController {
 	public void setRandomCategories() {
 		catExtractor.setRandomCategories();
 	}
-	
-	
 }
-

@@ -8,29 +8,27 @@ import java.util.List;
  * It contains a list of all the clues in it.
  * @author Osama Kashif (Team 22)
  * @author Adam Sinclair (Team 22)
- *
  */
 public class Category {
-
-	private List<Clue> _clues = new ArrayList<Clue>();
-	private String _name;
+	private List<Clue> clues = new ArrayList<Clue>();
+	private String name;
 	
 	/**
 	 * Initialises with category name.
-	 * @param name
+	 * @param nameToAdd
 	 */
-	public Category(String name) {
-		_name = name;
+	public Category(String nameToAdd) {
+		name = nameToAdd;
 	}
 	
 	/**
 	 * Initialises with category name and a list of Clues given to it.
-	 * @param name
+	 * @param nameToAdd
 	 * @param clues
 	 */
-	public Category(String name, List<Clue> clues) {
-		_name = name;
-		_clues = clues;
+	public Category(String nameToAdd, List<Clue> clues) {
+		name = nameToAdd;
+		this.clues = clues;
 	}
 	
 	/**
@@ -38,7 +36,7 @@ public class Category {
 	 * @param clue
 	 */
 	public void addClue(Clue clue) {
-		_clues.add(clue);
+		clues.add(clue);
 	}
 	
 	/**
@@ -47,7 +45,7 @@ public class Category {
 	 * @return
 	 */
 	public Clue getClue(int index) {
-		return _clues.get(index);
+		return clues.get(index);
 	}
 	
 	/**
@@ -55,7 +53,7 @@ public class Category {
 	 * @return
 	 */
 	public List<Clue> getAllClues() {
-		return _clues;
+		return clues;
 	}
 	
 	/**
@@ -64,7 +62,7 @@ public class Category {
 	 */
 	public List<Clue> getAllUnasnweredClues() {
 		List<Clue> unanswered = new ArrayList<Clue>();
-		for (Clue clueBeingTested : _clues) {
+		for (Clue clueBeingTested : clues) {
 			if (!clueBeingTested.isAnswered()) {
 				unanswered.add(clueBeingTested);
 			}
@@ -77,7 +75,7 @@ public class Category {
 	 * @return
 	 */
 	public int numberOfClues() {
-		return _clues.size();
+		return clues.size();
 	}
 	
 	/**
@@ -86,7 +84,7 @@ public class Category {
 	 * @return
 	 */
 	public Boolean allAnswered() {
-		for (Clue clueBeingTested : _clues) {
+		for (Clue clueBeingTested : clues) {
 			if (!clueBeingTested.isAnswered()) {
 				return false;
 			}
@@ -100,7 +98,7 @@ public class Category {
 	 * @return
 	 */
 	public String categoryName() {
-		return _name;
+		return name;
 	}
 
 	/**
@@ -109,7 +107,7 @@ public class Category {
 	 * @return
 	 */
 	public int indexOf(Clue clue) {
-		return _clues.indexOf(clue);
+		return clues.indexOf(clue);
 	}
 	
 	/**
@@ -120,11 +118,11 @@ public class Category {
 	public List<Clue> getRandomClues() {
 		List<Clue> randomClues = new ArrayList<Clue>();
 		List<Integer> done = new ArrayList<Integer>(); 
-		//while ((randomClues.size() < _clues.size()) && (randomClues.size() < 5)) {
+		//while ((randomClues.size() < clues.size()) && (randomClues.size() < 5)) {
 		while (randomClues.size() < 5) {
-				int randomIndex = (int)(Math.random() * _clues.size());
+				int randomIndex = (int)(Math.random() * clues.size());
 				if (!done.contains(randomIndex)) {
-					randomClues.add(_clues.get(randomIndex));
+					randomClues.add(clues.get(randomIndex));
 					done.add(randomIndex);
 				}
 		}
@@ -136,13 +134,13 @@ public class Category {
 	 * @return randomClue
 	 */
 	public Clue getOneRandomClue() {
-		int randomIndex = (int)(Math.random() * _clues.size());
-		Clue randomClue = _clues.get(randomIndex);
+		int randomIndex = (int)(Math.random() * clues.size());
+		Clue randomClue = clues.get(randomIndex);
 		return randomClue;
 	}
 	
 	@Override
 	public String toString() {
-		return _name;
+		return name;
 	}
 }

@@ -12,8 +12,12 @@ import java.util.List;
 
 import controller.PrimaryController;
 
+/**
+ * IncorrectClue Extractor is responsible for loading incorrect clues from memory,
+ * to be used in the practice section.
+ * @author Adam and Osama
+ */
 public class IncorrectClueExtractor {
-	
 	/**
 	 * makeIncorrectDir makes the incorrect directory to store questions the user got wrong.
 	 */

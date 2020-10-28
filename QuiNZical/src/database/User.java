@@ -10,11 +10,10 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class User implements Comparable<User> {
 	
-	private final SimpleStringProperty _name;
-	private int _score = 0;
-	private final SimpleStringProperty _scoreString;
-	//private String _scoreString = Integer.toString(_score);
-	private Integer _comparableScore = (Integer)_score;
+	private final SimpleStringProperty name;
+	private int score = 0;
+	private final SimpleStringProperty scoreString;
+	private Integer comparableScore = (Integer)score;
 	
 	
 	/**
@@ -22,8 +21,8 @@ public class User implements Comparable<User> {
 	 * @param name
 	 */
 	public User(String name) {
-		_name = new SimpleStringProperty(name);
-		_scoreString = new SimpleStringProperty("");
+		this.name = new SimpleStringProperty(name);
+		this.scoreString = new SimpleStringProperty("");
 	}
 	
 	/**
@@ -33,9 +32,9 @@ public class User implements Comparable<User> {
 	 * @param score
 	 */
 	public User(String name, String score) {
-		_name = new SimpleStringProperty(name);
-		_scoreString = new SimpleStringProperty(score);
-		_comparableScore = (Integer)_score;
+		this.name = new SimpleStringProperty(name);
+		this.scoreString = new SimpleStringProperty(score);
+		this.comparableScore = (Integer)this.score;
 	}
 	
 	/**
@@ -45,10 +44,10 @@ public class User implements Comparable<User> {
 	 * @param score
 	 */
 	public User(String name, int score) {
-		_name = new SimpleStringProperty(name);
-		_score = score;
-		_scoreString = new SimpleStringProperty(Integer.toString(score));
-		_comparableScore = (Integer)_score;
+		this.name = new SimpleStringProperty(name);
+		this.score = score;
+		this.scoreString = new SimpleStringProperty(Integer.toString(score));
+		this.comparableScore = (Integer)this.score;
 	}
 	
 	/**
@@ -56,7 +55,7 @@ public class User implements Comparable<User> {
 	 * @return username
 	 */
 	public String getName() {
-		return _name.get();
+		return this.name.get();
 	}
 	
 	/**
@@ -64,14 +63,14 @@ public class User implements Comparable<User> {
 	 * @return user score
 	 */
 	public String getScore() {
-		return _scoreString.get();
+		return this.scoreString.get();
 	}
 	/**
 	 * reportCalculableScore returns the users score as an int.
 	 * @return user score
 	 */
 	public int reportCalculableScore() {
-		return _score;
+		return this.score;
 	}
 	
 	/**
@@ -80,7 +79,7 @@ public class User implements Comparable<User> {
 	 * @return user score
 	 */
 	private Integer reportComparableScore() {
-		return _comparableScore;
+		return this.comparableScore;
 	}
 	
 	/**
@@ -88,8 +87,8 @@ public class User implements Comparable<User> {
 	 * @param added
 	 */
 	public void incrementScore(int added) {
-		_score = _score + added;
-		_comparableScore = (Integer)_score;
+		this.score = this.score + added;
+		this.comparableScore = (Integer)this.score;
 	}
 	
 	/**
@@ -98,9 +97,9 @@ public class User implements Comparable<User> {
 	 * @param score
 	 */
 	public void overrideScore(int score) {
-		_score = score;
-		_scoreString.set(Integer.toString(score));
-		_comparableScore = (Integer)_score;
+		this.score = score;
+		this.scoreString.set(Integer.toString(score));
+		this.comparableScore = (Integer)this.score;
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class User implements Comparable<User> {
 	 */
 	@Override
 	public int compareTo(User user) {
-		return this._comparableScore.compareTo(user.reportComparableScore());
+		return this.comparableScore.compareTo(user.reportComparableScore());
 	}
 
 }

@@ -17,8 +17,12 @@ import javafx.scene.layout.GridPane;
 import service.AskQuestionService;
 import service.FXMLService;
 
+/**
+ * Controls the QuestionBoard, allowing the user
+ * to select from the NZ grid.
+ * @author Adam and Osama
+ */
 public class QuestionBoardController extends Controller {	
-	public void init() {}
 	
 	@FXML 
 	private GridPane gp;
@@ -40,6 +44,10 @@ public class QuestionBoardController extends Controller {
 	
 	private List<Label> lblList;
 	
+	/**
+	 * Sets up the question board, adding all categories and
+	 * their respective available clue values.
+	 */
 	public void initialize() {
 		lblList = Arrays.asList(cat1,cat2,cat3,cat4,cat5);
 		int catCounter = 0;
@@ -88,6 +96,11 @@ public class QuestionBoardController extends Controller {
 	}
 
 	
+	/**
+	 * Determines the clue pressed by its location in the gridpane.
+	 * and begins asking the user that clue.
+	 * @param e, the action event fired by the button pushed
+	 */
 	@FXML
 	private void buttonPressed(ActionEvent e) {
 
@@ -100,15 +113,29 @@ public class QuestionBoardController extends Controller {
 			askQuestion.start();
 		}
 	
+	
+	/**
+	 * Takes the user back to the homescreen
+	 */
 	@FXML
 	private void back() {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 	
+	
+	/**
+	 * Updates text size when the window is resized, by adjusting the 
+	 * size of the root.
+	 */
 	public void updateTextIndividual() {
-		Double currentFontSize = PrimaryController._currentFontSize;
+		Double currentFontSize = PrimaryController.currentFontSize;
 		gp.setStyle("-fx-font-size: " + currentFontSize + "em; -fx-padding: "+ currentFontSize*10);
 		gp.setVgap(pow(2,currentFontSize));
 		gp.setHgap(pow(2,currentFontSize));
 	}
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
+	@Override
+	public void init() {}
 }

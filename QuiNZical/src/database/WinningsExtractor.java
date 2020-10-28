@@ -9,9 +9,18 @@ import java.io.IOException;
 
 import controller.PrimaryController;
 
+/**
+ * Winning Extractor is responsible for loading winnings from memory,
+ * and manipulation of these winnings during the game.
+ * @author Adam and Osama
+ */
 public class WinningsExtractor {
 
-	
+	/**
+	 * Retrieves the winnings from memory, if they have been created.
+	 * Otherwise, it creates them.
+	 * @return the user's current winnings.
+ 	 */
 	public String getWinnings() {
 		File winnings = new File(PrimaryController.pathQuiNZical + "/.winnings");
 		Boolean winningsExists = winnings.exists();
@@ -20,13 +29,15 @@ public class WinningsExtractor {
 			try {
 				makeWinnings();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} 
 		return readWinnings();
 	}
 	
+	/**
+	 * Makes a winnings file for the user, intialised to zero.
+	 */
 	private void makeWinnings() {
 		try {
 			// The winnings file is created and stored with 0 initially.
@@ -41,7 +52,6 @@ public class WinningsExtractor {
 				throw new Exception("Winnings not made.");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -67,7 +77,14 @@ public class WinningsExtractor {
 		return currentWinnings;
 	}
 
-	public Integer updateWinningFile(Clue clue)  {
+	/**
+	 * Updates the winning's file for the given clue, given
+	 * the answer was correct. This increases the user's score
+	 * by the value of the clue.
+	 * @param clue, the clue which was answered correctly
+	 * @return the users updated score.
+	 */
+	public Integer updateWinningFileCorrect(Clue clue)  {
 		Integer winnings = 0;
 		try {
 			File winningsFile = new File(PrimaryController.pathQuiNZical + "/.winnings");
@@ -85,12 +102,14 @@ public class WinningsExtractor {
 			winningWriter.close();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return winnings;
 	}
 
+	/**
+	 * Resets the user's winnings back to zero.
+	 */
 	public void resetWinnings() {
 		File winnings = new File(PrimaryController.pathQuiNZical + "/.winnings");
 		if (winnings.exists()) {

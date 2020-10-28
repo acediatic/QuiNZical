@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  *
  */
 public class PracticeModuleController {
-	public static Double _currentFontSize = 1.8;
+	public static Double currentFontSize = 1.8;
 	public static Font titleFont;
 
 	private static PracticeModuleController singleton = null;
@@ -22,7 +22,7 @@ public class PracticeModuleController {
 	public int currentAttempts;
 	
 	private CategoryExtractor  catExtractor = new CategoryExtractor();
-	private ArrayList<Category> _categories;
+	private ArrayList<Category> allCategories;
 	
 	
 	/**
@@ -31,7 +31,7 @@ public class PracticeModuleController {
 	 */
 	private PracticeModuleController() {		
 		try {
-			_categories = catExtractor.getMasterCategories();
+			allCategories = catExtractor.getNZMasterCategories();
 			titleFont = PrimaryController.titleFont;
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class PracticeModuleController {
 	 * @return all categories available to be practiced
 	 */
 	public ArrayList<Category> getAllCategories() {
-		return _categories;
+		return allCategories;
 	}
 
 }

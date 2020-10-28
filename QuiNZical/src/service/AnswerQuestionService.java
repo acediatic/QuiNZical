@@ -10,36 +10,66 @@ import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
+/**
+ * A Service class responsible for handling checking a user's answer.
+ * This determines if the user is correct, and sets up the next screen
+ * accordingly.
+ * @author Adam and Osama.
+ *
+ */
 public class AnswerQuestionService extends Service<Boolean> {
-	private StringProperty _usrAns = new SimpleStringProperty();
-	private SimpleObjectProperty<Clue> _clue = new SimpleObjectProperty<Clue>();
-	private BooleanProperty _practiceMode = new SimpleBooleanProperty();
-	private BooleanProperty _internationalMode = new SimpleBooleanProperty();
+	private StringProperty usrAns = new SimpleStringProperty();
+	private SimpleObjectProperty<Clue> clue = new SimpleObjectProperty<Clue>();
+	private BooleanProperty practiceMode = new SimpleBooleanProperty();
+	private BooleanProperty internationalMode = new SimpleBooleanProperty();
 	
-	 public final void setAns(String usrAns, Clue clue, boolean practiceMode, boolean internationalMode) {
-		 _usrAns.set(usrAns);
-		 _clue.set(clue);
-		 _practiceMode.set(practiceMode);
-		 _internationalMode.set(internationalMode);
+	 /**
+	 * Sets up the propertys for this service.
+	 * @param usrAns, the users answer
+	 * @param clue, the clue that was attempted
+	 * @param practiceMode, if the user was in the practice section
+	 * @param internationalMode, if the user was in the international section.
+	 */
+	public final void setAns(String usrAns, Clue clue, boolean practiceMode, boolean internationalMode) {
+		 this.usrAns.set(usrAns);
+		 this.clue.set(clue);
+		 this.practiceMode.set(practiceMode);
+		 this.internationalMode.set(internationalMode);
      }
 
-     public final String getUsrAns() {
-         return _usrAns.get();
+     /**
+     * @return, the user's answer as a string.
+     */
+    public final String getUsrAns() {
+         return this.usrAns.get();
      }
      
-     public final Clue getClue() {
-         return _clue.get();
+     /**
+     * @return the clue that was attempted.
+     */
+    public final Clue getClue() {
+         return this.clue.get();
      }
      
-     public final Boolean getPracticeMode() {
-         return _practiceMode.get();
+     /**
+     * @return if the user was in the practice section
+     */
+    public final Boolean getPracticeMode() {
+         return this.practiceMode.get();
      }
 
-     public final Boolean getInternationalMode() {
-    	 return _internationalMode.get();
+     /**
+     * @return if the user was in the international section
+     */
+    public final Boolean getInternationalMode() {
+    	 return this.internationalMode.get();
      }
      
-     protected Task<Boolean> createTask() {
+     /**
+     * Creates the task to be executed concurrently with the GUI thread,
+     * setting the new scene accordingly using an FXMLService.
+     */
+    protected Task<Boolean> createTask() {
          final String usrAns = getUsrAns();
          final Clue clue = getClue();
          final Boolean _practiceMode = getPracticeMode();

@@ -39,29 +39,12 @@ import service.FXMLService;
 import javafx.util.Duration;
 
 public class AskingController extends Controller {
-	private Clue _clue;
-	@SuppressWarnings("unused")
-	private Category _category;
-	private boolean _practiceMode;
+	private Clue clue;
+	private boolean practiceMode;
 	private Integer timer = 30;
-	private boolean _internationalMode;
-	private boolean _timerStarted = false;
-	private boolean _submitted = false;
-	
-	public void initClue(Category category, Clue clue, boolean practiceMode, boolean internationalMode) {		
-		_clue = clue;
-		_category = category;
-		_practiceMode = practiceMode;
-		_internationalMode = internationalMode;
-		if (_practiceMode) {
-			textToggle.setDisable(true);
-			}
-		questionType.setText(clue.showClueType());
-		showQuestionTextCheck();
-		playAudio();
-		setupTimer();
-		PrimaryController.getInstance().setAnswered(_clue);
-	}
+	private boolean internationalMode;
+	private boolean timerStarted = false;
+	private boolean submitted = false;
 	
 	@FXML 
 	public TextField usrAnsField;
@@ -97,11 +80,38 @@ public class AskingController extends Controller {
 	private String[] lowerVowels = {"ā", "ē", "ī", "ō", "ū"};
 	private String[] upperVowels = {"Ā", "Ē", "Ī", "Ō", "Ū"};
 	
+	/**
+	 * Adds macrons once the FXML has loaded
+	 */
 	@FXML 
 	private void initialize() {
 		addMacronButtons();	
 	}
 	
+	/**
+	 * Initialises the clue to be asked. 
+	 * @param category, the category the clue comes from
+	 * @param clue, the clue to be asked
+	 * @param practiceMode, if it is a practice mode
+	 * @param internationalMode, if it is the international mode.
+	 */
+	public void initClue(Category inputCategory, Clue inputClue, boolean inputPracticeMode, boolean inputInternationalMode) {		
+		clue = inputClue;
+		practiceMode = inputPracticeMode;
+		internationalMode = inputInternationalMode;
+		if (practiceMode) {
+			textToggle.setDisable(true);
+			}
+		questionType.setText(inputClue.showClueType());
+		showQuestionTextCheck();
+		playAudio();
+		setupTimer();
+		PrimaryController.getInstance().setAnswered(clue);
+	}
+	
+	/**
+	 * Sets up the on screen timer, with the default value of 30s.
+	 */
 	private void setupTimer() {
 		timerDot = new Circle(5, Color.LIGHTGREEN);
 		
@@ -113,7 +123,7 @@ public class AskingController extends Controller {
 		sp.setRotate(-90);
 		
 
-		if (_practiceMode) {
+		if (practiceMode) {
 			timeText.setText("!");
 			timerDot.setVisible(false);
 		}
@@ -130,6 +140,9 @@ public class AskingController extends Controller {
 		stack.getChildren().addAll(sp, timeText);
 	}
 	
+	/**
+	 * Begins the timer. Called once the question has finished being read aloud
+	 */
 	private void startTimer() {
 		        timeline.setCycleCount(Timeline.INDEFINITE);
 		        timeline.getKeyFrames().add(
@@ -150,16 +163,29 @@ public class AskingController extends Controller {
 				timeline.playFromStart();
 	}
 	
+	/**
+	 * Stops the timer.
+	 */
 	private void stopTimer() {
 		timeline.stop();
 	}
-	// returns true if there is still time in the timer.
+
+	/**
+	 * Decrements the value on the timer and updates the
+	 * timer text accordingly.
+	 * @return true if there is still time in the timer
+	 */
 	private boolean decrementTimerAndSetText() {
 		timer--;
 		timeText.setText(Integer.toString(timer));
 		return timer > 0;
 	}
 
+	/**
+	 * Checks that the user has indeed submitted an answer
+	 * to the question, and replaces it with an empty string if not
+	 * @return the usr answer, either an empty string or thier answer.
+	 */
 	private String usrAnsSafety() {
 		String usrAns = usrAnsField.getText();
 		if (usrAnsField.getText() == null || usrAnsField.getText().trim().isEmpty()) {
@@ -168,39 +194,60 @@ public class AskingController extends Controller {
 		return usrAns;
 	}
 	
+	/**
+	 * Handles the submit button. Checks that the
+	 * user has added text, does nothing if not.
+	 */
 	@FXML
 	private void handleSubmitButtonAction() {
 		if (usrAnsSafety().isEmpty()) {
 			// do nothing
 		} else {
-			_submitted = true;
+			submitted = true;
 			checkQuestion(usrAnsField.getText());
 		}
 	}
+
+	// Allows user to submit by using the enter key
+	@FXML
+	private void lookForEnter(KeyEvent keyEvent) {
+		if (keyEvent.getCode() == KeyCode.ENTER && !submitted) { //used to ensure user doesn't push enter multiple times
+			handleSubmitButtonAction();
+		}
+	}
 	
+	/**
+	 * Called by the dont know button to
+	 * allow the user to skip the question
+	 */
 	@FXML 
 	private void handleDontKnow() {
 		checkQuestion("");
 	}
 			
+	/**
+	 * Calls the answer question service to check the user's
+	 * answer
+	 * @param usrAns, the string of the user's answer.
+	 */
 	private void checkQuestion(String usrAns) {
 		stopTimer();
 
 		AnswerQuestionService service = new AnswerQuestionService();
-		service.setAns(usrAns, _clue, _practiceMode, _internationalMode);
+		service.setAns(usrAns, clue, practiceMode, internationalMode);
 		service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
 	            @Override 
 	            public void handle(WorkerStateEvent t) {
-	            	if(!_practiceMode) { 
+	            	if(!practiceMode) { 
 		            	try {
-		            		PrimaryController.getInstance().update(_clue, (boolean) t.getSource().getValue());
+		            		PrimaryController.getInstance().update(clue, (boolean) t.getSource().getValue());
 		            		speakAnswerResult((boolean) t.getSource().getValue());
 		        		} catch (Exception e) {
 							e.printStackTrace();
 						}
 	            	} else {
-	            		PracticeModuleController.getInstance().currentAttempts++;
+	            		PracticeModuleController.getInstance().currentAttempts++; // increases the number of attempts the user has had
 	            		Alert answerAlert = new Alert(AlertType.INFORMATION);
 	            		answerAlert.setContentText("You have had " + PracticeModuleController.getInstance().currentAttempts + " attempt(s)");
 	            		usrAnsField.clear();
@@ -217,10 +264,10 @@ public class AskingController extends Controller {
 		            		answerAlert.setTitle("INCORRECT!");
 		            		answerAlert.setHeaderText("Uh Oh! That wasn't it. Try again!");
 		            		if (PracticeModuleController.getInstance().currentAttempts == 2) {
-		            			usrAnsField.setPromptText(_clue.showAnswer().substring(0, 1));
-		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) {
-		            			usrAnsField.setPromptText(_clue.showAnswer());
-		            			answerAlert.setContentText("Correct Answer: " + _clue.showAnswer());
+		            			usrAnsField.setPromptText(clue.showAnswer().substring(0, 1));
+		            		} else if(PracticeModuleController.getInstance().currentAttempts >= 3) { // shows the user the answer after 3 attempts
+		            			usrAnsField.setPromptText(clue.showAnswer());
+		            			answerAlert.setContentText("Correct Answer: " + clue.showAnswer());
 		            			if(PracticeModuleController.getInstance().currentAttempts == 3) {
 		            				speakAnswerResult(false);
 		            			}
@@ -233,24 +280,20 @@ public class AskingController extends Controller {
 		service.start();
 		}
 
-	// Allows user to submit by using the enter key
-	@FXML
-	private void lookForEnter(KeyEvent keyEvent) {
-		if (keyEvent.getCode() == KeyCode.ENTER && !_submitted) { //used to ensure user doesn't push enter multiple times
-			handleSubmitButtonAction();
-		}
-	}
 
+	/**
+	 * Plays the question audio, and starts the timer upon completion
+	 */
 	@FXML
 	private void playAudio() {
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
-				Speaker.question(_clue, speedSlider.getValue());
+				Speaker.question(clue, speedSlider.getValue());
 					return null;
 	        }
 			protected void succeeded() {
-				if(!_practiceMode && !_timerStarted) {
-					_timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
+				if(!practiceMode && !timerStarted) {
+					timerStarted = true; // prevents bug where pushing the audio button speeds up the timer.
 					startTimer();
 				}
 			}
@@ -258,13 +301,17 @@ public class AskingController extends Controller {
 		th.start(); 
 	}
 	
+	/**
+	 * Speaks the result of the user's attempt (correct or incorrect)
+	 * @param correct, whether or not the user was correct.
+	 */
 	private void speakAnswerResult(boolean correct) {
 		Thread th = new Thread(new Task<Void>() {
 			protected Void call() throws IOException {
 				if (correct) {
-					Speaker.correct(_clue, speedSlider.getValue());
+					Speaker.correct(clue, speedSlider.getValue());
 				} else {
-					Speaker.incorrect(_clue, speedSlider.getValue());
+					Speaker.incorrect(clue, speedSlider.getValue());
 				}
 				return null;
 	        }
@@ -273,15 +320,21 @@ public class AskingController extends Controller {
 
 	}
 	
+	/**
+	 * Toggles whether the clue text should be shown.
+	 */
 	@FXML 
 	private void showQuestionTextCheck() {
-		if (textToggle.isSelected() || _practiceMode) {
-			questionField.setText(_clue.showClue());
+		if (textToggle.isSelected() || practiceMode) {
+			questionField.setText(clue.showClue());
 		} else {
 			questionField.setText("Please listen for your hint.");
 		}
 	}
 
+	/**
+	 * Adds the macron buttons to screen, allowing the user to use these in their answer
+	 */
 	private void addMacronButtons() {
 		JFXButton macronTitleButton = new JFXButton("Ā/ā");
 		macronTitleButton.setButtonType(JFXButton.ButtonType.RAISED);
@@ -326,15 +379,16 @@ public class AskingController extends Controller {
 		macrons.setSpacing(10d);
 	}
 	
+	
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init() {}
 
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void updateTextIndividual() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTextIndividual() {}
 }

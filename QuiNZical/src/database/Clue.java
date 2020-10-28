@@ -13,16 +13,16 @@ import java.util.List;
  */
 public class Clue {
 
-	private int _value;
-	private String _valueString;
-	private String _clue;
-	private String _clueType;
-	private Category _category;
-	private String _answer;
-	private Boolean _answered = false;
-	private List<String> _multiAnswers = new ArrayList<String>();
-	private List<String> _possibleAnswers = new ArrayList<String>();
-	private List<List<String>> _multiAnswersWithPossibilities = new ArrayList<List<String>>();
+	private int value;
+	private String valueString;
+	private String clue;
+	private String clueType;
+	private Category category;
+	private String answer;
+	private Boolean answered = false;
+	private List<String> multiAnswers = new ArrayList<String>();
+	private List<String> possibleAnswers = new ArrayList<String>();
+	private List<List<String>> multiAnswersWithPossibilities = new ArrayList<List<String>>();
 	
 	/**
 	 * The Clue constructor is used to initialise the question object using
@@ -32,11 +32,11 @@ public class Clue {
 	 * @param answer
 	 */
 	public Clue(String value, String clue, String answer) {
-		_valueString = value;
-		_value = Integer.parseInt(_valueString);
-		_clue = clue;
-		_answer = answer;
-		splitAnswer(_answer);
+		this.valueString = value;
+		this.value = Integer.parseInt(this.valueString);
+		this.clue = clue;
+		this.answer = answer;
+		splitAnswer(this.answer);
 	}
 	
 	/**
@@ -48,11 +48,11 @@ public class Clue {
 	 * @param answer
 	 */
 	public Clue(Category category, String clue, String clueType, String answer) {
-		_category = category;
-		_clue  = clue;
-		_clueType = clueType;
-		_answer = answer;
-		splitAnswer(_answer);
+		this.category = category;
+		this.clue  = clue;
+		this.clueType = clueType;
+		this.answer = answer;
+		splitAnswer(this.answer);
 	}
 	
 	/**
@@ -65,13 +65,13 @@ public class Clue {
 	 * @param value
 	 */
 	public Clue(Category category, String clue, String clueType, String answer, String value) {
-		_category = category;
-		_clue = clue;
-		_clueType = clueType;
-		_answer = answer;
-		splitAnswer(_answer);
-		_valueString = value;
-		_value = Integer.parseInt(_valueString);
+		this.category = category;
+		this.clue = clue;
+		this.clueType = clueType;
+		this.answer = answer;
+		splitAnswer(this.answer);
+		this.valueString = value;
+		this.value = Integer.parseInt(this.valueString);
 	}
 	
 	/**
@@ -85,18 +85,18 @@ public class Clue {
 	 * @param answered
 	 */
 	public Clue(Category category, String clue, String clueType, String answer, String value, String answered) {
-		_category = category;
-		_clue = clue;
-		_clueType = clueType;
-		_answer = answer;
-		splitAnswer(_answer);
-		_valueString = value;
-		_value = Integer.parseInt(_valueString);
+		this.category = category;
+		this.clue = clue;
+		this.clueType = clueType;
+		this.answer = answer;
+		splitAnswer(this.answer);
+		this.valueString = value;
+		this.value = Integer.parseInt(this.valueString);
 		if (answered.equals("true")) {
-			_answered = true;
+			this.answered = true;
 		}
 		else {
-			_answered = false;
+			this.answered = false;
 		}
 	}
 	
@@ -110,10 +110,10 @@ public class Clue {
 	 * @return if the answer given for the clue is correct or not
 	 */
 	public Boolean check(String answer) {
-		if ((answer.replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", "")))||(("the "+answer).replaceAll(" ", "").equalsIgnoreCase(_answer.replaceAll(" ", "")))||(answer.replaceAll(" ", "").equalsIgnoreCase(("the "+_answer).replaceAll(" ", "")))) {
+		if ((answer.replaceAll(" ", "").equalsIgnoreCase(this.answer.replaceAll(" ", "")))||(("the "+answer).replaceAll(" ", "").equalsIgnoreCase(this.answer.replaceAll(" ", "")))||(answer.replaceAll(" ", "").equalsIgnoreCase(("the "+this.answer).replaceAll(" ", "")))) {
 			return true;
 		}
-		else if  (_possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
+		else if  (possibleAnswers.stream().anyMatch(answer::equalsIgnoreCase)) {
 			return true;
 		}
 		else {
@@ -127,7 +127,7 @@ public class Clue {
 			else {
 				answerArray = answer.split(" ");
 			}
-			for (String s: _possibleAnswers) {
+			for (String s: possibleAnswers) {
 				if ((answer.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+answer).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(answer.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) {
 					return true;
 				}
@@ -140,7 +140,7 @@ public class Clue {
 				}
 			}
 			int multiMatch = 0;
-			for (String s : _multiAnswers) {
+			for (String s : multiAnswers) {
 				for (String ans: answerArray) {
 					if ((ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+ans).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(ans.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) {
 						multiMatch++;
@@ -148,13 +148,13 @@ public class Clue {
 					}
 				}
 			}
-			if (multiMatch == _multiAnswers.size()) {
+			if (multiMatch == multiAnswers.size()) {
 				return true;
 			}
 			
 			multiMatch = 0;
 			List<String> checkedAnswers = new ArrayList<String>();
-			for (List<String> list: _multiAnswersWithPossibilities) {
+			for (List<String> list: multiAnswersWithPossibilities) {
 				for (String s : list) {
 					for (String ans: answerArray) {
 						if (((ans.replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(("the "+ans).replaceAll(" ", "").equalsIgnoreCase(s.replaceAll(" ", "")))||(ans.replaceAll(" ", "").equalsIgnoreCase(("the "+s).replaceAll(" ", "")))) & !checkedAnswers.contains(s)) {
@@ -165,7 +165,7 @@ public class Clue {
 					}
 				}
 			}
-			if (multiMatch == _multiAnswers.size()) {
+			if (multiMatch == multiAnswers.size()) {
 				return true;
 			}
 
@@ -193,49 +193,49 @@ public class Clue {
 				}
 			}
 			for (int i = 0; i < maxVariations; i++) {
-				_multiAnswersWithPossibilities.add(new ArrayList<String>());
+				multiAnswersWithPossibilities.add(new ArrayList<String>());
 			}
 			for (int i = 0; i < multiAnswerArray.length; i++) {
 				if (multiAnswerArray[i].contains("/")) {
 					if (multiAnswerArray[i].split("/").length < maxVariations) {
 						for (int j = 0; j < multiAnswerArray[i].split("/").length; j++) {
-							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
+							multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
 						}
 						for (int j = multiAnswerArray[i].split("/").length; j < maxVariations; j++) {
-							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[0]);
+							multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[0]);
 						}
 					}
 					else {
 						for (int j = 0; j < multiAnswerArray[j].split("/").length; j++) {
-							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
+							multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i].split("/")[j]);
 						}
 					}
 				}
 				else {
 					for (int j = 0; j < maxVariations; j++) {
-						if (!_multiAnswersWithPossibilities.get(j).contains(multiAnswerArray[i])) {
-							_multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i]);
+						if (!multiAnswersWithPossibilities.get(j).contains(multiAnswerArray[i])) {
+							multiAnswersWithPossibilities.get(j).add(multiAnswerArray[i]);
 						}
 					}
 				}
 			}
-			_possibleAnswers.add(answer);
-			_multiAnswers = Arrays.asList(answer.split(","));	
+			possibleAnswers.add(answer);
+			multiAnswers = Arrays.asList(answer.split(","));	
 		}
 		else if(answer.contains(",")) {
-			_multiAnswers = Arrays.asList(answer.split(","));
-			_possibleAnswers.add(answer);
-			_multiAnswersWithPossibilities.add(_possibleAnswers);
+			multiAnswers = Arrays.asList(answer.split(","));
+			possibleAnswers.add(answer);
+			multiAnswersWithPossibilities.add(possibleAnswers);
 		}
 		else if(answer.contains("/")) {
-			_possibleAnswers = Arrays.asList(answer.split("/"));
-			_multiAnswers.add(answer);
-			_multiAnswersWithPossibilities.add(_possibleAnswers);
+			possibleAnswers = Arrays.asList(answer.split("/"));
+			multiAnswers.add(answer);
+			multiAnswersWithPossibilities.add(possibleAnswers);
 		}
 		else {
-			_possibleAnswers.add(answer);
-			_multiAnswers.add(answer);
-			_multiAnswersWithPossibilities.add(_possibleAnswers);
+			possibleAnswers.add(answer);
+			multiAnswers.add(answer);
+			multiAnswersWithPossibilities.add(possibleAnswers);
 		}
 	}
 	
@@ -244,15 +244,15 @@ public class Clue {
 	 * @param value
 	 */
 	public void giveValue(String value) {
-		_value = Integer.parseInt(value);
-		_valueString = value;
+		this.value = Integer.parseInt(value);
+		this.valueString = value;
 	}
 	
 	/**
 	 * answered marks the question as answered //Not used much, but left for possible future implementations.
 	 */
 	public void answered() {
-		_answered = true;
+		answered = true;
 	}
 	
 	/**
@@ -260,7 +260,7 @@ public class Clue {
 	 * @return if the question is answered
 	 */
 	public Boolean isAnswered() {
-		return _answered;
+		return answered;
 	}
 	
 	/**
@@ -268,7 +268,7 @@ public class Clue {
 	 * @return value string
 	 */
 	public String showValue() {
-		return _valueString;
+		return this.valueString;
 	}
 	
 	/**
@@ -276,7 +276,7 @@ public class Clue {
 	 * @return value 
 	 */
 	public int returnValue() {
-		return _value;
+		return this.value;
 	}
 	
 	/**
@@ -284,7 +284,7 @@ public class Clue {
 	 * @return clue/question
 	 */
 	public String showClue() {
-		return _clue;
+		return this.clue;
 	}
 	
 	/**
@@ -292,7 +292,7 @@ public class Clue {
 	 * @return answer
 	 */
 	public String showAnswer() {
-		return _answer;
+		return this.answer;
 	}
 	
 	/**
@@ -300,7 +300,7 @@ public class Clue {
 	 * @return category name
 	 */
 	public String showCategory() {
-		return _category.toString();
+		return this.category.toString();
 	}
 	
 	/**
@@ -308,7 +308,7 @@ public class Clue {
 	 * @return category
 	 */
 	public Category getCategory() {
-		return _category;
+		return this.category;
 	}
 	
 	
@@ -317,7 +317,7 @@ public class Clue {
 	 * @return clue type
 	 */
 	public String showClueType() {
-		return _clueType;
+		return this.clueType;
 	}
 	
 }

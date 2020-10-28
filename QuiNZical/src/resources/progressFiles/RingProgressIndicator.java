@@ -33,6 +33,8 @@ import javafx.css.converter.SizeConverter;
  * Progress indicator showing a filling arc.
  * 
  * @author Andrea Vacondio
+ * 
+ * Source: https://github.com/torakiki/fx-progress-circle
  *
  */
 public class RingProgressIndicator extends ProgressCircleIndicator {

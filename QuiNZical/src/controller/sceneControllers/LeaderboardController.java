@@ -19,7 +19,8 @@ public class LeaderboardController extends Controller {
 	@FXML
 	private Label title;
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") // due to a known bug as listed here:
+	// https://stackoverflow.com/questions/53258264/type-safety-a-generic-array-is-created-for-varargs-parameter-is-this-a-good
 	@FXML
 	private void initialize() {	
 		title.setFont(PrimaryController.titleFont);
@@ -38,20 +39,23 @@ public class LeaderboardController extends Controller {
 		leaderboard.getItems().addAll(ScoreboardExtractor.extractScoreBoard());
 	}
 	
+	/**
+	 * Takes the user back to the homescreen
+	 */
 	@FXML
 	private void back() {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init() {}
 
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void updateTextIndividual() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTextIndividual() {}
 }

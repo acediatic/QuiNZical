@@ -6,18 +6,37 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
+/**
+ * Loads the Primary Controller and then the 
+ * model from Memory
+ * @author Adam and Osama.
+ *
+ */
 public class LoadControllerAndModelService extends Service<PrimaryController> {
-	 private SimpleObjectProperty<QuiNZical> _app = new SimpleObjectProperty<QuiNZical>();
+	 private SimpleObjectProperty<QuiNZical> app = new SimpleObjectProperty<QuiNZical>();
 	
-	 public final void setApp(QuiNZical app) {
-		 _app.set(app);
+	 /**
+	 * Sets the JavaFX app used.
+	 * @param app, the javafx app
+	 */
+	public final void setApp(QuiNZical app) {
+		 this.app.set(app);
      }
-
+	
+	 /**
+	 * Gets the JavaFX app used.
+	 * @return the javafx app
+	 */
      public final QuiNZical getApp() {
-         return _app.get();
+         return this.app.get();
      }
 
-     protected Task<PrimaryController> createTask() {
+     /**
+     * Creates the task to be run. This creates an instance of the
+     * primary controller, sets the app for this controller, the 
+     * stage listener for resizing, and the app icon.
+     */
+    protected Task<PrimaryController> createTask() {
          final QuiNZical app = getApp();
          return new Task<PrimaryController>() {
              protected PrimaryController call() {

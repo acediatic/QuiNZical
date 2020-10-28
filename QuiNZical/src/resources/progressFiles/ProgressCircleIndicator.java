@@ -36,6 +36,8 @@ import javafx.css.converter.SizeConverter;
  * Base class for the progress indicator controls represented by circualr shapes
  * 
  * @author Andrea Vacondio
+ * 
+ * Source: https://github.com/torakiki/fx-progress-circle
  *
  */
 abstract class ProgressCircleIndicator extends Control {

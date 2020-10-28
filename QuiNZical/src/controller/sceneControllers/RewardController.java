@@ -1,18 +1,26 @@
 package controller.sceneControllers;
 
-
 import java.io.IOException;
+
 import java.util.Optional;
 
 import controller.PrimaryController;
 import database.ScoreboardExtractor;
+
+import service.FXMLService;
+import service.FXMLService.FXMLNames;
+
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import service.FXMLService;
-import service.FXMLService.FXMLNames;
+
+/**
+ * The reward controller, for the scene shown to the 
+ * user after finishing the game.
+ * @author Adam and Osama
+ */
 public class RewardController extends Controller {
 	
 	@FXML 
@@ -21,6 +29,9 @@ public class RewardController extends Controller {
 	@FXML
 	private Text allDoneTxt;
 	
+	/**
+	 * Sets up the text for the user's winnings, including its formatting.
+	 */
 	@FXML
 	private void initialize() {	
 		usrWinnings.setFont(PrimaryController.titleFont);
@@ -30,6 +41,10 @@ public class RewardController extends Controller {
 		allDoneTxt.setFill(Color.WHITE);
 	}
 	
+	/**
+	 * Takes the user back to the homescreen, after resetting
+	 * the game.
+	 */
 	@FXML
 	private void back() {
 		Thread th = new Thread(new Task<Void>() {
@@ -42,6 +57,11 @@ public class RewardController extends Controller {
 		PrimaryController.getInstance().addNewScene(FXMLService.FXMLNames.HOMESCREEN);
 	}
 
+	/**
+	 * Prompts the user to enter their name, which is then 
+	 * added to the scoreboard along with their winnings.
+	 * They are then taken their to see other users.
+	 */
 	@FXML
 	private void scoreboard() {
 		TextInputDialog dialog = new TextInputDialog("Jeff");
@@ -66,16 +86,16 @@ public class RewardController extends Controller {
 		}
 	}
 	
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init() {}
 
+	/**
+	 * Unused helper method inherited from the super class.
+	 */
 	@Override
-	public void updateTextIndividual() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTextIndividual() {}
 }
 

@@ -98,11 +98,14 @@ public class ScoreboardExtractor {
 		}
 	}
 
+	/**
+	 * Updates the scoreboard for the userName of the input user.
+	 * @param userName
+	 */
 	public static void updateScoreBoardWithUsr(String userName) {
 		User newUser = new User(userName, PrimaryController.getInstance().getWinnings());
 		List<User> users = extractScoreBoard();
 		users.add(newUser);
 		updateScoreBoard(users);
 	}
-	
 }
