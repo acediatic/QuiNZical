@@ -27,7 +27,7 @@
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                            <children>
                               <Button fx:id="internationalButton" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#internationalStart" prefHeight="50.0" prefWidth="50.0" visible="false" />
-                              <JFXHamburger fx:id="_hamMenu" alignment="CENTER_RIGHT" />
+                              <JFXHamburger fx:id="hamMenu" alignment="CENTER_RIGHT" />
                            </children>
                         </HBox>
                      </children>
@@ -42,7 +42,7 @@
             </HBox>
          </top>
          <bottom>
-            <HBox fx:id="_hbox" alignment="CENTER" BorderPane.alignment="CENTER">
+            <HBox fx:id="hbox" alignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="20.0" />
                </BorderPane.margin>
@@ -56,7 +56,7 @@
             </HBox>
          </bottom>
          <right>
-            <JFXDrawer fx:id="_drawer" blendMode="SRC_ATOP" defaultDrawerSize="300.0" direction="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="300.0" onDrawerClosed="#drawerClose" onDrawerOpened="#drawerOpen" prefWidth="300.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
+            <JFXDrawer fx:id="drawer" blendMode="SRC_ATOP" defaultDrawerSize="300.0" direction="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="300.0" onDrawerClosed="#drawerClose" onDrawerOpened="#drawerOpen" prefWidth="300.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </root>
