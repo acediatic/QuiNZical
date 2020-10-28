@@ -171,6 +171,10 @@ If your Question has various possible answers, for e.g. the Question "Name one c
 If your Question has multiple answers, where some or all of the multiplicities have a variation, for e.g. the Question "Name two colours in the New Zealand flag ", will have the answer "Blue, Red",  "Blue, White", or "White, Red" (irrespective of order), you can separate the multiple answers with a comma, and each variation with a forward slash:
 `Clue_Question@Clue_Type@Multiple_1_Possible_Clue_Answer_1/Multiple_1_Possible_Clue_Answer_2,Multiple_2_Possible_Clue_Answer_1/Multiple_2_Possible_Clue_Answer_2`
 
+### Troubleshooting:
+
+If you encounter any issues while playing the game, first ensure that you have placed the QuiNZical app inside a folder without any spaces in the name (i.e "myFolder" instead of "My Folder"). If issues persist, you can manually reset the game by deleting the ".History" and ".Incorrect" directorys, along with the ".winnings" and ".scoreBoard" files.
+
 ### Dependencies:
 
 To play the game you need Java version 14 and JavaFX relevant to it.
