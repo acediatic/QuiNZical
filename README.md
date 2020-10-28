@@ -21,6 +21,9 @@ Open the terminal in that directory and copy paste and run the following command
 (In case it doesn't work you will need to give it executable rights and then run by entering the following command instead:
  `chmod +x quiNZical.sh; ./quiNZical.sh`)
 
+### Preview:
+
+If you would like to preview the game by joining halway through ####useful for marking ###, please move the contents of the directory "midGameSave" to the root (top level) folder.
 
 ### Games module:
 
