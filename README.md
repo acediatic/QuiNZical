@@ -23,7 +23,7 @@ Open the terminal in that directory and copy paste and run the following command
 
 ### Preview:
 
-If you would like to preview the game by joining halway through ####useful for marking ###, please move the contents of the directory "midGameSave" to the root (top level) folder.
+If you would like to preview the game by joining halway through **useful for marking**, please move the contents of the directory "midGameSave" to the root (top level) folder.
 
 ### Games module:
 
